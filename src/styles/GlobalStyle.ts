@@ -1,9 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { Theme } from './theme';
-
-export interface GlobalTheme {
-    theme: Theme;
-}
+import { GlobalTheme } from './theme';
 
 export default createGlobalStyle`
     *, *::after, *::before {

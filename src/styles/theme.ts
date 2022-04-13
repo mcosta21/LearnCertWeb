@@ -4,25 +4,40 @@ export interface GlobalTheme {
     theme: Theme;
 }
 
+interface Colors {
+    purple: string;
+    red: string;
+    green: string;
+}
+
 export interface Theme extends DefaultTheme {
     background: string;
     text: string;
     textSecondary: string;
     border: string;
+    colors: Colors;
 }
+
+const colorsTheme = {
+    purple: '#5902EC',
+    red: '#D82148',
+    green: '#65C18C'
+} as Colors;
 
 export const lightTheme = {
     background: '#FFFFFF',
     text: '#000000',
     textSecondary: '#706E6E',
     border: '#E5E5E5',
+    colors: colorsTheme
 } as Theme;
 
 export const darkTheme = {
     background: '#151D3B',
     text: '#FFFFFF',
     textSecondary: '#C4C4C4',
-    border: '#21325E'
+    border: '#21325E',
+    colors: colorsTheme
 } as Theme;
 
 

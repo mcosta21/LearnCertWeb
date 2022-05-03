@@ -7,9 +7,13 @@ export const SCardContainer = styled.div`
     border: 1px solid ${({ theme }: GlobalTheme) => theme.border};
     border-radius: 7px;
     gap: 0.5rem;
-    cursor: pointer;
     transition: all 0.3s ease;
+    width: 100%;
+    height: 100%;
 
+    &.collapsed {
+        cursor: pointer;
+    }
 
     &:hover, &:hover footer, &:hover h3 {
         border-color: ${({ theme }: GlobalTheme) => theme.colors.purple};
@@ -27,20 +31,26 @@ export const SQuestionDescription = styled.p`
 export const SQuestionFooter  = styled.footer`
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     border-top: 1px solid ${({ theme }: GlobalTheme) => theme.border};
-    padding: 15px 20px;
+    padding: 15px 30px;
 
-    button {
+    button, a {
         background-color: transparent;
         color: ${({ theme }: GlobalTheme) => theme.text};
         border: none;
         cursor: pointer;
         transition:color 0.3s ease;
+        font-size: 0.8rem;
+        text-decoration: none;
 
         &:hover {
             color: ${({ theme }: GlobalTheme) => theme.textSecondary};
         }
+    }
+    
+    a.hidden {
+        visibility: hidden;
     }
 `
 
@@ -90,8 +100,8 @@ export const SSelectedOptionButton = styled(SCommonOptionButton)`
     span {
         display: block;
         border-radius: 40px;
-        height: 9px;
-        width: 9px;
+        height: 8px;
+        width: 8px;
         background-color: ${({ theme }: GlobalTheme) => theme.colors.purple};
     }
 `;

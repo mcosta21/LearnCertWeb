@@ -1,15 +1,16 @@
 import styled from 'styled-components';
 import { GlobalTheme } from 'styles/theme';
 import { FiChevronDown } from 'react-icons/fi';
+import { QuestionDescriptionModel, QuestionResult } from 'pages/CertificationPage/models/certification.model';
 
 interface Props {
-    title: string;
+    question: QuestionDescriptionModel;
     focused: boolean;
     handleCollapse: () => void;
 }
 
 export default function QuestionModuleTitle({
-    title,
+    question,
     focused = false,
     handleCollapse
 }: Props){
@@ -21,9 +22,9 @@ export default function QuestionModuleTitle({
                     <SFocusedTitle>
                         <div>
                             <span>
-                                1.1
+                                {question.code}
                             </span>
-                            {title}
+                            {question.moduleTitle}
                         </div>
                         <button onClick={handleCollapse}>
                             <FiChevronDown size={20}/>
@@ -33,9 +34,9 @@ export default function QuestionModuleTitle({
                 ) : (
                     <SNormalTitle>
                         <span>
-                            1.1
+                            {question.code}
                         </span>
-                        {title}
+                        {question.moduleTitle}
                     </SNormalTitle>
                 )
             }

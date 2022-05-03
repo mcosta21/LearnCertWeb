@@ -1,44 +1,41 @@
-export interface Certification {
+export class CertificationModel {
     id: string;
     title: string;
-    modules: Module[];
+    questionDescriptions: QuestionDescriptionModel[];
 }
 
-export interface Module {
+export interface QuestionDescriptionModel {
     id: string;
-    title: string;
-    orderExibition: number;
-    questions: Question[];
-}
-
-export interface Question {
-    id: string;
-    code: number;
-    questionDescriptions: QuestionDescription[];
-}
-
-export interface QuestionDescription {
-    id: string;
+    code: string;
     description: string;
     languageType: LanguageType;
+    certificationId: string;
+    moduleTitle: string;
+    questionId: string;
     answerOptions: AnswerOption[];
 }
 
 export interface AnswerOption {
     id: string;
+    code: number;
     description: string;
     isCorrect: boolean;
 }
 
 export enum LanguageType {
-    English = "English",
-    Portuguese = "Portuguese"
+    English = 'English',
+    Portuguese = 'Portuguese'
 }
 
+export const LanguageTypes = Object.keys(LanguageType) as LanguageType[];
 
 export interface QuestionResult {
     id: string;
     moduleTitle: string;
     questionDescription: string;
+    questionId: string;
     answerOptions: AnswerOption[];
+    externalLink?: string;
+    numberModule: number;
+    numberQuestion: number;
 }

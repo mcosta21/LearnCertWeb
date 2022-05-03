@@ -1,51 +1,75 @@
-import { QuestionResult } from "pages/CertificationPage/models/certification.model"
+import { AnswerOption, QuestionDescriptionModel, QuestionResult } from "pages/CertificationPage/models/certification.model"
 import { useState } from "react";
 import AnswerOptionList from "./AnswerOptionList";
 import QuestionModuleTitle from "./QuestionModuleTitle";
 import { SCardContainer, SQuestionDescription, SQuestionFooter } from "./styles";
 
 interface Props {
-    value: QuestionResult;
+    value: QuestionDescriptionModel;
+    focused: boolean;
+    showCorrect: boolean;
+    onFocus: (questionId: string | undefined) => void;
+    onShowCorrect: (questionId: string | undefined) => void;
+    selectedOptionCode: number | undefined;
+    onSelectOption: (option: AnswerOption) => void;
 }
 
 export default function QuestionCard({
-    value
+    value,
+    focused,
+    onFocus,
+    showCorrect,
+    onShowCorrect,
+    selectedOptionCode,
+    onSelectOption
 }: Props){
 
-    const [focused, setFocused] = useState(false);
-    const [showCorrect, setShowCorrect] = useState(false);
     
     function handleFocus() {
-        if(focused === true) return;
-        setFocused(true);
+        if(focused) return;
+        onFocus(value.questionId);
     }
 
     function handleCollapse() {
-        setFocused(false);
+        onFocus(undefined);
     }
 
-    function handleShowCorrect(){
-        setShowCorrect(oldState => !oldState);
+    function handleShowCorrectAnswer() {
+        onShowCorrect(showCorrect ? undefined : value.questionId);
     }
+
 
     return (
-        <SCardContainer onClick={handleFocus}>
+        <SCardContainer onClick={handleFocus} className={focused ? 'focused' : 'collapsed'}>
             <QuestionModuleTitle 
-                title={value.moduleTitle} 
+                question={value!}
                 focused={focused}
                 handleCollapse={handleCollapse}
             />
 
             <SQuestionDescription>
-                {value.questionDescription}
+                {value.description}
             </SQuestionDescription>
 
             {
                 focused && (
                     <>
-                        <AnswerOptionList answers={value.answerOptions} showCorrect={showCorrect} />
+                        <AnswerOptionList 
+                            answers={value.answerOptions} 
+                            showCorrect={showCorrect} 
+                            selectedOptionCode={selectedOptionCode}
+                            onSelectOption={onSelectOption}
+                        />
                         <SQuestionFooter>
-                            <button onClick={handleShowCorrect}>
+                            <a 
+                                href={value.description} 
+                                rel="noreferrer noopener"
+                                target="_blank"
+                                className={!!value.description ? 'visible' : 'hidden'}
+                            >
+                                Learn more
+                            </a>
+                            <button onClick={handleShowCorrectAnswer}>
                                 {showCorrect ? 'Hide answer' : 'Show answer'}
                             </button>
                         </SQuestionFooter>

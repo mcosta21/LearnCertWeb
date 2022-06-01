@@ -5,6 +5,7 @@ import { RouterKey } from './routekeys';
 import CertificationPage from '../pages/CertificationPage';
 import HomePage from '../pages/HomePage';
 import NotFoundPage from '../pages/NotFoundPage';
+import CertificationFormPage from '../pages/CertificationFormPage';
 
 export function AppRoutes() {
   return (
@@ -19,6 +20,11 @@ export function AppRoutes() {
         <Route
           path={RouterKey.Certification}
           element={<PrivateRoute component={<CertificationPage />} />}
+        />
+
+        <Route
+          path={RouterKey.CertificationForm}
+          element={<PrivateRoute component={<CertificationFormPage />} />}
         />
 
         <Route path="*" element={<NotFoundPage />} />

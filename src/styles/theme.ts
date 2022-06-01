@@ -12,6 +12,7 @@ interface Colors {
 
 export interface Theme extends DefaultTheme {
     background: string;
+    backgroundSecondary: string;
     text: string;
     textSecondary: string;
     border: string;
@@ -25,7 +26,8 @@ const colorsTheme = {
 } as Colors;
 
 export const lightTheme = {
-    background: '#FFFFFF',
+    background: '#f5f5f5',
+    backgroundSecondary: '#FFF',
     text: '#000000',
     textSecondary: '#706E6E',
     border: '#E5E5E5',
@@ -33,7 +35,8 @@ export const lightTheme = {
 } as Theme;
 
 export const darkTheme = {
-    background: '#151D3B',
+    background: '#101835',
+    backgroundSecondary: '#151D3B',
     text: '#FFFFFF',
     textSecondary: '#C4C4C4',
     border: '#21325E',

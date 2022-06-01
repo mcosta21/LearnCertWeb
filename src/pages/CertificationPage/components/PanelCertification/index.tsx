@@ -5,8 +5,7 @@ import {
     CertificationModel, 
     LanguageType, 
     LanguageTypes, 
-    QuestionDescriptionModel, 
-    QuestionResult 
+    QuestionDescriptionModel
 } from "../../models/certification.model";
 import EmptyQuestionCard from "../EmptyQuestionCard";
 import QuestionCard from "../QuestionCard";

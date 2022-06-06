@@ -11,7 +11,32 @@ export default createGlobalStyle`
     }
 
     body {
-        background-color: ${({ theme }: GlobalTheme) => theme.background};
-        color: ${({ theme }: GlobalTheme) => theme.text};
+        background-color: ${({ theme }: GlobalTheme) => theme.background} !important;
+        color: ${({ theme }: GlobalTheme) => theme.text} !important;
     }
+
+    .MuiTab-root {
+        border-bottom: 1px solid ${({ theme }: GlobalTheme) => theme.border} !important;
+    }
+
+    .MuiButtonBase-root {
+        color: ${({ theme }: GlobalTheme) => theme.text} !important;
+    }
+
+    .Mui-selected {
+        color: ${({ theme }: GlobalTheme) => theme.colors.purple} !important;
+    }
+
+    .MuiTabs-indicator {
+        background-color: ${({ theme }: GlobalTheme) => theme.colors.purple} !important;
+    }
+
+    .MuiPaper-root {
+        background-color: ${({ theme }: GlobalTheme) => theme.background} !important;
+    }
+
+    .MuiTab-root.Mui-selected {
+        background-color: ${({ theme }: GlobalTheme) => theme.backgroundSecondary} !important;
+    }
+
 `;

@@ -9,6 +9,7 @@ export const SInputContainer = styled.div`
 
     label {
         font-size: 0.9rem;
+        color: ${({ theme }: GlobalTheme) => theme.text};
     }
 
     span {

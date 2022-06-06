@@ -1,10 +1,17 @@
-import LBody from "../../components/LBody";
-import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import { LInput } from "../../components/LInput";
-import { Certification, Module } from "./models/certification.model";
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Popover } from "@mui/material";
+import { LLabel } from '../../components/LLabel';
+import React, { FunctionComponentElement, useEffect } from 'react';
+import { useState } from "react";
+import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import LBody from "../../components/LBody";
+import { LInput } from "../../components/LInput";
+import LTabs from "./components/LTabs";
+import { LTabModel } from './components/LTabs/models';
+import { ModuleTab, ModuleTabProps } from './components/ModuleTab';
+import { Certification, Module } from "./models/certification.model";
 import { CertificationValidation } from "./models/certification.validation";
-import ModuleField from "./components/ModuleField";
+import { SModuleTabsContainer, SPopoverModule } from "./styles";
 
 interface Props {
 
@@ -20,19 +27,69 @@ export default function CertificationFormPage({
         formState: { errors },
         control,
         getValues,
-        setValue
+        getFieldState,
+        setValue,
+        watch
     } = useForm<Certification>({ resolver: yupResolver(CertificationValidation) });
 
     const { fields, append, prepend } = useFieldArray({
         control,
         name: "modules"
-      });
+    });
+
+    const [currentTab, setCurrentTab] = useState<string>();
+
+    const [moduleTabs, setModuleTabs] = useState<LTabModel[]>([]);
+    const [titleModule, setTitleModule] = useState<string>('Modulo 1');
+    const [inputModule, setInputModule] = useState<HTMLElement | undefined>(undefined);
+    const open = Boolean(inputModule);
+    const id = open ? 'imput-module' : undefined;
+
+    useEffect(() => {
+
+        handleAddModule();
+
+        if(getValues().modules[0]) {
+            setCurrentTab(getValues().modules[0].id);
+        }
+    }, []);
+
+    function handleOpenInputModule(event?: React.MouseEvent<HTMLElement>) {
+        setInputModule(inputModule ? undefined : event?.currentTarget);
+    };
+
+    function handleCloseInputModule(){
+        setInputModule(undefined);
+    }
 
     function handleAddModule(){
+
         const modules = getValues('modules') ?? [];
-        const module = new Module();
-        module.title = "teste"
-        setValue('modules', [...modules, module])
+        const module = new Module(titleModule);
+        setValue('modules', [...modules, module]);
+
+        const index = modules.length;
+
+        setModuleTabs(oldState => [...oldState, createModuleTab(index, module)]);
+
+        setTitleModule('');
+        handleCloseInputModule();
+        setCurrentTab(module.id);
+    }
+
+    function createModuleTab(index: number, module: Module){
+        
+        const content = {
+            index,
+            control,
+        } as ModuleTabProps;
+
+        const component = React.createElement(ModuleTab, { ...content });
+        return new LTabModel(module.id, module.title, component)
+    }
+
+    function handleChangeTab(selectedTab: string) {
+        setCurrentTab(selectedTab);
     }
 
     const onSubmit: SubmitHandler<Certification> = async data => {
@@ -58,20 +115,40 @@ export default function CertificationFormPage({
                     {...register("imageUrl")} 
                 />
                 
-                <hr />
-
-                <button onClick={() => handleAddModule()}>
-                    Add module
-                </button>
-
-                {
-                    fields.map((field, index) => (
-                        <ModuleField key={field.id} {...{ control, index, errors: errors.modules ? errors.modules[index] : undefined }} />
-                    ))
-                }
+                <SModuleTabsContainer>
+                    <LLabel value="MODULE.TITLE" />
+                    <LTabs 
+                        currentTab={currentTab} 
+                        onChange={handleChangeTab}
+                        tabs={moduleTabs} 
+                        onAddTab={handleOpenInputModule} 
+                    />
+                </SModuleTabsContainer>
                 
-                <br/>
                 <input type="submit" />
+
+                <Popover 
+                    id={id} 
+                    open={open} 
+                    anchorEl={inputModule}
+                    onClose={handleCloseInputModule}
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }}
+                >
+                    <SPopoverModule>
+                        <LInput 
+                            label="MODULE.TITLE"
+                            width="300px"
+                            onChange={(event) => setTitleModule(event.currentTarget.value)}
+                        />
+                        
+                        <button onClick={() => handleAddModule()} disabled={!titleModule}>
+                            Add module
+                        </button>
+                    </SPopoverModule>
+                </Popover>
             </form>
         </LBody>
     )

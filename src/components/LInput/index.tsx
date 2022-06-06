@@ -1,10 +1,13 @@
-import { forwardRef, ForwardRefRenderFunction, InputHTMLAttributes } from "react";
+import { LLabel } from "../../components/LLabel";
+import { ChangeEvent, ChangeEventHandler, forwardRef, ForwardRefRenderFunction, InputHTMLAttributes } from "react";
 import { SInput, SInputContainer } from "./styles";
 
 interface Props {
     label?: string;
     error?: string;
     hideError?: boolean;
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+    width?: string;
 }
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, Props> = (
@@ -12,15 +15,19 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, Props> = (
       label,
       error,
       hideError = false,
+      onChange,
+      width,
       ...rest
     },
     ref,
   ) => {
     return (
         <SInputContainer className="l-input">
-            <label hidden={!label}>{label}</label>
+            <LLabel hidden={!label} value={label} />
             <SInput 
                 ref={ref}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => onChange ? onChange(e) : undefined}
+                style={{ width }}
                 {...rest} 
             />
             {!hideError && <span>{error}</span>}

@@ -14,6 +14,7 @@ export default function LTabs({
 }: LTabProps){
 
     function handleChange(event: React.SyntheticEvent, newValue: string){
+        if(newValue === 'add_more') return;
         onChange(newValue);
     }
     

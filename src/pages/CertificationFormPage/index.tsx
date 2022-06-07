@@ -1,17 +1,17 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Popover } from "@mui/material";
-import { LLabel } from '../../components/LLabel';
-import React, { FunctionComponentElement, useEffect } from 'react';
-import { useState } from "react";
+import { Check } from '@mui/icons-material';
+import { Button, IconButton, Popover } from "@mui/material";
+import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import LBody from "../../components/LBody";
 import { LInput } from "../../components/LInput";
+import { LLabel } from '../../components/LLabel';
 import LTabs from "./components/LTabs";
 import { LTabModel } from './components/LTabs/models';
 import { ModuleTab, ModuleTabProps } from './components/ModuleTab';
 import { Certification, Module } from "./models/certification.model";
 import { CertificationValidation } from "./models/certification.validation";
-import { SModuleTabsContainer, SPopoverModule } from "./styles";
+import { SCertificationFooter, SModuleTabsContainer, SPopoverModule, SCertificationForm } from "./styles";
 
 interface Props {
 
@@ -27,9 +27,7 @@ export default function CertificationFormPage({
         formState: { errors },
         control,
         getValues,
-        getFieldState,
         setValue,
-        watch
     } = useForm<Certification>({ resolver: yupResolver(CertificationValidation) });
 
     const { fields, append, prepend } = useFieldArray({
@@ -98,11 +96,7 @@ export default function CertificationFormPage({
 
     return (
         <LBody>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                    <img src={getValues().imageUrl} height="140"/>
-                    <h4>{getValues().title}</h4>
-                </div>
+            <SCertificationForm onSubmit={handleSubmit(onSubmit)}>
                 <LInput 
                     label="CERTIFICATION.TITLE"
                     error={errors.title?.message}
@@ -125,7 +119,11 @@ export default function CertificationFormPage({
                     />
                 </SModuleTabsContainer>
                 
-                <input type="submit" />
+                <SCertificationFooter>
+                    <Button variant="contained" size="medium" type="submit" >
+                        SAVE
+                    </Button>
+                </SCertificationFooter>
 
                 <Popover 
                     id={id} 
@@ -141,15 +139,21 @@ export default function CertificationFormPage({
                         <LInput 
                             label="MODULE.TITLE"
                             width="300px"
+                            hideError
                             onChange={(event) => setTitleModule(event.currentTarget.value)}
                         />
+
+                        <IconButton 
+                            aria-label="add-module"
+                            onClick={() => handleAddModule()} 
+                            disabled={!titleModule}
+                        >
+                            <Check />
+                        </IconButton>
                         
-                        <button onClick={() => handleAddModule()} disabled={!titleModule}>
-                            Add module
-                        </button>
                     </SPopoverModule>
                 </Popover>
-            </form>
+            </SCertificationForm>
         </LBody>
     )
 }

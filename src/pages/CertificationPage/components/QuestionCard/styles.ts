@@ -59,6 +59,7 @@ export const SOptionsList = styled.ul`
     list-style: none;
     padding: 0 0 18px 30px;
 
+    /*
     li {
         color: ${({ theme }: GlobalTheme) => theme.text};
         font-size: 0.9rem;
@@ -76,6 +77,7 @@ export const SOptionsList = styled.ul`
     li:hover {
         color: ${({ theme }: GlobalTheme) => theme.textSecondary};
     }
+    */
 `
 
 export const SCommonOptionButton = styled.button`

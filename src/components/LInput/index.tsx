@@ -8,6 +8,7 @@ interface Props {
     hideError?: boolean;
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
     width?: string;
+    value?: string;
 }
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, Props> = (
@@ -17,6 +18,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, Props> = (
       hideError = false,
       onChange,
       width,
+      value,
       ...rest
     },
     ref,
@@ -28,6 +30,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, Props> = (
                 ref={ref}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => onChange ? onChange(e) : undefined}
                 style={{ width }}
+                value={value}
                 {...rest} 
             />
             {!hideError && <span>{error}</span>}

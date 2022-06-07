@@ -1,14 +1,10 @@
-import { AnswerOption } from "pages/CertificationPage/models/certification.model"
-import { 
-    SCorrectedOptionButton, 
-    SNormalOptionButton, 
-    SOptionsList, 
-    SSelectedOptionButton, 
-    SWrongOptionButton 
+import { OptionType } from "../../../../components/LAnswerOptionItem/models";
+import { AnswerOption } from "pages/CertificationPage/models/certification.model";
+import { LAnswerOptionItem } from "../../../../components/LAnswerOptionItem";
+import {
+    SOptionsList
 } from './styles';
 
-import { FiCheck } from 'react-icons/fi';
-import { CgClose } from 'react-icons/cg';
 
 interface Props {
     answers: AnswerOption[];
@@ -17,12 +13,6 @@ interface Props {
     onSelectOption: (option: AnswerOption) => void;
 }
 
-enum OptionType {
-    Normal,
-    Selected,
-    Correct,
-    Wrong
-}
 
 export default function AnswerOptionList({
     answers,
@@ -60,8 +50,7 @@ export default function AnswerOptionList({
             {
                 answers.map(option => (
                     <li key={option.id} onClick={() => handleSelectOption(option)}>
-                        <OptionButton type={renderOption(option)}/>
-                        {option.description}
+                        <LAnswerOptionItem type={renderOption(option)} label={option.description} />
                     </li>
                 ))
             }
@@ -69,19 +58,3 @@ export default function AnswerOptionList({
     )
 }
 
-interface OptionButtonProps {
-    type: OptionType;
-};
-
-function OptionButton({ type }: OptionButtonProps){
-    switch(type) {
-        
-        case OptionType.Selected: return <SSelectedOptionButton><span/></SSelectedOptionButton>;
-
-        case OptionType.Correct: return <SCorrectedOptionButton><FiCheck size={16}/></SCorrectedOptionButton>;
-
-        case OptionType.Wrong: return <SWrongOptionButton><CgClose size={16} /></SWrongOptionButton>;
-
-        default: return <SNormalOptionButton />
-    } 
-}

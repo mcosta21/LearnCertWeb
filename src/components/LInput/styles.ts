@@ -22,7 +22,7 @@ export const SInputContainer = styled.div`
 `;
 
 export const SInput = styled.input`
-    height: 50px;
+    height: 40px;
     border: 1px solid ${({ theme }: GlobalTheme) => theme.border};
     border-radius: 3px;
     background-color: ${({ theme }: GlobalTheme) => theme.backgroundSecondary};

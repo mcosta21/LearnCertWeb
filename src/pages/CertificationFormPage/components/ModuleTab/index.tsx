@@ -1,7 +1,7 @@
 import { LInput } from "../../../../components/LInput";
 import { Control, Controller, useFieldArray } from "react-hook-form";
-import { Certification, Module, Question } from "../../models/certification.model";
-import { SModuleTabContainer } from "./styles";
+import { Certification, Question } from "../../models/certification.model";
+import { SButtonAddQuestion, SModuleTabContainer, SQuestionContainer } from "./styles";
 import { QuestionCard } from "../QuestionCard";
 
 export interface ModuleTabProps {
@@ -13,7 +13,7 @@ export function ModuleTab({ control, index }: ModuleTabProps){
     const { fields, remove, append } = useFieldArray({
         control,
         name: `modules.${index}.questions`
-      });
+    });
 
     function handleAddQuestion(){
         const question = new Question('questão 1');
@@ -21,32 +21,42 @@ export function ModuleTab({ control, index }: ModuleTabProps){
     }
 
     return (
-        <SModuleTabContainer>
-            <Controller
-                control={control}
-                name={`modules.${index}.title`}
-                defaultValue=""
-                render={({ field }) =>
-                    (
-                        <LInput 
-                            label="CERTIFICATION.TITLE"
-                            {...field} 
-                        />
-                    )
-                }
-            />
+        <SModuleTabContainer className="module-tab">
 
             {
-                fields.map((question, questionIndex) => (
-                    <QuestionCard
-                        key={questionIndex}
-                        control={control}
-                        moduleIndex={index}
-                        questionIndex={questionIndex}
-                    />
-                ))
+                /*
+                <Controller
+                    control={control}
+                    name={`modules.${index}.title`}
+                    defaultValue=""
+                    render={({ field }) =>
+                        (
+                            <LInput 
+                                label="CERTIFICATION.TITLE"
+                                {...field} 
+                            />
+                        )
+                    }
+                />
+                */
             }
-            <button onClick={handleAddQuestion}>teste</button>
+
+            <SQuestionContainer>
+                {
+                    fields.map((question, questionIndex) => (
+                        <QuestionCard
+                            key={questionIndex}
+                            control={control}
+                            moduleIndex={index}
+                            questionIndex={questionIndex}
+                        />
+                    ))
+                }
+            </SQuestionContainer>
+
+            <SButtonAddQuestion onClick={handleAddQuestion}>
+                ADD_QUESTION
+            </SButtonAddQuestion>
             
         </SModuleTabContainer>
     )

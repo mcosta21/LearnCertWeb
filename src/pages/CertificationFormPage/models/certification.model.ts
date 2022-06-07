@@ -32,8 +32,8 @@ export class Question {
 }
 
 export class AnswerOption {
-    public id: string;
-    public description: string;
+    public id: string = uuid();
+    public description: string = '';
     public code: number;
-    public isCorrect: boolean;
+    public isCorrect: boolean = false;
 }

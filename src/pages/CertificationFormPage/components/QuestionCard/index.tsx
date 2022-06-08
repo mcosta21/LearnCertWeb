@@ -1,12 +1,12 @@
-import { LInput } from "../../../../components/LInput";
-import { AnswerOption, Certification } from "../../../../pages/CertificationFormPage/models/certification.model";
-import { Control, Controller, useFieldArray } from "react-hook-form";
-import { SAnswerOptionContainer, SAnswerOptionInput, SAnswerOptionItem, SAnswerOptionItems, SQuestionCardContainer } from "./styles";
-import { useState } from "react";
+import { Add, Clear, Delete, Edit, Remove } from "@mui/icons-material";
 import { FormControlLabel, IconButton, Switch } from "@mui/material";
-import { Add, Check } from "@mui/icons-material";
+import { useState } from "react";
+import { Control, Controller, useFieldArray } from "react-hook-form";
 import { LAnswerOptionItem } from "../../../../components/LAnswerOptionItem";
 import { OptionType } from "../../../../components/LAnswerOptionItem/models";
+import { LInput } from "../../../../components/LInput";
+import { AnswerOption, Certification } from "../../../../pages/CertificationFormPage/models/certification.model";
+import { SAnswerOptionContainer, SAnswerOptionInput, SAnswerOptionItem, SAnswerOptionItems, SQuestionCardContainer, SQuestionInputs } from "./styles";
 
 interface Props {
     moduleIndex: number;
@@ -21,25 +21,39 @@ export function QuestionCard({
 }: Props){
 
     const [newOption, setNewOption] = useState<AnswerOption>(new AnswerOption());
+    const [isNew, setIsNew] = useState<boolean>(true);
 
-    const { fields, remove, append } = useFieldArray({
+    const { fields, remove, append, replace, update } = useFieldArray({
         control,
         name: `modules.${moduleIndex}.questions.${questionIndex}.answerOptions`
     });
     
     function handleAddAnswerOption(){
-        console.log(newOption)
-        append(newOption);
+        const option = {...newOption, code: fields.length + 1}
+        append(option);
         setNewOption(new AnswerOption());
+        setIsNew(true);
     }
 
-    function setDescription(value: string) {
+    function handleUpdateAnswerOption(){
+        const index = fields.findIndex(x => x.id === newOption.id);
+        update(index, newOption);
+        setNewOption(new AnswerOption());
+        setIsNew(true);
+    }
+
+    function onUpdateAnswerOption(newAnswerOption: AnswerOption) {
+        setNewOption(newAnswerOption);
+        setIsNew(false);
+    }
+
+    function setAnswerDescription(value: string) {
         setNewOption(oldState => { 
             return {...oldState, description: value }
         });
     }
 
-    function toogleIsCorrect() {
+    function toogleAnswerIsCorrect() {
         setNewOption(oldState => { 
             return {...oldState, isCorrect: !oldState.isCorrect }
         });
@@ -49,29 +63,60 @@ export function QuestionCard({
         return !newOption || !newOption.description;
     }
 
+    function handleClearAnswerOption(){
+        setIsNew(true);
+        setNewOption(new AnswerOption());
+    }
+
+    function handleRemoveAnswerOption(index: number) {
+        remove(index);
+    }
+
     return (
         <SQuestionCardContainer>
-            <Controller
-                control={control}
-                name={`modules.${moduleIndex}.questions.${questionIndex}.description`}
-                render={({ field }) =>
-                    (
-                        <LInput 
-                            label="QUESTION.DESCRIPTION"
-                            hideError
-                            {...field} 
-                        />
-                    )
-                }
-            />
+
+            <SQuestionInputs>
+                <Controller
+                    control={control}
+                    defaultValue=""
+                    name={`modules.${moduleIndex}.questions.${questionIndex}.description`}
+                    render={({ field, fieldState }) =>
+                        (
+                            <LInput 
+                                label="QUESTION.DESCRIPTION"
+                                required
+                                error={fieldState.error?.message}
+                                {...field} 
+                            />
+                        )
+                    }
+                />
+
+                <Controller
+                    control={control}
+                    defaultValue=""
+                    name={`modules.${moduleIndex}.questions.${questionIndex}.learnMore`}
+                    render={({ field, fieldState }) =>
+                        (
+                            <LInput 
+                                label="QUESTION.LEARN_MORE"
+                                error={fieldState.error?.message}
+                                {...field} 
+                            />
+                        )
+                    }
+                />
+            </SQuestionInputs>
 
             <SAnswerOptionContainer>
                 <SAnswerOptionInput>
+                    
                     <LInput 
                         label="ANSWER.DESCRIPTION"
                         value={newOption.description}
+                        required
                         hideError
-                        onChange={(e) => setDescription(e.target.value)}
+                        onChange={(e) => setAnswerDescription(e.target.value)}
                     />
 
                     <FormControlLabel 
@@ -80,27 +125,55 @@ export function QuestionCard({
                         control={
                             <Switch 
                                 checked={newOption.isCorrect} 
-                                onChange={toogleIsCorrect}
+                                onChange={toogleAnswerIsCorrect}
                             />
                         } 
                         label="ANSWER.IS_CORRECT" 
                     />
 
-                    <IconButton 
-                        aria-label="add-module"
-                        size="small" 
-                        onClick={() => handleAddAnswerOption()} 
-                        disabled={isInvalid()}
-                    >
-                        <Add />
-                    </IconButton>
+                    {
+                        isNew ? (
+                            <IconButton 
+                                aria-label="add-module"
+                                size="small" 
+                                onClick={() => handleAddAnswerOption()} 
+                                disabled={isInvalid()}
+                            >
+                                <Add />
+                            </IconButton>
+                        ) : (
+                            <IconButton 
+                                aria-label="update-module"
+                                size="small" 
+                                onClick={() => handleUpdateAnswerOption()} 
+                                disabled={isInvalid()}
+                            >
+                                <Edit />
+                            </IconButton>
+                        )
+                    }
 
+                    <IconButton 
+                        aria-label="clear-module"
+                        size="small" 
+                        onClick={() => handleClearAnswerOption()} 
+                    >
+                        <Clear />
+                    </IconButton>
+                    
                 </SAnswerOptionInput>
 
                 <SAnswerOptionItems hidden={fields.length === 0}>    
                     {
-                        fields.map(x => (
-                            <SAnswerOptionItem key={x.id}>
+                        fields.map((x, index) => (
+                            <SAnswerOptionItem key={x.id} onDoubleClick={() => onUpdateAnswerOption(x)}>
+                                <IconButton 
+                                    aria-label="remove-answer"
+                                    size="small" 
+                                    onClick={() => handleRemoveAnswerOption(index)} 
+                                >
+                                    <Remove style={{ fontSize: 14 }}/>
+                                </IconButton>
                                 {x.isCorrect ? (
                                     <LAnswerOptionItem type={OptionType.Correct} label={x.description} />
                                 ) : (
@@ -114,3 +187,4 @@ export function QuestionCard({
         </SQuestionCardContainer>
     )
 }
+

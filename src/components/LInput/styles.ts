@@ -13,11 +13,11 @@ export const SInputContainer = styled.div`
     }
 
     span {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         color: ${({ theme }: GlobalTheme) => theme.colors.red};
         display: block;
         width: 100%;
-        height: 1.2rem;
+        height: 1.3rem;
     }
 `;
 
@@ -33,6 +33,10 @@ export const SInput = styled.input`
 
     &:hover, &:focus {
         border-color: ${({ theme }: GlobalTheme) => theme.colors.purple};
+    }
+    
+    &.invalid, &.invalid:hover, &.invalid:focus {
+        border-color: ${({ theme }: GlobalTheme) => theme.colors.red} !important;
     }
 `;
 

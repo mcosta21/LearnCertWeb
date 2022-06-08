@@ -14,12 +14,19 @@ export const SQuestionCardContainer = styled.li`
     }
 `;
 
+export const SQuestionInputs = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+`
+
 export const SAnswerOptionInput = styled.aside`
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px;
     border-bottom: 1px solid ${({ theme }: GlobalTheme) => theme.border};
+    gap: 0.5rem;
 
     .l-input {
 
@@ -44,7 +51,6 @@ export const SAnswerOptionInput = styled.aside`
 export const SAnswerOptionContainer = styled.div`
     background-color: ${({ theme }: GlobalTheme) => theme.backgroundSecondary};
     border: 1px solid ${({ theme }: GlobalTheme) => theme.border};
-    margin-top: 10px;
 `
 
 export const SAnswerOptionItems = styled.div`
@@ -52,7 +58,10 @@ export const SAnswerOptionItems = styled.div`
 `
 
 export const SAnswerOptionItem = styled.div`
-    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px;
 
     span {
         font-size: 0.7rem;

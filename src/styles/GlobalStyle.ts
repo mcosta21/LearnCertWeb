@@ -43,6 +43,7 @@ export default createGlobalStyle`
 
     .MuiTab-root {
         border-bottom: 1px solid ${({ theme }: GlobalTheme) => theme.border} !important;
+        min-height: 50px !important;
     }
 
     .MuiButtonBase-root {

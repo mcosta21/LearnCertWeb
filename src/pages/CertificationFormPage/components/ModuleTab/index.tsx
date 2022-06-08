@@ -1,8 +1,8 @@
-import { LInput } from "../../../../components/LInput";
-import { Control, Controller, useFieldArray } from "react-hook-form";
+import { Control, useFieldArray } from "react-hook-form";
+import { LDashedButton } from "../../../../components/LDashedButton";
 import { Certification, Question } from "../../models/certification.model";
-import { SButtonAddQuestion, SModuleTabContainer, SQuestionContainer } from "./styles";
 import { QuestionCard } from "../QuestionCard";
+import { SModuleTabContainer, SQuestionContainer } from "./styles";
 
 export interface ModuleTabProps {
     control: Control<Certification, any>,
@@ -16,7 +16,8 @@ export function ModuleTab({ control, index }: ModuleTabProps){
     });
 
     function handleAddQuestion(){
-        const question = new Question('questão 1');
+        const question = new Question();
+        question.code = fields.length + 1;
         append(question);
     }
 
@@ -54,9 +55,9 @@ export function ModuleTab({ control, index }: ModuleTabProps){
                 }
             </SQuestionContainer>
 
-            <SButtonAddQuestion onClick={handleAddQuestion}>
+            <LDashedButton type="button" onClick={handleAddQuestion}>
                 ADD_QUESTION
-            </SButtonAddQuestion>
+            </LDashedButton>
             
         </SModuleTabContainer>
     )

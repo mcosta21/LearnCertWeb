@@ -3,6 +3,19 @@ import { GlobalTheme } from 'styles/theme';
 
 export const SCertificationForm = styled.form`
     padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+`
+
+export const SCertificationInputs = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    & > div {
+        width: 100%
+    }
 `
 
 export const SPopoverModule = styled.div`
@@ -18,7 +31,8 @@ export const SModuleTabsContainer = styled.div`
 
     & > label {
         display: block;
-        padding-bottom: 15px;
+        padding-bottom: 10px;
+        margin-top: 10px;
         border-bottom: 1px solid ${({ theme }: GlobalTheme) => theme.border};
     }
 
@@ -28,7 +42,7 @@ export const SModuleTabsContainer = styled.div`
     }
 `
 export const SCertificationFooter = styled.footer`
-    height: 68px;
+    height: 65px;
     display: flex;
     align-items: center;
     justify-content: flex-end;

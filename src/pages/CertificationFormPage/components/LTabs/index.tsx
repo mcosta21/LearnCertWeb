@@ -4,13 +4,14 @@ import Tab from '@mui/material/Tab';
 import { Add } from "@mui/icons-material";
 import { LTabContent } from './TabContent';
 import { LTabProps } from "./models";
-
+import { STabsContainer } from './styles';
 
 export default function LTabs({
     currentTab = 'add_more',
     tabs = [],
     onChange,
-    onAddTab
+    onAddTab,
+    onRightClick
 }: LTabProps){
 
     function handleChange(event: React.SyntheticEvent, newValue: string){
@@ -19,15 +20,32 @@ export default function LTabs({
     }
     
     return (
-        <>
-        <Tabs value={currentTab} onChange={handleChange} scrollButtons="auto">
-            {
-                tabs.map((tab, index) => <Tab key={index} value={tab.id} label={tab.name} />)
-            }
-            <Tab icon={<Add />} value="add_more" onClick={onAddTab}/>
+        <STabsContainer>
 
-        </Tabs>
-        {
+            <Tabs value={currentTab} onChange={handleChange} scrollButtons="auto">
+                {
+                    tabs.map((tab, index) => (
+                        <Tab 
+                            key={index} 
+                            value={tab.id} 
+                            label={tab.name} 
+                            icon={tab.icon} 
+                            iconPosition={tab.iconPosition}
+                            className={tab.invalid ? 'invalid' : ''}
+                            onContextMenu={(e) => {
+                                if(onRightClick) {
+                                    e.preventDefault(); 
+                                    onRightClick(tab, e);
+                                }
+                            }}
+                        />
+                    ))
+                }
+                <Tab icon={<Add />} value="add_more" onClick={onAddTab}/>
+
+            </Tabs>
+
+            {
                 tabs.map((tab, index) => (
                     <LTabContent key={index} value={tab.id} visible={currentTab === tab.id}>
                         {tab.tab}
@@ -35,6 +53,7 @@ export default function LTabs({
                     )
                 )
             }
-        </>
+
+        </STabsContainer>
     );
 }

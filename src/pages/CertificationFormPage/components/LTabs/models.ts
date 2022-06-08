@@ -1,16 +1,20 @@
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 export interface LTabProps {
     currentTab?: string;
     tabs?: LTabModel[];
-    onChange: (selectedTab) => void;
+    onChange: (selectedTab: string) => void;
     onAddTab: (event: React.MouseEvent<HTMLElement> | undefined) => void;
+    onRightClick?: (tab: LTabModel, event?: React.MouseEvent<HTMLElement>) => void;
 }
 
 export class LTabModel {
     id: string;
     name: string;
     tab: ReactNode;
+    icon?: ReactElement;
+    iconPosition?: "bottom" | "top" | "end" | "start";
+    invalid?: boolean = false;
 
     constructor(id: string, name: string, tab: ReactNode) {
         this.id = id,

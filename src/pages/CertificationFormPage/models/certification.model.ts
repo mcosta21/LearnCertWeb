@@ -2,7 +2,7 @@ import { LanguageType } from './../../CertificationPage/models/certification.mod
 import { v4 as uuid } from 'uuid';
 
 export class Certification {
-    public id: string;
+    public id: string = uuid();
     public title: string;
     public imageUrl: string;
     public languageType: LanguageType;
@@ -10,13 +10,14 @@ export class Certification {
 }
 
 export class Module {
-    public id: string = uuid();
+    public id: string;
     public title: string;
     public code: number;
     public questions: Array<Question> = [];
 
-    constructor(title: string) {
+    constructor(title: string, code: number) {
         this.title = title;
+        this.code = code;
     }
 }
 
@@ -24,11 +25,8 @@ export class Question {
     public id: string = uuid();
     public code: number;
     public description: string;
+    public learnMore: string;
     public answerOptions: Array<AnswerOption> = [];
-
-    constructor(description: string) {
-        this.description = description;
-    }
 }
 
 export class AnswerOption {

@@ -11,7 +11,9 @@ interface OptionButtonProps {
 export function LAnswerOptionItem({ type, label }: OptionButtonProps){
     return (
         <LAnswerOptionItemContainer>
-            <OptionItem type={type} />
+            <div>
+                <OptionItem type={type} />
+            </div>
             <span>{label}</span>
         </LAnswerOptionItemContainer>
     )

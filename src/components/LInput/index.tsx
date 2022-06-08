@@ -9,6 +9,7 @@ interface Props {
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
     width?: string;
     value?: string;
+    required?: boolean;
 }
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, Props> = (
@@ -19,17 +20,19 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, Props> = (
       onChange,
       width,
       value,
+      required = false,
       ...rest
     },
     ref,
   ) => {
     return (
         <SInputContainer className="l-input">
-            <LLabel hidden={!label} value={label} />
+            <LLabel hidden={!label} value={`${label} ${required ? '*' : ''}`} />
             <SInput 
                 ref={ref}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => onChange ? onChange(e) : undefined}
                 style={{ width }}
+                className={error ? 'invalid' : ''}
                 value={value}
                 {...rest} 
             />

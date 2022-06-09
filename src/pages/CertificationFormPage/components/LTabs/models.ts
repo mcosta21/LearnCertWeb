@@ -1,11 +1,11 @@
 import { ReactElement, ReactNode } from 'react';
 
 export interface LTabProps {
-    currentTab?: string;
+    currentTab?: number;
     tabs?: LTabModel[];
-    onChange: (selectedTab: string) => void;
+    onChange: (selectedTab: number) => void;
     onAddTab: (event: React.MouseEvent<HTMLElement> | undefined) => void;
-    onRightClick?: (tab: LTabModel, event?: React.MouseEvent<HTMLElement>) => void;
+    onRightClick?: (index: number, tab: LTabModel, event?: React.MouseEvent<HTMLElement>) => void;
 }
 
 export class LTabModel {

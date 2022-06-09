@@ -10,7 +10,7 @@ import { LLabel } from '../../components/LLabel';
 import LTabs from "./components/LTabs";
 import { LTabModel } from './components/LTabs/models';
 import { ModuleTab, ModuleTabProps } from './components/ModuleTab';
-import { AnswerOption, Certification, Module, Question } from "./models/certification.model";
+import { AnswerOption, Certification, Module, Question, certification } from "./models/certification.model";
 import { CertificationValidation } from "./models/certification.validation";
 import { SCertificationFooter, SModuleTabsContainer, SPopoverModule, SCertificationForm, SCertificationInputs } from "./styles";
 
@@ -22,23 +22,6 @@ export default function CertificationFormPage({
 
 }: Props){
 
-    const certification = new Certification();
-    certification.title = "AZ 900";
-
-    const module = new Module("Módulo 2", 1);
-    const question1 = new Question();
-    question1.description = "Questão 1";
-    question1.code = 1;
-
-    const answer1 = new AnswerOption();
-    answer1.code = 1;
-    answer1.description = "Reposta 1";
-    answer1.isCorrect = true;
-    question1.answerOptions.push(answer1);
-
-    module.questions.push(question1)
-    certification.modules.push(module);
-
     const { 
         register, 
         handleSubmit, 
@@ -46,17 +29,18 @@ export default function CertificationFormPage({
         control,
         setValue,
         getValues,
+        watch
     } = useForm<Certification>({ 
         resolver: yupResolver(CertificationValidation),
-        defaultValues: { ...certification }
+        defaultValues: certification
     });
 
-    const { fields, append, update } = useFieldArray({
+    const { fields, append, update  } = useFieldArray({
         control,
-        name: "modules"
+        name: "modules",
     });
 
-    const [currentTab, setCurrentTab] = useState<string>();
+    const [currentTab, setCurrentTab] = useState<number>();
 
     const [moduleTabs, setModuleTabs] = useState<LTabModel[]>([]);
     const [titleModule, setTitleModule] = useState<string>("");
@@ -73,10 +57,8 @@ export default function CertificationFormPage({
 
     useEffect(() => {
         if(certification.modules[0]) {
-            setCurrentTab(certification.modules[0].id);
+            setCurrentTab(0);
         }
-
-        console.log(fields, certification.modules)
     }, []);
 
     useEffect(() => {
@@ -90,6 +72,8 @@ export default function CertificationFormPage({
     };
 
     function handleCloseInputModule(){
+        setTitleModule('');
+        setIsNew(true);
         setInputModule(undefined);
     }
 
@@ -105,7 +89,7 @@ export default function CertificationFormPage({
 
         setTitleModule('');
         handleCloseInputModule();
-        setCurrentTab(module.id);
+        setCurrentTab(index);
         setIsNew(true)
     }
 
@@ -120,7 +104,7 @@ export default function CertificationFormPage({
         return new LTabModel(module.id, module.title, component)
     }
 
-    function handleChangeTab(selectedTab: string) {
+    function handleChangeTab(selectedTab: number) {
         setCurrentTab(selectedTab);
         setTitleModule('');
         setIsNew(true);
@@ -141,21 +125,26 @@ export default function CertificationFormPage({
         setModuleTabs(newModuleTabs);
     }
 
-    function handleRightClickTab(tab: LTabModel, event?: React.MouseEvent<HTMLElement>) {
-        setCurrentTab(tab.id);
-        console.log(tab.name)
+    function handleRightClickTab(index: number, tab: LTabModel, event?: React.MouseEvent<HTMLElement>) {
+        setCurrentTab(index);
+        handleOpenInputModule(event);
         setTitleModule(tab.name);
         setIsNew(false);
-        handleOpenInputModule(event);
     }
 
     function handleUpdateModule() {
-        console.log(fields)
-        const index = fields.findIndex(x => x.id === currentTab);
-        const updatedTab = fields[index];
+        if(currentTab === undefined) return;
+        const updatedTab = fields[currentTab];
         updatedTab.title = titleModule;
-        update(index, updatedTab);
+        update(currentTab, updatedTab);
         setTitleModule('');
+        handleCloseInputModule();
+        setIsNew(true);
+
+        const updatedModulesTabs = getValues('modules').map((x, index) => createModuleTab(index, x));
+        console.log(updatedModulesTabs)
+        setModuleTabs(updatedModulesTabs);
+        setCurrentTab(currentTab);
     }
 
     return (

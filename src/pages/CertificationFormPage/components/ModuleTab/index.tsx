@@ -23,30 +23,11 @@ export function ModuleTab({ control, index }: ModuleTabProps){
 
     return (
         <SModuleTabContainer className="module-tab">
-
-            {
-                /*
-                <Controller
-                    control={control}
-                    name={`modules.${index}.title`}
-                    defaultValue=""
-                    render={({ field }) =>
-                        (
-                            <LInput 
-                                label="CERTIFICATION.TITLE"
-                                {...field} 
-                            />
-                        )
-                    }
-                />
-                */
-            }
-
             <SQuestionContainer>
                 {
                     fields.map((question, questionIndex) => (
                         <QuestionCard
-                            key={questionIndex}
+                            key={question.id}
                             control={control}
                             moduleIndex={index}
                             questionIndex={questionIndex}

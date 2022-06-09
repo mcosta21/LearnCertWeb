@@ -7,15 +7,15 @@ import { LTabProps } from "./models";
 import { STabsContainer } from './styles';
 
 export default function LTabs({
-    currentTab = 'add_more',
+    currentTab = -1,
     tabs = [],
     onChange,
     onAddTab,
     onRightClick
 }: LTabProps){
 
-    function handleChange(event: React.SyntheticEvent, newValue: string){
-        if(newValue === 'add_more') return;
+    function handleChange(event: React.SyntheticEvent, newValue: number){
+        if(newValue === -1) return;
         onChange(newValue);
     }
     
@@ -27,7 +27,7 @@ export default function LTabs({
                     tabs.map((tab, index) => (
                         <Tab 
                             key={index} 
-                            value={tab.id} 
+                            value={index} 
                             label={tab.name} 
                             icon={tab.icon} 
                             iconPosition={tab.iconPosition}
@@ -35,19 +35,19 @@ export default function LTabs({
                             onContextMenu={(e) => {
                                 if(onRightClick) {
                                     e.preventDefault(); 
-                                    onRightClick(tab, e);
+                                    onRightClick(index, tab, e);
                                 }
                             }}
                         />
                     ))
                 }
-                <Tab icon={<Add />} value="add_more" onClick={onAddTab}/>
+                <Tab icon={<Add />} value={-1} onClick={onAddTab}/>
 
             </Tabs>
 
             {
                 tabs.map((tab, index) => (
-                    <LTabContent key={index} value={tab.id} visible={currentTab === tab.id}>
+                    <LTabContent key={index} value={tab.id} visible={currentTab === index}>
                         {tab.tab}
                     </LTabContent>
                     )

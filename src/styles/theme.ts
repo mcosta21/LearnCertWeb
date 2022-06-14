@@ -8,6 +8,7 @@ interface Colors {
     purple: string;
     red: string;
     green: string;
+    white: string;
 }
 
 export interface Theme extends DefaultTheme {
@@ -22,7 +23,8 @@ export interface Theme extends DefaultTheme {
 const colorsTheme = {
     purple: '#5902EC',
     red: '#D82148',
-    green: '#65C18C'
+    green: '#65C18C',
+    white: '#FFF'
 } as Colors;
 
 export const lightTheme = {

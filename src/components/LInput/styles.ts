@@ -8,7 +8,7 @@ export const SInputContainer = styled.div`
     width: 100%;
 
     label {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
         color: ${({ theme }: GlobalTheme) => theme.text};
     }
 

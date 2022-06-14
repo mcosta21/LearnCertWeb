@@ -35,7 +35,7 @@ export class AnswerOption {
     public code: number;
     public isCorrect: boolean = false;
 }
-
+/*
 export const certification = new Certification();
 certification.id = uuid();
 certification.title = "AZ 900";
@@ -54,3 +54,4 @@ question1.answerOptions.push(answer1);
 
 module.questions.push(question1)
 certification.modules.push(module);
+*/

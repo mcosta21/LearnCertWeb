@@ -77,6 +77,7 @@ export default createGlobalStyle`
 
     .MuiButton-containedPrimary {
         background-color: ${({ theme }: GlobalTheme) => theme.colors.purple} !important;
+        color: ${({ theme }: GlobalTheme) => theme.colors.white} !important;
         padding: 6px 20px !important;
         font-weight: 500 !important;
     }

@@ -1,4 +1,4 @@
-import { GlobalTheme } from './../../styles/theme';
+import { GlobalTheme } from '@styles/theme';
 import styled from 'styled-components';
 
 export const SLabel = styled.label`

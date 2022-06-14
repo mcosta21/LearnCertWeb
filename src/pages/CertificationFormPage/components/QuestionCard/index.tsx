@@ -1,12 +1,14 @@
-import { Add, Clear, Delete, Edit, Remove } from "@mui/icons-material";
+import { Add, Clear, Edit, Remove } from "@mui/icons-material";
 import { FormControlLabel, IconButton, Switch } from "@mui/material";
 import { useState } from "react";
 import { Control, Controller, useFieldArray } from "react-hook-form";
-import { LAnswerOptionItem } from "../../../../components/LAnswerOptionItem";
-import { OptionType } from "../../../../components/LAnswerOptionItem/models";
-import { LInput } from "../../../../components/LInput";
-import { AnswerOption, Certification } from "../../../../pages/CertificationFormPage/models/certification.model";
+
 import { SAnswerOptionContainer, SAnswerOptionInput, SAnswerOptionItem, SAnswerOptionItems, SQuestionCardContainer, SQuestionInputs } from "./styles";
+
+import { AnswerOption, Certification } from "@pages/CertificationFormPage/models/certification.model";
+import { LAnswerOptionItem } from "@components/LAnswerOptionItem";
+import { OptionType } from "@components/LAnswerOptionItem/models";
+import { LInput } from "@components/LInput";
 
 interface Props {
     moduleIndex: number;

@@ -1,18 +1,21 @@
+import React, { useEffect, useState } from 'react';
+
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Check, Edit, Warning } from '@mui/icons-material';
 import { Button, IconButton, Popover } from "@mui/material";
-import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import LBody from "../../components/LBody";
-import { LDashedButton } from '../../components/LDashedButton';
-import { LInput } from "../../components/LInput";
-import { LLabel } from '../../components/LLabel';
-import LTabs from "./components/LTabs";
-import { LTabModel } from './components/LTabs/models';
-import { ModuleTab, ModuleTabProps } from './components/ModuleTab';
+
 import { Certification, Module } from "./models/certification.model";
 import { CertificationValidation } from "./models/certification.validation";
 import { SCertificationFooter, SCertificationForm, SCertificationInputs, SModuleTabsContainer, SPopoverModule } from "./styles";
+
+import LBody from "@components/LBody";
+import { LTabModel } from '@components/LTabs/models';
+import LTabs from '@components/LTabs';
+import { LDashedButton } from '@components/LDashedButton';
+import { LInput } from "@components/LInput";
+import { LLabel } from '@components/LLabel';
+import { ModuleTab, ModuleTabProps } from './components/ModuleTab';
 
 interface Props {
     certification?: Certification;

@@ -1,7 +1,7 @@
-import { FiCheck } from "react-icons/fi";
 import { CgClose } from "react-icons/cg";
-import { SSelectedOptionButton, SCorrectedOptionButton, SWrongOptionButton, SNormalOptionButton, LAnswerOptionItemContainer } from "./styles";
+import { FiCheck } from "react-icons/fi";
 import { OptionType } from './models';
+import { LAnswerOptionItemContainer, SCorrectedOptionButton, SNormalOptionButton, SSelectedOptionButton, SWrongOptionButton } from "./styles";
 
 interface OptionButtonProps {
     type: OptionType;

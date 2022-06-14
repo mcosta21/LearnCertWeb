@@ -1,5 +1,5 @@
-import { LLabel } from "../../components/LLabel";
-import { ChangeEvent, ChangeEventHandler, forwardRef, ForwardRefRenderFunction, InputHTMLAttributes } from "react";
+import { ChangeEvent, forwardRef, ForwardRefRenderFunction } from "react";
+import { LLabel } from "@components/LLabel";
 import { SInput, SInputContainer } from "./styles";
 
 interface Props {

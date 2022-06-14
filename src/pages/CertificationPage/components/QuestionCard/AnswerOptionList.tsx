@@ -1,6 +1,6 @@
-import { OptionType } from "../../../../components/LAnswerOptionItem/models";
-import { AnswerOption } from "pages/CertificationPage/models/certification.model";
-import { LAnswerOptionItem } from "../../../../components/LAnswerOptionItem";
+import { OptionType } from "@components/LAnswerOptionItem/models";
+import { AnswerOption } from "@pages/CertificationPage/models/certification.model";
+import { LAnswerOptionItem } from "@components/LAnswerOptionItem";
 import {
     SOptionsList
 } from './styles';

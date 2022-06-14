@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import LBody from "../../components/LBody";
+import LBody from "@components/LBody";
 import HeaderCertification from "./components/HeaderCertification";
 import PanelCertification from "./components/PanelCertification";
 import { CertificationModel } from "./models/certification.model";

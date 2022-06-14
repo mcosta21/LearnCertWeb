@@ -1,6 +1,4 @@
-import { ButtonBaseProps } from "@mui/material"
-import { ReactNode } from "react";
-import { SButtonContainer } from "./styles"
+import { SButtonContainer } from "./styles";
 
 interface Props extends HTMLButtonElement {
     width?: string;

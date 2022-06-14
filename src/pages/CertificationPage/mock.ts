@@ -1,5 +1,3 @@
-import { Certification } from "./models/certification.model";
-
 export const cert = {
 	"id": "5b8daa0a-7f4e-4c7c-ad98-736df8453533",
 	"title": "Microsoft  Azure Fundamentals AZ-900",

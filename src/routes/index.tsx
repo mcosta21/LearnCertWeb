@@ -2,10 +2,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { PrivateRoute } from './private.routes';
 import { RouterKey } from './routekeys';
 
-import CertificationPage from '../pages/CertificationPage';
-import HomePage from '../pages/HomePage';
-import NotFoundPage from '../pages/NotFoundPage';
-import CertificationFormPage from '../pages/CertificationFormPage';
+import CertificationPage from '@pages/CertificationPage';
+import HomePage from '@pages/HomePage';
+import NotFoundPage from '@pages/NotFoundPage';
+import CertificationFormPage from '@pages/CertificationFormPage';
 
 export function AppRoutes() {
   return (

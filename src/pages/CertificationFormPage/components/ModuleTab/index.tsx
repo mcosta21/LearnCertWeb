@@ -1,5 +1,5 @@
 import { Control, useFieldArray } from "react-hook-form";
-import { LDashedButton } from "../../../../components/LDashedButton";
+import { LDashedButton } from "@components/LDashedButton";
 import { Certification, Question } from "../../models/certification.model";
 import { QuestionCard } from "../QuestionCard";
 import { SModuleTabContainer, SQuestionContainer } from "./styles";

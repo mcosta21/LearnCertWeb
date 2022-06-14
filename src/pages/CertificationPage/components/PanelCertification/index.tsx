@@ -1,4 +1,4 @@
-import _, { first } from "lodash";
+import _ from "lodash";
 import { useState } from "react";
 import { 
     AnswerOption,

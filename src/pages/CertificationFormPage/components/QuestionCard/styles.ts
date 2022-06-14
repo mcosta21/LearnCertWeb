@@ -1,5 +1,5 @@
-import { GlobalTheme } from 'styles/theme';
 import styled from 'styled-components';
+import { GlobalTheme } from '@styles/theme';
 
 export const SQuestionCardContainer = styled.li`
     list-style: none;

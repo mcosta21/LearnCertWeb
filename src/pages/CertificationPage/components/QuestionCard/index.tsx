@@ -1,5 +1,4 @@
-import { AnswerOption, QuestionDescriptionModel, QuestionResult } from "pages/CertificationPage/models/certification.model"
-import { useState } from "react";
+import { AnswerOption, QuestionDescriptionModel } from "@pages/CertificationPage/models/certification.model";
 import AnswerOptionList from "./AnswerOptionList";
 import QuestionModuleTitle from "./QuestionModuleTitle";
 import { SCardContainer, SQuestionDescription, SQuestionFooter } from "./styles";

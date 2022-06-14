@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
-import { Theme, lightTheme, darkTheme } from "../styles/theme";
-import GlobalTheme from '../styles/GlobalStyle';
+import { Theme, lightTheme, darkTheme } from "@styles/theme";
+import GlobalTheme from '@styles/GlobalStyle';
 
 interface CustomThemeProviderData {
 	children: ReactNode;

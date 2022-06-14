@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { GlobalTheme } from 'styles/theme';
+import { GlobalTheme } from '@styles/theme';
 
 export const SButtonContainer = styled.button`
     background: ${({ theme }: GlobalTheme) => theme.backgroundSecondary};

@@ -1,4 +1,4 @@
-import { useMyTheme } from "../../hooks/useMyTheme";
+import { useMyTheme } from "@hooks/useMyTheme";
 
 export default function HomePage(){
     const { toggleTheme } = useMyTheme();

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { GlobalTheme } from 'styles/theme';
+import { GlobalTheme } from '@styles/theme';
 import { FiChevronDown } from 'react-icons/fi';
-import { QuestionDescriptionModel, QuestionResult } from 'pages/CertificationPage/models/certification.model';
+import { QuestionDescriptionModel } from '@pages/CertificationPage/models/certification.model';
 
 interface Props {
     question: QuestionDescriptionModel;

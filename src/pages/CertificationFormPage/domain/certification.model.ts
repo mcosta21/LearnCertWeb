@@ -5,7 +5,7 @@ export class Certification {
     public id: string = uuid();
     public title: string;
     public imageUrl: string;
-    public languageType: LanguageType;
+    public languageType: LanguageType = LanguageType.English;
     public modules: Array<Module> = [];
 }
 

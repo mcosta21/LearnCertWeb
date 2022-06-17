@@ -21,6 +21,10 @@ export function ModuleTab({ control, index }: ModuleTabProps){
         append(question);
     }
 
+    function handleRemoveQuestion(index: number) {
+        remove(index);
+    }
+
     return (
         <SModuleTabContainer className="module-tab">
             <SQuestionContainer>
@@ -31,6 +35,7 @@ export function ModuleTab({ control, index }: ModuleTabProps){
                             control={control}
                             moduleIndex={index}
                             questionIndex={questionIndex}
+                            onRemoveQuestion={handleRemoveQuestion}
                         />
                     ))
                 }

@@ -1,4 +1,4 @@
-import { Add, Clear, Edit, Remove } from "@mui/icons-material";
+import { Add, Clear, Delete, Edit, Remove } from "@mui/icons-material";
 import { FormControlLabel, IconButton, Switch } from "@mui/material";
 import { useState } from "react";
 import { Control, Controller, useFieldArray } from "react-hook-form";
@@ -14,18 +14,20 @@ interface Props {
     moduleIndex: number;
     questionIndex: number;
     control: Control<Certification, any>,
+    onRemoveQuestion: (index: number) => void;
 }
 
 export function QuestionCard({
     moduleIndex,
     questionIndex,
     control,
+    onRemoveQuestion
 }: Props){
 
     const [newOption, setNewOption] = useState<AnswerOption>(new AnswerOption());
     const [isNew, setIsNew] = useState<boolean>(true);
 
-    const { fields, remove, append, replace, update } = useFieldArray({
+    const { fields, remove, append, update } = useFieldArray({
         control,
         name: `modules.${moduleIndex}.questions.${questionIndex}.answerOptions`
     });
@@ -108,6 +110,14 @@ export function QuestionCard({
                         )
                     }
                 />
+
+                <IconButton 
+                    aria-label="remove-question"
+                    size="small" 
+                    onClick={() => onRemoveQuestion(questionIndex)} 
+                >
+                    <Delete />
+                </IconButton>
             </SQuestionInputs>
 
             <SAnswerOptionContainer>
@@ -136,7 +146,7 @@ export function QuestionCard({
                     {
                         isNew ? (
                             <IconButton 
-                                aria-label="add-module"
+                                aria-label="add-answer"
                                 size="small" 
                                 onClick={() => handleAddAnswerOption()} 
                                 disabled={isInvalid()}
@@ -145,7 +155,7 @@ export function QuestionCard({
                             </IconButton>
                         ) : (
                             <IconButton 
-                                aria-label="update-module"
+                                aria-label="update-answer"
                                 size="small" 
                                 onClick={() => handleUpdateAnswerOption()} 
                                 disabled={isInvalid()}
@@ -156,7 +166,7 @@ export function QuestionCard({
                     }
 
                     <IconButton 
-                        aria-label="clear-module"
+                        aria-label="clear-answer"
                         size="small" 
                         onClick={() => handleClearAnswerOption()} 
                     >

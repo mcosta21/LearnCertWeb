@@ -14,7 +14,14 @@ export const SCertificationInputs = styled.div`
     gap: 14px;
 
     & > div {
-        width: 100%
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 10px;
+
+        .l-select {
+            grid-column: 1 / -1;
+        }
     }
 `
 

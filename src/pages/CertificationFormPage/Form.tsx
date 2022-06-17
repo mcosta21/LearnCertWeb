@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Check, Edit, Warning } from '@mui/icons-material';
-import { Button, IconButton, Popover } from "@mui/material";
+import { Button, IconButton, MenuItem, Popover, Select, SelectChangeEvent } from "@mui/material";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
-import { Certification, Module } from "./models/certification.model";
-import { CertificationValidation } from "./models/certification.validation";
+import { Certification, Module } from "./domain/certification.model";
+import { CertificationValidation } from "./domain/certification.validation";
 import { SCertificationFooter, SCertificationForm, SCertificationInputs, SModuleTabsContainer, SPopoverModule } from "./styles";
 
 import LBody from "@components/LBody";
@@ -16,6 +16,9 @@ import { LDashedButton } from '@components/LDashedButton';
 import { LInput } from "@components/LInput";
 import { LLabel } from '@components/LLabel';
 import { ModuleTab, ModuleTabProps } from './components/ModuleTab';
+import * as api from './services/certification.api';
+import { LanguageType, LanguageTypes } from '@pages/CertificationPage/models/certification.model';
+import LSelect from '@components/LSelect';
 
 interface Props {
     certification?: Certification;
@@ -28,13 +31,16 @@ export default function CertificationForm({
     const { 
         register, 
         handleSubmit, 
-        formState: { errors },
+        formState: { errors, isValid },
         control,
+        setValue,
         getValues,
     } = useForm<Certification>({ 
         resolver: yupResolver(CertificationValidation),
         defaultValues: certification
     });
+
+    const [languageType, setLanguageType] = useState<LanguageType | undefined>(certification?.languageType);
 
     const { fields, append, update  } = useFieldArray({
         control,
@@ -79,8 +85,6 @@ export default function CertificationForm({
     }
 
     function handleAddModule(){
-        console.log('add module')
-
         const module = new Module(titleModule, fields.length + 1);
         append(module);
 
@@ -112,7 +116,12 @@ export default function CertificationForm({
     }
 
     const onSubmit: SubmitHandler<Certification> = async data => {
-        console.log(data)
+        try {
+            await api.save(data);
+        }
+        catch(e) {
+            console.log(e)
+        }
     };
 
     function validateTabs(){
@@ -148,6 +157,12 @@ export default function CertificationForm({
         setCurrentTab(currentTab);
     }
 
+    const handleSelectLanguageType = (event: SelectChangeEvent) => {
+        const selectedValue = event.target.value as LanguageType;
+        setValue('languageType', selectedValue);
+        setLanguageType(selectedValue);
+      };
+
     return (
         <LBody>
             <SCertificationForm onSubmit={handleSubmit(onSubmit)}>
@@ -171,7 +186,17 @@ export default function CertificationForm({
                             error={errors.imageUrl?.message}
                             hideError
                             {...register("imageUrl")} 
-                        />   
+                        />  
+
+                        <LSelect
+                            label="CERTIFICATION.LANGUAGE_TYPE"
+                            defaultValue={languageType}
+                            onChange={handleSelectLanguageType}
+                            hideError
+                            required
+                        >
+                            {LanguageTypes.map(x => <MenuItem key={x} value={x}>{x}</MenuItem>)}
+                        </LSelect> 
                     </div>            
 
                 </SCertificationInputs>
@@ -188,7 +213,12 @@ export default function CertificationForm({
                 </SModuleTabsContainer>
                 
                 <SCertificationFooter>
-                    <Button variant="contained" size="medium" type="submit">
+                    <Button 
+                        variant="contained" 
+                        size="medium" 
+                        type="submit"
+                        disabled={!isValid}
+                    >
                         SAVE
                     </Button>
                 </SCertificationFooter>

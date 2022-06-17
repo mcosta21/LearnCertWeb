@@ -5,7 +5,7 @@ import { Control, Controller, useFieldArray } from "react-hook-form";
 
 import { SAnswerOptionContainer, SAnswerOptionInput, SAnswerOptionItem, SAnswerOptionItems, SQuestionCardContainer, SQuestionInputs } from "./styles";
 
-import { AnswerOption, Certification } from "@pages/CertificationFormPage/models/certification.model";
+import { AnswerOption, Certification } from "@pages/CertificationFormPage/domain/certification.model";
 import { LAnswerOptionItem } from "@components/LAnswerOptionItem";
 import { OptionType } from "@components/LAnswerOptionItem/models";
 import { LInput } from "@components/LInput";

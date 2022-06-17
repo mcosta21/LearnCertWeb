@@ -27,6 +27,11 @@ export function AppRoutes() {
           element={<PrivateRoute component={<CertificationFormPage />} />}
         />
 
+        <Route
+          path={`${RouterKey.CertificationForm}/:id`}
+          element={<PrivateRoute component={<CertificationFormPage />} />}
+        />
+
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

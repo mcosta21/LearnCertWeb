@@ -169,9 +169,14 @@ export default function CertificationForm({
 
                 <SCertificationInputs>
 
-                    <LDashedButton type="button" width="200px" height="155px">
-                        ADD_IMAGE    
-                    </LDashedButton>     
+                    {
+                        !!getValues('imageUrl') ? 
+                            <img src={getValues('imageUrl')} />  
+                         : 
+                            <LDashedButton type="button" width="200px" height="155px">
+                                NO_IMAGE_DEFINED
+                            </LDashedButton> 
+                    }
 
                     <div>
                         <LInput 

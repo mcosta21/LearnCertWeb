@@ -23,6 +23,11 @@ export const SCertificationInputs = styled.div`
             grid-column: 1 / -1;
         }
     }
+
+    & > img {
+        width: 160px;
+        height: 160px;
+    }
 `
 
 export const SPopoverModule = styled.div`

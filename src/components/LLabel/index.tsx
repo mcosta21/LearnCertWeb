@@ -1,3 +1,4 @@
+import Translate from "@services/i18nProvider/Translate";
 import { SLabel } from "./styles"
 
 interface Props {
@@ -6,5 +7,7 @@ interface Props {
 }
 
 export function LLabel({ value, hidden = false }: Props){
-    return <SLabel hidden={hidden}>{value}</SLabel>
+    return <SLabel hidden={hidden}>
+                {value ? <Translate value={value} /> : value }
+            </SLabel>
 }

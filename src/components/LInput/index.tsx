@@ -27,7 +27,10 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, Props> = (
   ) => {
     return (
         <SInputContainer className="l-input">
-            <LLabel hidden={!label} value={`${label} ${required ? '*' : ''}`} />
+            <span>
+                <LLabel hidden={!label} value={label} />
+                {!label && required ? '*' : ''}
+            </span>
             <SInput 
                 ref={ref}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => onChange ? onChange(e) : undefined}

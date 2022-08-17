@@ -26,6 +26,7 @@
       "@routes/*": ["./src/routes/*"],
       "@styles/*": ["./src/styles/*"],
       "@config/*": ["./src/config/*"],
+      "@services/*": ["./src/services/*"]
     }
   },
   "include": ["src", "**/*.ts", "**/*.tsx"],

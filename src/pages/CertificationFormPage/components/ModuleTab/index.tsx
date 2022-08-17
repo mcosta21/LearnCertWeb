@@ -3,6 +3,7 @@ import { LDashedButton } from "@components/LDashedButton";
 import { Certification, Question } from "../../domain/certification.model";
 import { QuestionCard } from "../QuestionCard";
 import { SModuleTabContainer, SQuestionContainer } from "./styles";
+import Translate from "@services/i18nProvider/Translate";
 
 export interface ModuleTabProps {
     control: Control<Certification, any>,
@@ -44,7 +45,7 @@ export function ModuleTab({ control, index }: ModuleTabProps){
             </SQuestionContainer>
 
             <LDashedButton type="button" onClick={handleAddQuestion}>
-                ADD_QUESTION
+                <Translate value="QUESTION.ADD" />
             </LDashedButton>
             
         </SModuleTabContainer>

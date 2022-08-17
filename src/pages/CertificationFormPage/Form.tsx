@@ -19,6 +19,7 @@ import { ModuleTab, ModuleTabProps } from './components/ModuleTab';
 import * as api from './services/certification.api';
 import { LanguageType, LanguageTypes } from '@pages/CertificationPage/models/certification.model';
 import LSelect from '@components/LSelect';
+import Translate from '@services/i18nProvider/Translate';
 
 interface Props {
     certification?: Certification;
@@ -181,7 +182,7 @@ export default function CertificationForm({
                             <img src={getValues('imageUrl')} />  
                          : 
                             <LDashedButton type="button" width="200px" height="155px">
-                                NO_IMAGE_DEFINED
+                                <Translate value="CERTIFICATION.NO_IMAGE" />
                             </LDashedButton> 
                     }
 
@@ -214,7 +215,7 @@ export default function CertificationForm({
                 </SCertificationInputs>
 
                 <SModuleTabsContainer>
-                    <LLabel value="MODULE.TITLE" />
+                    <LLabel value="MODULE.LABEL" />
                     <LTabs 
                         currentTab={currentTab} 
                         onChange={handleChangeTab}
@@ -231,7 +232,7 @@ export default function CertificationForm({
                         type="submit"
                         disabled={!isValid}
                     >
-                        SAVE
+                        <Translate value="SAVE" />
                     </Button>
                 </SCertificationFooter>
 

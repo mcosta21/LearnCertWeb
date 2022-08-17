@@ -24,7 +24,10 @@ export default function LSelect({
 }: Props){
     return (
         <SSelectContainer className="l-select">
-            <LLabel hidden={!label} value={`${label} ${required ? '*' : ''}`} />
+            <span>
+                <LLabel hidden={!label} value={label} />
+                {!label && required ? '*' : ''}
+            </span>
             <Select
                 value={defaultValue}
                 onChange={onChange}

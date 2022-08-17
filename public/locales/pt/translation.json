@@ -1,6 +1,23 @@
 {
   "TITLE": "Oi",
+  "SAVE": "Salvar",
   "CERTIFICATION": {
-    "TITLE": "Título"
+    "TITLE": "Título",
+    "NO_IMAGE": "Sem imagem",
+    "IMAGE_URL": "Url da imagem",
+    "LANGUAGE_TYPE": "Idioma"
+  },
+  "MODULE": {
+    "TITLE": "Título do módulo",
+    "LABEL": "Módulos"
+  },
+  "QUESTION": {
+    "DESCRIPTION": "Descrição",
+    "LEARN_MORE": "Saiba mais",
+    "ADD": "Adicionar questão"
+  },
+  "ANSWER": {
+    "DESCRIPTION": "Resposta",
+    "IS_CORRECT": "Está correto?"
   }
 }

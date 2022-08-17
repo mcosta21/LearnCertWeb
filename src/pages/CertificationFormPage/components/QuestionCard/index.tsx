@@ -11,6 +11,8 @@ import { OptionType } from "@components/LAnswerOptionItem/models";
 import { LInput } from "@components/LInput";
 import { LLabel } from "@components/LLabel";
 
+import Translate from '@services/i18nProvider/Translate';
+
 interface Props {
     moduleIndex: number;
     questionIndex: number;
@@ -192,7 +194,7 @@ export function QuestionCard({
                                     onChange={toogleAnswerIsCorrect}
                                 />
                             } 
-                            label="ANSWER.IS_CORRECT" 
+                            label={<Translate value="ANSWER.IS_CORRECT" />} 
                         />
 
                         {

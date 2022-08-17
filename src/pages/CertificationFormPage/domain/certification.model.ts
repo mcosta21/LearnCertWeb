@@ -27,6 +27,8 @@ export class Question {
     public description: string;
     public learnMore: string;
     public answerOptions: Array<AnswerOption> = [];
+
+    public collapsed: boolean = true;
 }
 
 export class AnswerOption {

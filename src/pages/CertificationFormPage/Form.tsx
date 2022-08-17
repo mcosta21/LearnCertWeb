@@ -22,10 +22,12 @@ import LSelect from '@components/LSelect';
 
 interface Props {
     certification?: Certification;
+    isNew: boolean;
 }
 
 export default function CertificationForm({
-    certification
+    certification,
+    isNew
 }: Props){
 
     const { 
@@ -54,7 +56,7 @@ export default function CertificationForm({
     const [inputModule, setInputModule] = useState<HTMLElement | undefined>(undefined);
     const open = Boolean(inputModule);
     const id = open ? 'imput-module' : undefined;
-    const [isNew, setIsNew] = useState(true);
+    const [isNewModule, setIsNewModule] = useState(true);
 
     useEffect(() => {
         if(!certification) return;
@@ -80,7 +82,7 @@ export default function CertificationForm({
 
     function handleCloseInputModule(){
         setTitleModule('');
-        setIsNew(true);
+        setIsNewModule(true);
         setInputModule(undefined);
     }
 
@@ -95,7 +97,7 @@ export default function CertificationForm({
         setTitleModule('');
         handleCloseInputModule();
         setCurrentTab(index);
-        setIsNew(true)
+        setIsNewModule(true)
     }
 
     function createModuleTab(index: number, module: Module){
@@ -112,17 +114,8 @@ export default function CertificationForm({
     function handleChangeTab(selectedTab: number) {
         setCurrentTab(selectedTab);
         setTitleModule('');
-        setIsNew(true);
+        setIsNewModule(true);
     }
-
-    const onSubmit: SubmitHandler<Certification> = async data => {
-        try {
-            await api.save(data);
-        }
-        catch(e) {
-            console.log(e)
-        }
-    };
 
     function validateTabs(){
         const newModuleTabs = moduleTabs.map((tab, index) => {
@@ -139,7 +132,7 @@ export default function CertificationForm({
         setCurrentTab(index);
         handleOpenInputModule(event);
         setTitleModule(tab.name);
-        setIsNew(false);
+        setIsNewModule(false);
     }
 
     function handleUpdateModule() {
@@ -149,7 +142,7 @@ export default function CertificationForm({
         update(currentTab, updatedTab);
         setTitleModule('');
         handleCloseInputModule();
-        setIsNew(true);
+        setIsNewModule(true);
 
         const updatedModulesTabs = getValues('modules').map((x, index) => createModuleTab(index, x));
         console.log(updatedModulesTabs)
@@ -157,11 +150,25 @@ export default function CertificationForm({
         setCurrentTab(currentTab);
     }
 
-    const handleSelectLanguageType = (event: SelectChangeEvent) => {
+    function handleSelectLanguageType(event: SelectChangeEvent) {
         const selectedValue = event.target.value as LanguageType;
         setValue('languageType', selectedValue);
         setLanguageType(selectedValue);
-      };
+    }
+
+    const onSubmit: SubmitHandler<Certification> = async data => {
+        try {
+            if(isNew) {
+                await api.save(data);
+            }
+            else {
+                await api.update(data);
+            }
+        }
+        catch(e) {
+            alert(e);
+        }
+    };
 
     return (
         <LBody>

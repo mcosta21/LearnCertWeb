@@ -14,6 +14,19 @@ export const SQuestionCardContainer = styled.li`
     }
 `;
 
+export const SQuestionCardData = styled.div`
+
+`
+
+export const SQuestionCardCollapsed = styled.div`
+
+    & > div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+`
+
 export const SQuestionInputs = styled.div`
     display: flex;
     align-items: center;

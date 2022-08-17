@@ -1,4 +1,4 @@
-import { CreateCertification } from './../domain/certification.commands';
+import { CreateCertificationCommand, UpdateCertificationCommand } from './../domain/certification.commands';
 import { Certification } from '@pages/CertificationFormPage/domain/certification.model';
 import { api } from '@config/api';
 
@@ -14,6 +14,13 @@ export async function getById(
 export async function save(
   certification: Certification
 ) {
-  const cmd = new CreateCertification(certification);
+  const cmd = new CreateCertificationCommand(certification);
   await api.post(`${root}/Save`, cmd);
+}
+
+export async function update(
+  certification: Certification
+) {
+  const cmd = new UpdateCertificationCommand(certification);
+  await api.put(`${root}/Update`, cmd);
 }

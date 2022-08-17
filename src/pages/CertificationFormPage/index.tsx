@@ -10,6 +10,7 @@ export default function CertificationFormPage(){
     const { id } = useParams();
     const [certification, setCertification] = useState<Certification>();
     const [loading, setLoading] = useState<boolean>(true);
+    const [isNew, setIsNew] = useState<boolean>(true);
 
     useEffect(() => {
         if(id) {
@@ -17,6 +18,7 @@ export default function CertificationFormPage(){
                 .then(data => {
                     console.log(data)
                     setCertification(data);
+                    setIsNew(false);
                     setLoading(false);
                 })
                 .catch(error => {
@@ -33,5 +35,5 @@ export default function CertificationFormPage(){
         return <LLoading />
     }
 
-    return <CertificationForm certification={certification}/>
+    return <CertificationForm certification={certification} isNew={isNew}/>
 }

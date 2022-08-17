@@ -1,7 +1,7 @@
 import { Certification } from './certification.model';
 import { Module } from './certification.model';
 
-export class CreateCertification {
+export class BaseCertificationCommand {
     public id: string;
     public title: string;
     public imageUrl: string;
@@ -14,3 +14,7 @@ export class CreateCertification {
         this.modules = certification.modules;
     }
 }
+
+export class CreateCertificationCommand extends BaseCertificationCommand {}
+
+export class UpdateCertificationCommand extends BaseCertificationCommand {}

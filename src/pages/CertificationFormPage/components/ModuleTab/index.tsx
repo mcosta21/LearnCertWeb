@@ -18,6 +18,7 @@ export function ModuleTab({ control, index }: ModuleTabProps){
     function handleAddQuestion(){
         const question = new Question();
         question.code = fields.length + 1;
+        question.collapsed = false;
         append(question);
     }
 
@@ -36,6 +37,7 @@ export function ModuleTab({ control, index }: ModuleTabProps){
                             moduleIndex={index}
                             questionIndex={questionIndex}
                             onRemoveQuestion={handleRemoveQuestion}
+                            collapsed={question.collapsed}
                         />
                     ))
                 }

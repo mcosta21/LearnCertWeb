@@ -1,36 +1,25 @@
+import { AnswerOption, Certification, LanguageType, LanguageTypes, Question } from "@pages/CertificationFormPage/domain/certification.model";
 import _ from "lodash";
 import { useState } from "react";
-import { 
-    AnswerOption,
-    CertificationModel, 
-    LanguageType, 
-    LanguageTypes, 
-    QuestionDescriptionModel
-} from "../../models/certification.model";
 import EmptyQuestionCard from "../EmptyQuestionCard";
 import QuestionCard from "../QuestionCard";
 import { BoxCard, SPanelContainer } from "./styles";
 
 interface Props {
-    certification: CertificationModel
+    certification: Certification,
+    showAllAnswer: boolean;
 }
 
 export default function PanelCertification({
-    certification
+    certification,
+    showAllAnswer
 }: Props){
 
     
     const [selectedAnswerOptionCode, setSelectedAnswerOptionCode] = useState<number>();
 
-    const firstLanguage = LanguageTypes[0];
-    const secondLanguage = LanguageTypes[1];
-
     const [questionFocused, setQuestionFocused] = useState<string>();
     const [showCorrectAnswer, setShowCorrectAnswer] = useState<string>();
-
-    const groupQuestions = _.groupBy(certification.questionDescriptions, 'questionId');
-    const questions = Object.values(_.mapValues(groupQuestions, question => question));
-
 
     function handleFocusQuestion(questionId: string | undefined) {
         setSelectedAnswerOptionCode(undefined);
@@ -48,37 +37,31 @@ export default function PanelCertification({
     return (
         <SPanelContainer>
             {
-                questions.map((question, index) => (
-                    <aside key={index}>
-                        <QuestionByLanguage 
-                            values={question} 
-                            languageType={firstLanguage} 
-                            questionFocused={questionFocused}
-                            showCorrectAnswer={showCorrectAnswer}
-                            onFocus={handleFocusQuestion}
-                            onShowCorrect={handleShowCorrectAnswer}
-                            selectedOptionCode={selectedAnswerOptionCode}
-                            onSelectOption={handleSelectOption}
-                        />
-                        <QuestionByLanguage 
-                            values={question} 
-                            languageType={secondLanguage} 
-                            questionFocused={questionFocused}
-                            showCorrectAnswer={showCorrectAnswer}
-                            onFocus={handleFocusQuestion}
-                            onShowCorrect={handleShowCorrectAnswer}
-                            selectedOptionCode={selectedAnswerOptionCode}
-                            onSelectOption={handleSelectOption}
-                        />
-                    </aside>
+                certification.modules.map(module => (
+                    module.questions.map((question, index) => (
+                        <aside key={index}>
+                            <QuestionCard 
+                                key={question.id} 
+                                question={question} 
+                                module={module}
+                                focused={question.id === questionFocused}
+                                showCorrect={question.id === showCorrectAnswer || showAllAnswer === true}
+                                onFocus={handleFocusQuestion}
+                                onShowCorrect={handleShowCorrectAnswer}
+                                selectedOptionCode={selectedAnswerOptionCode}
+                                onSelectOption={handleSelectOption}
+                            />
+                        </aside>
+                    ))     
                 ))
+                
             }
         </SPanelContainer>
     )
 }
 
 interface QuestionByLanguageProps {
-    values: QuestionDescriptionModel[], 
+    values: Question[], 
     languageType: LanguageType,
     questionFocused: string | undefined;
     showCorrectAnswer: string | undefined;
@@ -88,6 +71,7 @@ interface QuestionByLanguageProps {
     onSelectOption: (option: AnswerOption) => void;
 }
 
+/*
 function QuestionByLanguage({
     values,
     languageType,
@@ -120,3 +104,4 @@ function QuestionByLanguage({
         </BoxCard>
     )
 }
+*/

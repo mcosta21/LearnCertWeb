@@ -1,6 +1,6 @@
 export enum RouterKey {
   Home = "/",
-  Certification = "/certification",
+  CertificationLearn = "/certification/learn",
   CertificationForm = "/certification/form",
   CertificationList = "/certification/list",
 }

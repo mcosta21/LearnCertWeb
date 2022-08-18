@@ -1,10 +1,12 @@
+import { Module, Question } from "@pages/CertificationFormPage/domain/certification.model";
 import { AnswerOption, QuestionDescriptionModel } from "@pages/CertificationPage/models/certification.model";
 import AnswerOptionList from "./AnswerOptionList";
 import QuestionModuleTitle from "./QuestionModuleTitle";
 import { SCardContainer, SQuestionDescription, SQuestionFooter } from "./styles";
 
 interface Props {
-    value: QuestionDescriptionModel;
+    question: Question;
+    module: Module;
     focused: boolean;
     showCorrect: boolean;
     onFocus: (questionId: string | undefined) => void;
@@ -14,7 +16,8 @@ interface Props {
 }
 
 export default function QuestionCard({
-    value,
+    question,
+    module,
     focused,
     onFocus,
     showCorrect,
@@ -26,7 +29,7 @@ export default function QuestionCard({
     
     function handleFocus() {
         if(focused) return;
-        onFocus(value.questionId);
+        onFocus(question.id);
     }
 
     function handleCollapse() {
@@ -34,37 +37,38 @@ export default function QuestionCard({
     }
 
     function handleShowCorrectAnswer() {
-        onShowCorrect(showCorrect ? undefined : value.questionId);
+        onShowCorrect(showCorrect ? undefined : question.id);
     }
 
 
     return (
         <SCardContainer onClick={handleFocus} className={focused ? 'focused' : 'collapsed'}>
             <QuestionModuleTitle 
-                question={value!}
+                module={module}
+                question={question}
                 focused={focused}
                 handleCollapse={handleCollapse}
             />
 
             <SQuestionDescription>
-                {value.description}
+                {question.description}
             </SQuestionDescription>
 
             {
                 focused && (
                     <>
                         <AnswerOptionList 
-                            answers={value.answerOptions} 
+                            answers={question.answerOptions} 
                             showCorrect={showCorrect} 
                             selectedOptionCode={selectedOptionCode}
                             onSelectOption={onSelectOption}
                         />
                         <SQuestionFooter>
                             <a 
-                                href={value.description} 
+                                href={question.description} 
                                 rel="noreferrer noopener"
                                 target="_blank"
-                                className={!!value.description ? 'visible' : 'hidden'}
+                                className={!!question.description ? 'visible' : 'hidden'}
                             >
                                 Learn more
                             </a>

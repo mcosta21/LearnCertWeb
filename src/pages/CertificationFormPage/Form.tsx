@@ -5,7 +5,7 @@ import { Check, Edit, Warning } from '@mui/icons-material';
 import { Button, IconButton, MenuItem, Popover, Select, SelectChangeEvent } from "@mui/material";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
-import { Certification, Module } from "./domain/certification.model";
+import { Certification, LanguageType, LanguageTypes, Module } from "./domain/certification.model";
 import { CertificationValidation } from "./domain/certification.validation";
 import { SCertificationFooter, SCertificationForm, SCertificationInputs, SModuleTabsContainer, SPopoverModule } from "./styles";
 
@@ -17,7 +17,6 @@ import { LInput } from "@components/LInput";
 import { LLabel } from '@components/LLabel';
 import { ModuleTab, ModuleTabProps } from './components/ModuleTab';
 import * as api from './services/certification.api';
-import { LanguageType, LanguageTypes } from '@pages/CertificationPage/models/certification.model';
 import LSelect from '@components/LSelect';
 import Translate from '@services/i18nProvider/Translate';
 

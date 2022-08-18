@@ -37,6 +37,11 @@ export const SHeaderContainer = styled.header`
     
 `
 
-
+export const SButtonOptionContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+`
 
 

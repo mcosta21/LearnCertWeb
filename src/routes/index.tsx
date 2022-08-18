@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { PrivateRoute } from './private.routes';
 import { RouterKey } from './routekeys';
 
-import CertificationPage from '@pages/CertificationPage';
+import CertificationLearnPage from '@pages/CertificationPage';
 import HomePage from '@pages/HomePage';
 import NotFoundPage from '@pages/NotFoundPage';
 import CertificationFormPage from '@pages/CertificationFormPage';
@@ -19,8 +19,8 @@ export function AppRoutes() {
         />
 
         <Route
-          path={RouterKey.Certification}
-          element={<PrivateRoute component={<CertificationPage />} />}
+          path={`${RouterKey.CertificationLearn}/:id`}
+          element={<PrivateRoute component={<CertificationLearnPage />} />}
         />
 
         <Route

@@ -5,10 +5,17 @@ export const LAnswerOptionItemContainer = styled.div`
     display: flex;
     align-items: center;
     color: ${({ theme }: GlobalTheme) => theme.text};
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     transition: color 0.3s ease;
     cursor: pointer;
     gap: 0.8rem;
+
+    span {
+        transition: .2s;
+    }
+    span:hover {
+        color: ${({ theme }: GlobalTheme) => theme.textSecondary};
+    }
 `;
 
 export const SCommonOptionButton = styled.button`

@@ -59,6 +59,10 @@ export const SOptionsList = styled.ul`
     list-style: none;
     padding: 0 0 18px 30px;
 
+    li + li {
+        margin-top: 1rem;
+    }
+
     /*
     li {
         color: ${({ theme }: GlobalTheme) => theme.text};
@@ -70,13 +74,12 @@ export const SOptionsList = styled.ul`
         gap: 0.8rem;
     }
 
-    li + li {
-        margin-top: 1rem;
-    }
-
     li:hover {
-        color: ${({ theme }: GlobalTheme) => theme.textSecondary};
+        color: ${({ theme }: GlobalTheme) => theme.colors.purple};
     }
+    
+
+    
     */
 `
 

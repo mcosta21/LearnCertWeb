@@ -12,6 +12,7 @@
     "LABEL": "Modules"
   },
   "QUESTION": {
+    "LABEL": "Questions",
     "DESCRIPTION": "Description",
     "LEARN_MORE": "Learn more",
     "ADD": "Add question"

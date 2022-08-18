@@ -1,5 +1,11 @@
-import { LanguageType } from '../../CertificationPage/models/certification.model';
 import { v4 as uuid } from 'uuid';
+
+export enum LanguageType {
+    English = 'English',
+    Portuguese = 'Portuguese'
+}
+
+export const LanguageTypes = Object.keys(LanguageType) as LanguageType[];
 
 export class Certification {
     public id: string = uuid();

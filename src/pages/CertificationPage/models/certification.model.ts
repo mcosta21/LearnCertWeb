@@ -1,3 +1,5 @@
+import { LanguageType } from "@pages/CertificationFormPage/domain/certification.model";
+
 export class CertificationModel {
     id: string;
     title: string;
@@ -22,12 +24,6 @@ export interface AnswerOption {
     isCorrect: boolean;
 }
 
-export enum LanguageType {
-    English = 'English',
-    Portuguese = 'Portuguese'
-}
-
-export const LanguageTypes = Object.keys(LanguageType) as LanguageType[];
 
 export interface QuestionResult {
     id: string;

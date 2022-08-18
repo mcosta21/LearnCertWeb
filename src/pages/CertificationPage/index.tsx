@@ -1,38 +1,56 @@
 import { useEffect, useState } from "react";
 import LBody from "@components/LBody";
+import { useParams } from "react-router-dom";
 import HeaderCertification from "./components/HeaderCertification";
 import PanelCertification from "./components/PanelCertification";
-import { CertificationModel } from "./models/certification.model";
-import * as certificationApi from './services/certification.api';
+import * as api from '../CertificationFormPage/services/certification.api';
+import { Certification } from "@pages/CertificationFormPage/domain/certification.model";
 
-export default function CertificationPage(){
-    const [certification, setCertification] = useState<CertificationModel>(new CertificationModel());
+export default function CertificationLearnPage(){
+
+    const { id } = useParams();
+    const [certification, setCertification] = useState<Certification>(new Certification());
+    const [loading, setLoading] = useState<boolean>(true);
+    const [showAllAnswer, setShowAllAnswer] = useState<boolean>(false);
 
     useEffect(() => {
-        loadCertificationById('5b8daa0a-7f4e-4c7c-ad98-736df8453533')
+        if(id) {
+            api.getById(id)
+                .then(data => {
+                    console.log(data)
+                    setCertification(data);
+                    setLoading(false);
+                })
+                .catch(error => {
+                    alert(error.message);
+                });
+        }
+        else {
+            setLoading(false);
+        }
     }, []);
-
-    async function loadCertificationById(id: string) {
-        const response = await certificationApi.getCertification(id);
-        console.log(response)
-        setCertification(response);
-    }
 
     if(!certification.id) {
         return <h1>loading</h1>
     }
     
+    function handleShowAllAnswer(){
+        setShowAllAnswer(oldState => !oldState);
+    }
+
     return (
         <LBody>
 
             <HeaderCertification 
-                title={certification.title}
-                countQuestions={certification.questionDescriptions.length}
-                lastReviewed={new Date()}
-                logoUrl={"https://d2j6dbq0eux0bg.cloudfront.net/images/14319752/1386739702.jpg"}
+                certification={certification} 
+                showAllAnswer={showAllAnswer}
+                handleShowAllAnswer={handleShowAllAnswer}
             />
 
-            <PanelCertification certification={certification} />
+            <PanelCertification 
+                certification={certification} 
+                showAllAnswer={showAllAnswer}
+            />
 
         </LBody>
     )

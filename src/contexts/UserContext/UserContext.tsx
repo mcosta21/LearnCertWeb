@@ -16,8 +16,7 @@ interface AuthUserResponse {
 }
 
 interface UserContextData {
-  user?: User;
-  getLocalUser: () => User | null;
+  getAuthenticatedUser: () => User | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
 }
@@ -39,7 +38,6 @@ export function logout() {
 }
 
 export function UserProvider({ children }: UserProviderProps) {
-  const [user, setUser] = useState<User>();
 
   async function login(email: string, password: string) {
 
@@ -64,7 +62,6 @@ export function UserProvider({ children }: UserProviderProps) {
       const token = response.data.token;
   
       Cookies.set('@learn-cert:token', token);
-      Cookies.set('@learn-cert:iser', JSON.stringify(authenticatedUser));
   
       api.defaults.headers.common.Authorization = `Bearer ${token}`;
       setUser(authenticatedUser)
@@ -75,14 +72,23 @@ export function UserProvider({ children }: UserProviderProps) {
     setUser(undefined);
   }
 
-  function getLocalUser(): User | null {
+  function getUser(): User | null {
     const loggedUser = Cookies.get('@learn-cert:user');
     if (!loggedUser) return null;
     return JSON.parse(loggedUser);
   }
 
+  function setUser(user: User | undefined) {
+    if(user === undefined) {
+      Cookies.remove('@learn-cert:user');
+      return;
+    }
+    Cookies.set('@learn-cert:user', JSON.stringify(user));
+  }
+
+
   useEffect(() => {
-    const localUser = getLocalUser();
+    const localUser = getUser();
     if (localUser) setUser(localUser);
 
     const token = Cookies.get('@learn-cert:token');
@@ -91,7 +97,7 @@ export function UserProvider({ children }: UserProviderProps) {
 
   return (
     <UserContext.Provider
-      value={{ user, getLocalUser, login, logout: handleLogout }}
+      value={{ getAuthenticatedUser: getUser, login, logout: handleLogout }}
     >
       {children}
     </UserContext.Provider>

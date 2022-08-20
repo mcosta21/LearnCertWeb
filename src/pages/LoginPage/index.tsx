@@ -30,7 +30,7 @@ const signInFormSchema = yup.object().shape({
 });
 
 export default function LoginPage() {
-    const { user, login } = useUser();
+    const { getAuthenticatedUser, login } = useUser();
     const { t } = useTranslation();
     const navigate = useNavigate();
 
@@ -51,10 +51,10 @@ export default function LoginPage() {
     };
 
     useEffect(() => {
-      if (user) {
+      if (getAuthenticatedUser()) {
         navigate(RouterKey.CertificationForm);
       }
-    }, [user]);
+    }, [getAuthenticatedUser()]);
 
     return (
         <LBody>

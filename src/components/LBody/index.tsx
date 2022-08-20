@@ -1,3 +1,4 @@
+import LHeader from "@components/LHeader";
 import { ReactNode } from "react"
 import { SBodyContainer } from "./styles";
 
@@ -10,6 +11,7 @@ export default function LBody({
 }: Props){
     return (
         <SBodyContainer>
+            <LHeader />
             {
                 children
             }

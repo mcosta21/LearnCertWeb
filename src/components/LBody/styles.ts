@@ -6,5 +6,6 @@ export const SBodyContainer = styled.main`
     max-width: 1200px;
     margin: auto;
     padding: 0 2rem;
+    overflow-x: hidden;
 `
 

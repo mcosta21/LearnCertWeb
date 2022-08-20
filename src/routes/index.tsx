@@ -7,6 +7,7 @@ import HomePage from '@pages/HomePage';
 import NotFoundPage from '@pages/NotFoundPage';
 import CertificationFormPage from '@pages/CertificationFormPage';
 import CertificationListPage from '@pages/CertificationListPage';
+import LoginPage from '@pages/LoginPage';
 
 export function AppRoutes() {
   return (
@@ -16,6 +17,11 @@ export function AppRoutes() {
         <Route
           path={RouterKey.Home}
           element={<HomePage />}
+        />
+
+        <Route
+          path={RouterKey.Login}
+          element={<LoginPage />}
         />
 
         <Route

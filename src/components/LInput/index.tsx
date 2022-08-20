@@ -2,14 +2,19 @@ import { ChangeEvent, forwardRef, ForwardRefRenderFunction } from "react";
 import { LLabel } from "@components/LLabel";
 import { SInput, SInputContainer } from "./styles";
 
+interface ErrorMessage {
+    message: string;
+}
 interface Props {
     label?: string;
-    error?: string;
+    error?: string | ErrorMessage;
+    type?: string;
     hideError?: boolean;
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
     width?: string;
     value?: string;
     required?: boolean;
+    placeholder?: string;
 }
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, Props> = (
@@ -21,6 +26,8 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, Props> = (
       width,
       value,
       required = false,
+      type = 'text',
+      placeholder = '',
       ...rest
     },
     ref,
@@ -37,9 +44,13 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, Props> = (
                 style={{ width }}
                 className={error ? 'invalid' : ''}
                 value={value}
+                type={type}
+                placeholder={placeholder}
                 {...rest} 
             />
-            {!hideError && <span>{error}</span>}
+            <span>
+                {!hideError && error && (error as ErrorMessage)?.message ? (error as ErrorMessage).message : error }
+            </span>
         </SInputContainer>
     )
 }

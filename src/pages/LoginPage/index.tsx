@@ -52,7 +52,7 @@ export default function LoginPage() {
 
     useEffect(() => {
       if (getAuthenticatedUser()) {
-        navigate(RouterKey.CertificationForm);
+        navigate(RouterKey.Management);
       }
     }, [getAuthenticatedUser()]);
 

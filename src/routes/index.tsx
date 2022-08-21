@@ -7,6 +7,8 @@ import HomePage from '@pages/HomePage';
 import NotFoundPage from '@pages/NotFoundPage';
 import CertificationFormPage from '@pages/CertificationFormPage';
 import CertificationListPage from '@pages/CertificationListPage';
+import LoginPage from '@pages/LoginPage';
+import ManagementPage from '@pages/ManagementPage';
 
 export function AppRoutes() {
   return (
@@ -16,6 +18,11 @@ export function AppRoutes() {
         <Route
           path={RouterKey.Home}
           element={<HomePage />}
+        />
+
+        <Route
+          path={RouterKey.Login}
+          element={<LoginPage />}
         />
 
         <Route
@@ -36,6 +43,11 @@ export function AppRoutes() {
         <Route
           path={RouterKey.CertificationList}
           element={<PrivateRoute component={<CertificationListPage />} />}
+        />
+
+        <Route
+          path={RouterKey.Management}
+          element={<PrivateRoute component={<ManagementPage />} />}
         />
 
         <Route path="*" element={<NotFoundPage />} />

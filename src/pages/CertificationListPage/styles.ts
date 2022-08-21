@@ -11,6 +11,7 @@ export const SCertificationListContainer = styled.div`
     flex-direction: column;
     gap: ${GRID_GAP};
     justify-content: center;
+    padding-bottom: 1rem;
     
     .filters-container {
         display: flex;

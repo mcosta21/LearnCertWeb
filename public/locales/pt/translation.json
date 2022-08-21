@@ -25,5 +25,8 @@
   "ANSWER": {
     "DESCRIPTION": "Resposta",
     "IS_CORRECT": "Está correto?"
+  },
+  "USER": {
+    "LOGOUT": "Sair"
   }
 }

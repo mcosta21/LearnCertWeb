@@ -24,5 +24,8 @@
   "ANSWER": {
     "DESCRIPTION": "Answer",
     "IS_CORRECT": "Is it correct?"
+  },
+  "USER": {
+    "LOGOUT": "Logout"
   }
 }

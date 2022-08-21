@@ -39,7 +39,7 @@ export default function CertificationLearnPage(){
     }
 
     return (
-        <LBody>
+        <LBody hideHeader>
 
             <HeaderCertification 
                 certification={certification} 

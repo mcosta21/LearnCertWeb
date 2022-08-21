@@ -1,5 +1,4 @@
 import { SButtonOptionContainer, SHeaderContainer } from "./styles";
-import { GoSettings } from 'react-icons/go';
 import { Certification } from "@pages/CertificationFormPage/domain/certification.model";
 import Translate from "@services/i18nProvider/Translate";
 import { IconButton } from "@mui/material";

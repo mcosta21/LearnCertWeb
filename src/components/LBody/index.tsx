@@ -4,14 +4,16 @@ import { SBodyContainer } from "./styles";
 
 interface Props {
     children: ReactNode;
+    hideHeader?: boolean;
 }
 
 export default function LBody({
-    children
+    children,
+    hideHeader = false
 }: Props){
     return (
         <SBodyContainer>
-            <LHeader />
+            {!hideHeader && <LHeader />}
             {
                 children
             }

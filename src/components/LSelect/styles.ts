@@ -17,6 +17,7 @@ export const SSelectContainer = styled.div`
         line-height: 40px;
         border: 1px solid ${({ theme }: GlobalTheme) => theme.border};
         color: ${({ theme }: GlobalTheme) => theme.text};
+        background: ${({ theme }: GlobalTheme) => theme.backgroundSecondary};
 
         & > div {
             padding: 0 14px;
@@ -35,7 +36,7 @@ export const SSelectContainer = styled.div`
         color: ${({ theme }: GlobalTheme) => theme.text};
     }
 
-    span {
+    > span {
         font-size: 0.7rem;
         color: ${({ theme }: GlobalTheme) => theme.colors.red};
         display: block;

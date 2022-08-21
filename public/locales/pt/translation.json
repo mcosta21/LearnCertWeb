@@ -1,7 +1,12 @@
 {
+  "SEARCH": "Pesquisar",
   "TITLE": "Oi",
+  "Portuguese": "Português",
+  "English": "Inglês",
+  "All": "Todos",
   "SAVE": "Salvar",
   "CERTIFICATION": {
+    "LABEL": "Certificações",
     "TITLE": "Título",
     "NO_IMAGE": "Sem imagem",
     "IMAGE_URL": "Url da imagem",
@@ -20,5 +25,8 @@
   "ANSWER": {
     "DESCRIPTION": "Resposta",
     "IS_CORRECT": "Está correto?"
+  },
+  "USER": {
+    "LOGOUT": "Sair"
   }
 }

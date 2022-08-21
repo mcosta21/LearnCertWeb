@@ -1,5 +1,9 @@
 {
   "TITLE": "Hi",
+  "SEARCH": "Search",
+  "Portuguese": "Portuguese",
+  "English": "English",
+  "All": "All",
   "SAVE": "Save",
   "CERTIFICATION": {
     "TITLE": "Title",
@@ -20,5 +24,8 @@
   "ANSWER": {
     "DESCRIPTION": "Answer",
     "IS_CORRECT": "Is it correct?"
+  },
+  "USER": {
+    "LOGOUT": "Logout"
   }
 }

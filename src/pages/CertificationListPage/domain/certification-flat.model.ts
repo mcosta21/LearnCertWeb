@@ -1,8 +1,9 @@
-import { LanguageType } from './../../CertificationPage/models/certification.model';
+import { LanguageType } from "@pages/CertificationFormPage/domain/certification.model";
 
 export interface CertificationFlat {
     id: string;
     title: string;
+    imageUrl: string;
     languageType: LanguageType;
     countQuestions: number;
 }

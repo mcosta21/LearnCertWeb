@@ -7,6 +7,26 @@ export enum LanguageType {
 
 export const LanguageTypes = Object.keys(LanguageType) as LanguageType[];
 
+export interface LanguageTypeOption {
+    languageType: LanguageType | 'All';
+    image: string;
+}
+
+export const LanguageTypeOptions = [
+    {
+        languageType: 'All',
+        image: '/images/flags/all_flag.png',
+    },
+    {
+        languageType: LanguageType.Portuguese,
+        image: '/images/flags/brasil_flag.png',
+    },
+    {
+        languageType: LanguageType.English,
+        image: '/images/flags/usa_flag.png',
+    }
+] as LanguageTypeOption[];
+
 export class Certification {
     public id: string = uuid();
     public title: string;

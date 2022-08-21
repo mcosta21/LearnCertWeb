@@ -1,36 +1,39 @@
-import { FormControlLabel, IconButton, Switch } from "@mui/material";
-import { useState } from "react";
-import { Control, Controller, useFieldArray } from "react-hook-form";
 
-import {SCertificateCard } from "./styles";
-import {CertificationFlat} from "@pages/CertificationListPage/domain/certification-flat.model";
+import { CertificationFlat } from "@pages/CertificationListPage/domain/certification-flat.model";
+import { RouterKey } from "@routes/routekeys";
+import Translate from "@services/i18nProvider/Translate";
+import { useNavigate } from "react-router-dom";
+import { SCertificateCard } from "./styles";
 
-
-
-interface Props extends CertificationFlat {
-    onCertificateClick: (certificateId: string) => void
+interface Props {
+    certification: CertificationFlat;
 }
 
-const IMG_PATH = '/images/certificates/'
+export function CertificationCard({
+    certification
+}: Props) {
 
-export function CertificateCard({
-    id, title, countQuestions, imgFileName, imgAlt, languageType, onCertificateClick
-}: Props){
+    const navigate = useNavigate();
 
+    function handleClick(){
+        navigate(`${RouterKey.CertificationLearn}/${certification.id}`)
+    }
+    
     return (
-        <>
-            <SCertificateCard
-                onClick={() => onCertificateClick(id)}
-            >
-                <div className="certificate-img">
-                    <img src={`${IMG_PATH}${imgFileName}`} alt={imgAlt}/>
-                </div>
-                <div className="certificate-info-container">
-                    <span className="certificate-name">{title}</span>
-                    <span className="certificate-questions">{countQuestions + " questions"}</span>
-                </div>
-            </SCertificateCard>
-        </>
+        <SCertificateCard onDoubleClick={handleClick}>
+            <div className="certificate-img">
+                <img src={certification.imageUrl} alt={certification.title} />
+            </div>
+            <div className="certificate-info-container">
+                <span className="certificate-name">
+                    {certification.title}
+                </span>
+                <span className="certificate-questions">
+                    {certification.countQuestions + ' '}
+                    <Translate value="QUESTION.LABEL" />
+                </span>
+            </div>
+        </SCertificateCard>
     )
 }
 

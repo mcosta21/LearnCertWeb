@@ -35,7 +35,7 @@ export const SSelectContainer = styled.div`
         color: ${({ theme }: GlobalTheme) => theme.text};
     }
 
-    span {
+    > span {
         font-size: 0.7rem;
         color: ${({ theme }: GlobalTheme) => theme.colors.red};
         display: block;

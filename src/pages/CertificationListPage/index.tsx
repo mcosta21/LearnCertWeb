@@ -1,6 +1,7 @@
 import LBody from "@components/LBody";
 import { LInput } from "@components/LInput";
 import LSelect from "@components/LSelect";
+import { useUser } from "@hooks/useUser";
 import { MenuItem, SelectChangeEvent } from "@mui/material";
 import { LanguageTypeOptions } from "@pages/CertificationFormPage/domain/certification.model";
 import { CertificationCard } from "@pages/CertificationListPage/components/CertificateCard";
@@ -16,14 +17,26 @@ export default function CertificationListPage() {
     const [filterText, setFilterText] = useState("");
     const [languageType, setLanguageType] = useState<string>('All');
 
+    const { getAuthenticatedUser } = useUser();
+
     useEffect(() => {
-        api.index().then(certifications => {
-            setCertifications(certifications);
-        });
+        getCertifications();
     }, []);
 
     function filterCertificates(inputFilterText: string): void {
         setFilterText(inputFilterText);
+    }
+
+    function handleDeleteCertification(id: string) {
+        api.remove(id).then(() => {
+            getCertifications();
+        });
+    }
+
+    function getCertifications(){
+        api.index().then(certifications => {
+            setCertifications(certifications);
+        });
     }
 
     const handleSelectLanguageType = (event: SelectChangeEvent) => {
@@ -34,6 +47,8 @@ export default function CertificationListPage() {
     const filteredCertifications = certifications
         .filter(x => x.title.toLowerCase().includes(filterText?.toLowerCase()) &&
                     (x.languageType === languageType || languageType === 'All'));
+
+    const isAdmin = getAuthenticatedUser()?.role === 'Admin';
 
     return (
         <LBody>
@@ -85,6 +100,8 @@ export default function CertificationListPage() {
                             <CertificationCard
                                 key={index}
                                 certification={certification}
+                                isAdmin={isAdmin}
+                                onDelete={handleDeleteCertification}
                             />
                         ))
                     }

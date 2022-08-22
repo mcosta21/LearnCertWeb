@@ -33,7 +33,7 @@ export const SCertificationInputs = styled.div`
 export const SPopoverModule = styled.div`
     padding: 10px;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
     gap: 10px;
 `;
@@ -58,6 +58,7 @@ export const SCertificationFooter = styled.footer`
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    gap: 12px;
 
     button {
         width: 140px;

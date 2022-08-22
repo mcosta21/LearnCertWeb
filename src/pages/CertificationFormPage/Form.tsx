@@ -19,6 +19,8 @@ import { ModuleTab, ModuleTabProps } from './components/ModuleTab';
 import * as api from './services/certification.api';
 import LSelect from '@components/LSelect';
 import Translate from '@services/i18nProvider/Translate';
+import { RouterKey } from '@routes/routekeys';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
     certification?: Certification;
@@ -57,6 +59,8 @@ export default function CertificationForm({
     const open = Boolean(inputModule);
     const id = open ? 'imput-module' : undefined;
     const [isNewModule, setIsNewModule] = useState(true);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if(!certification) return;
@@ -170,6 +174,10 @@ export default function CertificationForm({
         }
     };
 
+    function handleBack(){
+        navigate(RouterKey.CertificationList);
+    }
+
     return (
         <LBody>
             <SCertificationForm onSubmit={handleSubmit(onSubmit)}>
@@ -228,6 +236,14 @@ export default function CertificationForm({
                     <Button 
                         variant="contained" 
                         size="medium" 
+                        type="button"
+                        onClick={handleBack}
+                    >
+                        <Translate value="BACK" />
+                    </Button>
+                    <Button 
+                        variant="contained" 
+                        size="medium" 
                         type="submit"
                         disabled={!isValid}
                     >
@@ -274,7 +290,6 @@ export default function CertificationForm({
                                 </IconButton>
                             )
                         }
-                        
                         
                     </SPopoverModule>
                 </Popover>

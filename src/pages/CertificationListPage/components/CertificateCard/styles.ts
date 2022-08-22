@@ -60,3 +60,15 @@ export const SCertificateCard = styled.div`
   }
 
 `;
+
+export const SOptionsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-direction: column;
+
+  img {
+    border-radius: 50px;
+    height: 35px;
+  }
+`

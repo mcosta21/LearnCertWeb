@@ -165,7 +165,6 @@ export function QuestionCard({
                                     aria-label="collapse-question"
                                     size="small" 
                                     onClick={handleCollapse} 
-                                    disabled={!field.value}
                                 >
                                     <KeyboardArrowUp />
                                 </IconButton>

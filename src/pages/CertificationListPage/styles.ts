@@ -58,9 +58,3 @@ export const SLanguageTypeOption = styled.div`
         margin-right: 12px;
     }
 `
-export const LanguageSelectStyle = {
-    background: "purple",
-    div: {
-        background: "red"
-    }
-}

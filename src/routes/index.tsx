@@ -27,7 +27,7 @@ export function AppRoutes() {
 
         <Route
           path={`${RouterKey.CertificationLearn}/:id`}
-          element={<PrivateRoute component={<CertificationLearnPage />} />}
+          element={<CertificationLearnPage />}
         />
 
         <Route
@@ -42,7 +42,7 @@ export function AppRoutes() {
 
         <Route
           path={RouterKey.CertificationList}
-          element={<PrivateRoute component={<CertificationListPage />} />}
+          element={<CertificationListPage />}
         />
 
         <Route

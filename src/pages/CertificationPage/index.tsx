@@ -30,7 +30,7 @@ export default function CertificationLearnPage(){
         }
     }, []);
 
-    if(!certification.id) {
+    if(!certification.id || loading) {
         return <h1>loading</h1>
     }
     

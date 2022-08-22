@@ -1,5 +1,4 @@
-import { LanguageType } from './../../CertificationPage/models/certification.model';
-import { Certification } from './certification.model';
+import { Certification, LanguageType } from './certification.model';
 import { Module } from './certification.model';
 
 export class BaseCertificationCommand {

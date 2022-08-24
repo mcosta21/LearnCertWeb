@@ -1,13 +1,14 @@
 import { ChangeEvent, forwardRef, ForwardRefRenderFunction } from "react";
 import { LLabel } from "@components/LLabel";
 import { SInput, SInputContainer } from "./styles";
+import { useTranslation } from "react-i18next";
 
 interface ErrorMessage {
     message: string;
 }
 interface Props {
     label?: string;
-    error?: string | ErrorMessage;
+    error?: string;
     type?: string;
     hideError?: boolean;
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -32,6 +33,9 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, Props> = (
     },
     ref,
   ) => {
+    
+    const { t } = useTranslation();
+
     return (
         <SInputContainer className="l-input">
             <span>
@@ -49,7 +53,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, Props> = (
                 {...rest} 
             />
             <span>
-                {!hideError && error && (error as ErrorMessage)?.message ? (error as ErrorMessage).message : error }
+                {!hideError && error ? t(error) : '' }
             </span>
         </SInputContainer>
     )

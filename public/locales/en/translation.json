@@ -9,6 +9,7 @@
   "EDIT": "Edit",
   "REMOVE": "Remove",
   "CERTIFICATION": {
+    "LABEL": "Certifications",
     "TITLE": "Title",
     "NO_IMAGE": "No image",
     "IMAGE_URL": "Imagem url",
@@ -29,6 +30,14 @@
     "IS_CORRECT": "Is it correct?"
   },
   "USER": {
-    "LOGOUT": "Logout"
+    "LOGOUT": "Logout",
+    "PASSWORD": "Password",
+    "EMAIL_PLACEHOLDER": "Enter email",
+    "PASSWORD_PLACEHOLDER": "Enter password",
+    "LOGIN": "Log in",
+    "EMAIL_NOT_INFORMED": "Email not informed",
+    "PASSWORD_NOT_INFORMED": "Password not informed",
+    "INVALID_EMAIL": "Invalid email",
+    "EMAIL_OR_PASSWORD_INCORRECT": "Email or password incorrect"
   }
 }

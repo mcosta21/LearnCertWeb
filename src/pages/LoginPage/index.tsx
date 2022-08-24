@@ -21,12 +21,11 @@ interface AuthUser {
 const signInFormSchema = yup.object().shape({
     email: yup
         .string()
-        .required('USER.EMAIL_REQUIRED')
-        .email('USER.EMAIL_INVALID'),
+        .required('USER.EMAIL_NOT_INFORMED')
+        .email('USER.INVALID_EMAIL'),
     password: yup
         .string()
-        .required('USER.PASSWORD_REQUIRED')
-        .min(6, 'USER.PASSWORD_INVALID'),
+        .required('USER.PASSWORD_NOT_INFORMED')
 });
 
 export default function LoginPage() {
@@ -70,7 +69,7 @@ export default function LoginPage() {
                 />
                 <LInput
                     type="password"
-                    label="Senha"
+                    label="USER.PASSWORD"
                     placeholder={t('USER.PASSWORD_PLACEHOLDER')}
                     error={errors.password?.message}
                     {...register('password')}
@@ -80,7 +79,7 @@ export default function LoginPage() {
                     size="medium"
                     type="submit"
                 >
-                    <Translate value="USER.ENTRAR" />
+                    <Translate value="USER.LOGIN" />
                 </Button>
             </SFormContainer>
         </LBody>

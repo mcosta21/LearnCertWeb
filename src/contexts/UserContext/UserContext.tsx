@@ -3,20 +3,16 @@ import { createContext, ReactNode, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { api } from '@config/api';
 
-interface User {
+interface AthenticatedUser {
+  id: string;
   name: string;
   email: string;
   role: string;
-  id: string;
-}
-
-interface AuthUserResponse {
   token: string;
-  user: User;
 }
 
 interface UserContextData {
-  getAuthenticatedUser: () => User | null;
+  getAuthenticatedUser: () => AthenticatedUser | undefined;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
 }
@@ -32,6 +28,7 @@ export const UserContext = createContext<UserContextData>(
 export function logout() {
   Cookies.remove('@learn-cert:token');
   Cookies.remove('@learn-cert:user');
+  api.defaults.headers.common.Authorization = '';
 
   // eslint-disable-next-line no-restricted-globals
   location.reload();
@@ -52,18 +49,16 @@ export function UserProvider({ children }: UserProviderProps) {
           'Content-Type': 'application/json' 
         },
       } 
-      const response = await api.post<AuthUserResponse>(
-        'Login/Login',
+      const response = await api.post<AthenticatedUser>(
+        'Login/Authenticate',
         { ...data },
         config
       );
 
-      const authenticatedUser = response.data.user;
-      const token = response.data.token;
+      const authenticatedUser = response.data;
   
-      Cookies.set('@learn-cert:token', token);
-  
-      api.defaults.headers.common.Authorization = `Bearer ${token}`;
+      api.defaults.headers.common.Authorization = `Bearer ${authenticatedUser.token}`;
+
       setUser(authenticatedUser)
   }
 
@@ -72,13 +67,13 @@ export function UserProvider({ children }: UserProviderProps) {
     setUser(undefined);
   }
 
-  function getUser(): User | null {
+  function getUser(): AthenticatedUser | undefined {
     const loggedUser = Cookies.get('@learn-cert:user');
-    if (!loggedUser) return null;
+    if (!loggedUser) return undefined;
     return JSON.parse(loggedUser);
   }
 
-  function setUser(user: User | undefined) {
+  function setUser(user: AthenticatedUser | undefined) {
     if(user === undefined) {
       Cookies.remove('@learn-cert:user');
       return;
@@ -89,10 +84,11 @@ export function UserProvider({ children }: UserProviderProps) {
 
   useEffect(() => {
     const localUser = getUser();
-    if (localUser) setUser(localUser);
+    if (!localUser) return;
 
-    const token = Cookies.get('@learn-cert:token');
-    api.defaults.headers.common.Authorization = `Bearer ${token}`;
+    setUser(localUser);
+
+    api.defaults.headers.common.Authorization = `Bearer ${localUser.token}`;
   }, []);
 
   return (

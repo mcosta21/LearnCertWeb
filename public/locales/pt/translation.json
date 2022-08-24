@@ -30,6 +30,14 @@
     "IS_CORRECT": "Está correto?"
   },
   "USER": {
-    "LOGOUT": "Sair"
+    "LOGOUT": "Sair",
+    "PASSWORD": "Senha",
+    "EMAIL_PLACEHOLDER": "Digite o e-mail",
+    "PASSWORD_PLACEHOLDER": "Digite a senha",
+    "LOGIN": "Entrar",
+    "EMAIL_NOT_INFORMED": "E-mail não informado",
+    "PASSWORD_NOT_INFORMED": "Senha não informada",
+    "INVALID_EMAIL": "E-mail inválido",
+    "EMAIL_OR_PASSWORD_INCORRECT": "E-mail ou senha incorreto"
   }
 }

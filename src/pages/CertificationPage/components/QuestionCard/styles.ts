@@ -15,6 +15,10 @@ export const SCardContainer = styled.div`
         cursor: pointer;
     }
 
+    &.focused {
+        background: ${({ theme }: GlobalTheme) => theme.backgroundSecondary};
+    }
+
     &:hover, &:hover footer, &:hover h3 {
         border-color: ${({ theme }: GlobalTheme) => theme.colors.purple};
     }

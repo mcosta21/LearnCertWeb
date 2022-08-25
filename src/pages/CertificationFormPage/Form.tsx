@@ -149,7 +149,6 @@ export default function CertificationForm({
         setIsNewModule(true);
 
         const updatedModulesTabs = getValues('modules').map((x, index) => createModuleTab(index, x));
-        console.log(updatedModulesTabs)
         setModuleTabs(updatedModulesTabs);
         setCurrentTab(currentTab);
     }

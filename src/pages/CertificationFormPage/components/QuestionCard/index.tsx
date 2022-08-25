@@ -155,22 +155,13 @@ export function QuestionCard({
                         <Delete />
                     </IconButton>
 
-                    <Controller
-                        control={control}
-                        defaultValue=""
-                        name={`modules.${moduleIndex}.questions.${questionIndex}.learnMore`}
-                        render={({ field }) =>
-                            (
-                                <IconButton 
-                                    aria-label="collapse-question"
-                                    size="small" 
-                                    onClick={handleCollapse} 
-                                >
-                                    <KeyboardArrowUp />
-                                </IconButton>
-                            )
-                        }
-                    /> 
+                    <IconButton 
+                        aria-label="collapse-question"
+                        size="small" 
+                        onClick={handleCollapse} 
+                    >
+                        <KeyboardArrowUp />
+                    </IconButton>
                 </SQuestionInputs>
 
                 <SAnswerOptionContainer>

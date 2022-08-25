@@ -16,7 +16,6 @@ export default function CertificationFormPage(){
         if(id) {
             api.getById(id)
                 .then(data => {
-                    console.log(data)
                     setCertification(data);
                     setIsNew(false);
                     setLoading(false);

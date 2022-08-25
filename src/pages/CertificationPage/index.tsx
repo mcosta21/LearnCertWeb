@@ -17,7 +17,6 @@ export default function CertificationLearnPage(){
         if(id) {
             api.getById(id)
                 .then(data => {
-                    console.log(data)
                     setCertification(data);
                     setLoading(false);
                 })

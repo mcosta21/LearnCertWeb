@@ -65,10 +65,10 @@ export default function QuestionCard({
                         />
                         <SQuestionFooter>
                             <a 
-                                href={question.description} 
+                                href={question.learnMore} 
                                 rel="noreferrer noopener"
                                 target="_blank"
-                                className={!!question.description ? 'visible' : 'hidden'}
+                                className={!!question.learnMore ? 'visible' : 'hidden'}
                             >
                                 Learn more
                             </a>

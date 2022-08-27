@@ -3,8 +3,9 @@ import CryptoJS from "crypto-js";
 
 export function encrypt(value: string) {
     
-    var key = CryptoJS.enc.Utf8.parse("8056483646328763");
-    var iv = CryptoJS.enc.Utf8.parse("8056483646328763");
+    const secretKey = String(import.meta.env.VITE_API_ENCRYPT_SECRET_KEY);
+    var key = CryptoJS.enc.Utf8.parse(secretKey);
+    var iv = CryptoJS.enc.Utf8.parse(secretKey);
 
     var encrypted = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(value), key,
     {

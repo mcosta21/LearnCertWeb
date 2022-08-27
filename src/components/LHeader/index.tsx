@@ -12,15 +12,13 @@ interface Props {
 export default function LHeader({
 
 }: Props){
-
+    const { themeName, toggleTheme } = useMyTheme();
     const { getAuthenticatedUser, logout } = useUser();
     const user = getAuthenticatedUser();
 
     if(!user) {
         return <></>
     }
-
-    const { themeName, toggleTheme } = useMyTheme();
 
     return (
         <SHeaderContainer>

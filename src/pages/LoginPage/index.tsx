@@ -12,6 +12,7 @@ import { Button } from '@mui/material';
 import LBody from '@components/LBody';
 import { SFormContainer } from './styles';
 import Translate from '@services/i18nProvider/Translate';
+import { encrypt } from '@services/EncryptionHandler';
 
 interface AuthUser {
     email: string;
@@ -43,7 +44,7 @@ export default function LoginPage() {
 
     async function handleSignIn(values: AuthUser) {
         try {
-            await login(values.email, values.password);
+            await login(values.email, encrypt(values.password));
         } catch (err: any) {
             alert(err.message)
         }

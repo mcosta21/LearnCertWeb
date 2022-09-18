@@ -3,36 +3,58 @@ import styled from "styled-components";
 import { GlobalTheme } from "@styles/theme";
 
 const COLUMN_GRID_WIDTH = '500px';
-const GRID_GAP = '20px';
 
 export const SCertificationListContainer = styled.div`
     width: 100%;
+    margin: auto;
+    max-width: 1366px;
     display: flex;
     flex-direction: column;
-    gap: ${GRID_GAP};
+    gap: 20px;
     justify-content: center;
     padding-bottom: 1rem;
     
     .filters-container {
         display: flex;
         width: 100%;
-        gap: ${GRID_GAP};
+        gap: 20px;
         justify-content: center;
         
-        div {
-            width: 500px;
-        }
     }
   
     .certificates-container {
         width: 100%;
         height: 100%;
         display: grid;
-        grid-template-columns: ${COLUMN_GRID_WIDTH} ${COLUMN_GRID_WIDTH};
+        grid-template-columns: 1fr 1fr;
         grid-template-rows: 140px auto;
-        column-gap: ${GRID_GAP};
-        row-gap: ${GRID_GAP};
+        gap: 20px;
         justify-content: center;
+    }
+
+    @media (max-width: 800px) {
+        padding: 0 3rem;
+
+        .filters-container {
+            flex-direction: column;
+            gap: 0;
+
+            div {
+                width: 100%;
+            }
+        }
+
+        .certificates-container {
+            margin-top: 1rem;
+        }
+    }
+
+    @media (max-width: 1366px) {
+        padding: 0 3rem;
+
+        .certificates-container {
+            grid-template-columns: 1fr;
+        }
     }
 
 `;

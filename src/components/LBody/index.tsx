@@ -14,9 +14,11 @@ export default function LBody({
     return (
         <SBodyContainer>
             {!hideHeader && <LHeader />}
-            {
-                children
-            }
+            <section>
+                {
+                    children
+                }
+            </section>
         </SBodyContainer>
     )
 };

@@ -4,7 +4,9 @@ export const SPanelContainer = styled.section`
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
-    padding: 1rem 0;
+    padding: 1rem 2rem;
+    max-width: 1366px;
+    margin: auto;
 
     aside {
         width: 100%;

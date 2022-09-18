@@ -22,7 +22,10 @@ export default function LHeader({
 
     return (
         <SHeaderContainer>
-            <span>{user.name}</span>
+            <aside>
+                <img src={themeName === 'light' ? '/images/logo-purple.png' : '/images/logo-white.png'} />
+                <span>{user.name}</span>
+            </aside>
             <div>
                 <IconButton 
                     aria-label="theme"

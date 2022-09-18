@@ -2,10 +2,11 @@ import styled from 'styled-components';
 import { GlobalTheme } from '@styles/theme';
 
 export const SCertificationForm = styled.form`
-    padding-top: 20px;
+    margin-top: 2rem;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding: 0 4rem;
 `
 
 export const SCertificationInputs = styled.div`

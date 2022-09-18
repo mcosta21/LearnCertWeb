@@ -18,6 +18,7 @@ export default function QuestionCard({
 }: Props){
 
     const [showCorrect, setShowCorrect] = useState<boolean>(showCorrectAnswer);
+    const [showAllCorrect, setShowAllCorrect] = useState<boolean>(showCorrectAnswer);
     
     const [selectedOptionCode, setSelectedOptionCode] = useState<number>();
     const [focused, setFocused] = useState(false);
@@ -40,7 +41,7 @@ export default function QuestionCard({
     }
 
     useEffect(() => {
-        setShowCorrect(showCorrectAnswer);
+        setShowAllCorrect(showCorrectAnswer);
     }, [showCorrectAnswer])
 
     return (
@@ -61,7 +62,7 @@ export default function QuestionCard({
                     <>
                         <AnswerOptionList 
                             answers={question.answerOptions} 
-                            showCorrect={showCorrect} 
+                            showCorrect={showCorrect || showAllCorrect} 
                             selectedOptionCode={selectedOptionCode}
                             onSelectOption={handleSelectOption}
                         />
@@ -75,7 +76,7 @@ export default function QuestionCard({
                                 Learn more
                             </a>
                             <button onClick={handleShowCorrectAnswer}>
-                                {showCorrect ? 'Hide answer' : 'Show answer'}
+                                {(showCorrect || showAllCorrect) ? 'Hide answer' : 'Show answer'}
                             </button>
                         </SQuestionFooter>
                     </>

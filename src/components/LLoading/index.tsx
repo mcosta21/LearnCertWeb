@@ -1,3 +1,9 @@
+import { SContainer } from "./styles";
+import { CircularProgress } from '@mui/material';
+
 export default function LLoading() {
-    return <div>loading</div>
-}
+    return (
+    <SContainer>
+        <CircularProgress color="primary" />
+    </SContainer>
+)}

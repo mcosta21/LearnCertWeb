@@ -19,6 +19,8 @@ export default function CertificationListPage() {
 
     const { getAuthenticatedUser } = useUser();
 
+    const loading = certifications.length === 0;
+
     useEffect(() => {
         getCertifications();
     }, []);
@@ -50,8 +52,9 @@ export default function CertificationListPage() {
 
     const isAdmin = getAuthenticatedUser()?.role === 'Admin';
 
+
     return (
-        <LBody>
+        <LBody loading={loading}>
 
             <SCertificateListTitle>
                 <Translate value="CERTIFICATION.LABEL" />

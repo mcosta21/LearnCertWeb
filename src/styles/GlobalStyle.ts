@@ -50,6 +50,10 @@ export default createGlobalStyle`
         color: ${({ theme }: GlobalTheme) => theme.text} !important;
     }
 
+    .MuiCircularProgress-root {
+        color: ${({ theme }: GlobalTheme) => theme.colors.purple} !important;
+    }
+
     .Mui-selected {
         color: ${({ theme }: GlobalTheme) => theme.colors.purple} !important;
     }

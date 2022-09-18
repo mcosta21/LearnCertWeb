@@ -1,5 +1,6 @@
 import { Module, Question } from "@pages/CertificationFormPage/domain/certification.model";
 import { AnswerOption, QuestionDescriptionModel } from "@pages/CertificationPage/models/certification.model";
+import { useEffect, useState } from "react";
 import AnswerOptionList from "./AnswerOptionList";
 import QuestionModuleTitle from "./QuestionModuleTitle";
 import { SCardContainer, SQuestionDescription, SQuestionFooter } from "./styles";
@@ -7,39 +8,40 @@ import { SCardContainer, SQuestionDescription, SQuestionFooter } from "./styles"
 interface Props {
     question: Question;
     module: Module;
-    focused: boolean;
-    showCorrect: boolean;
-    onFocus: (questionId: string | undefined) => void;
-    onShowCorrect: (questionId: string | undefined) => void;
-    selectedOptionCode: number | undefined;
-    onSelectOption: (option: AnswerOption) => void;
+    showCorrectAnswer?: boolean;
 }
 
 export default function QuestionCard({
     question,
     module,
-    focused,
-    onFocus,
-    showCorrect,
-    onShowCorrect,
-    selectedOptionCode,
-    onSelectOption
+    showCorrectAnswer = false
 }: Props){
 
+    const [showCorrect, setShowCorrect] = useState<boolean>(showCorrectAnswer);
+    
+    const [selectedOptionCode, setSelectedOptionCode] = useState<number>();
+    const [focused, setFocused] = useState(false);
     
     function handleFocus() {
         if(focused) return;
-        onFocus(question.id);
+        setFocused(true);
     }
 
     function handleCollapse() {
-        onFocus(undefined);
+        setFocused(false);
     }
 
     function handleShowCorrectAnswer() {
-        onShowCorrect(showCorrect ? undefined : question.id);
+        setShowCorrect(oldState => !oldState);
+    }
+    
+    function handleSelectOption(option: AnswerOption) {
+        setSelectedOptionCode(option.code);
     }
 
+    useEffect(() => {
+        setShowCorrect(showCorrectAnswer);
+    }, [showCorrectAnswer])
 
     return (
         <SCardContainer onClick={handleFocus} className={focused ? 'focused' : 'collapsed'}>
@@ -61,7 +63,7 @@ export default function QuestionCard({
                             answers={question.answerOptions} 
                             showCorrect={showCorrect} 
                             selectedOptionCode={selectedOptionCode}
-                            onSelectOption={onSelectOption}
+                            onSelectOption={handleSelectOption}
                         />
                         <SQuestionFooter>
                             <a 

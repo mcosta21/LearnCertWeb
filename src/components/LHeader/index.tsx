@@ -1,12 +1,13 @@
+import LIconButton from "@components/LIconButton";
 import { useMyTheme } from "@hooks/useMyTheme";
 import { useUser } from "@hooks/useUser";
-import { DarkMode, LightMode } from "@mui/icons-material";
+import { DarkMode, LightMode, TranslateOutlined } from "@mui/icons-material";
 import { Button, IconButton } from "@mui/material";
 import Translate from "@services/i18nProvider/Translate";
+import { useTranslation } from "react-i18next";
 import { SHeaderContainer } from "./styles";
 
 interface Props {
-
 }
 
 export default function LHeader({
@@ -15,6 +16,13 @@ export default function LHeader({
     const { themeName, toggleTheme } = useMyTheme();
     const { getAuthenticatedUser, logout } = useUser();
     const user = getAuthenticatedUser();
+
+    const { i18n } = useTranslation();
+
+    function changeLanguage(language: string){
+        i18n.changeLanguage(language)
+    }
+    
     return (
         <SHeaderContainer>
             <aside>
@@ -22,13 +30,20 @@ export default function LHeader({
                 <span>{user?.name}</span>
             </aside>
             <div>
-                <IconButton 
-                    aria-label="theme"
-                    size="small" 
-                    onClick={() => toggleTheme()} 
-                >
-                    { themeName === 'light' ? <DarkMode /> : <LightMode /> }
-                </IconButton>
+                <LIconButton 
+                    arialLabel="language"
+                    onClick={() => changeLanguage(i18n.language === 'pt' ? 'en' : 'pt')} 
+                    icon={<TranslateOutlined />}
+                    tooltip="CHANGE_LANGUAGE"
+                />
+
+                <LIconButton 
+                    arialLabel="theme"
+                    onClick={toggleTheme} 
+                    icon={themeName === 'light' ? <DarkMode /> : <LightMode />}
+                    tooltip={themeName === 'light' ? 'DARK_MODE' : 'LIGHT_MODE' }
+                />
+                
                 {
                     user && (
                         <Button

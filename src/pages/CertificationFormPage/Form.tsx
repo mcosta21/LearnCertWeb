@@ -21,6 +21,7 @@ import LSelect from '@components/LSelect';
 import Translate from '@services/i18nProvider/Translate';
 import { RouterKey } from '@routes/routekeys';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     certification?: Certification;
@@ -61,6 +62,7 @@ export default function CertificationForm({
     const [isNewModule, setIsNewModule] = useState(true);
 
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     useEffect(() => {
         if(!certification) return;
@@ -162,10 +164,14 @@ export default function CertificationForm({
     const onSubmit: SubmitHandler<Certification> = async data => {
         try {
             if(isNew) {
-                await api.save(data);
+                await api.save(data).then(() => {
+                    alert(t('SUCESS_SAVE'));
+                });
             }
             else {
-                await api.update(data);
+                await api.update(data).then(() => {
+                    alert(t('SUCESS_SAVE'));
+                });
             }
         }
         catch(e) {

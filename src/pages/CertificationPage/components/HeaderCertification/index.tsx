@@ -1,12 +1,13 @@
 import { SButtonOptionContainer, SHeaderContainer } from "./styles";
 import { Certification } from "@pages/CertificationFormPage/domain/certification.model";
 import Translate from "@services/i18nProvider/Translate";
-import { IconButton } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import { useMyTheme } from "@hooks/useMyTheme";
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 import { DarkMode, FirstPage, LightMode, TranslateOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
 import { RouterKey } from "@routes/routekeys";
+import LIconButton from "@components/LIconButton";
 
 interface Props {
     certification: Certification;
@@ -55,37 +56,35 @@ export default function HeaderCertification({
             </aside>
 
             <SButtonOptionContainer>
-                <IconButton 
-                    aria-label="language"
-                    size="small" 
+ 
+                <LIconButton 
+                    arialLabel="language"
                     onClick={() => changeLanguage(i18n.language === 'pt' ? 'en' : 'pt')} 
-                >
-                    <TranslateOutlined />
-                </IconButton>
+                    icon={<TranslateOutlined />}
+                    tooltip="CHANGE_LANGUAGE"
+                />
 
-                <IconButton 
-                    aria-label="theme"
-                    size="small" 
-                    onClick={() => toggleTheme()} 
-                >
-                    { themeName === 'light' ? <DarkMode /> : <LightMode /> }
-                </IconButton>    
+                <LIconButton 
+                    arialLabel="theme"
+                    onClick={toggleTheme} 
+                    icon={themeName === 'light' ? <DarkMode /> : <LightMode />}
+                    tooltip={themeName === 'light' ? 'DARK_MODE' : 'LIGHT_MODE' }
+                />
 
-                <IconButton 
-                    aria-label="visibility"
-                    size="small" 
+                <LIconButton 
+                    arialLabel="visibility"
                     onClick={handleShowAllAnswer} 
-                >
-                    { showAllAnswer ? <VisibilityOff /> : <Visibility /> }
-                </IconButton>
+                    icon={showAllAnswer ? <VisibilityOff /> : <Visibility />}
+                    tooltip={showAllAnswer ? 'HIDE_ANSWERS' : 'SHOW_ANSWERS' }
+                />
 
-                <IconButton 
-                    aria-label="go-back"
-                    size="small" 
-                    onClick={() => goBack()} 
-                >
-                    <FirstPage />
-                </IconButton>
+                <LIconButton 
+                    arialLabel="go-back"
+                    onClick={goBack} 
+                    icon={<FirstPage />}
+                    tooltip="BACK"
+                />
+
             </SButtonOptionContainer>
 
             

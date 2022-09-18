@@ -8,6 +8,12 @@
   "BACK": "Voltar",
   "EDIT": "Editar",
   "REMOVE": "Apagar",
+  "SUCESS_SAVE": "Salvo com sucesso",
+  "CHANGE_LANGUAGE": "Alterar idioma",
+  "DARK_MODE": "Modo escuro",
+  "LIGHT_MODE": "Modo claro",
+  "HIDE_ANSWERS": "Ocultar respostas",
+  "SHOW_ANSWERS": "Mostrar respostas",
   "CERTIFICATION": {
     "LABEL": "Certificações",
     "TITLE": "Título",

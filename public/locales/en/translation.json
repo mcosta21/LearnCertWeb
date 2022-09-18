@@ -8,6 +8,12 @@
   "BACK": "Back",
   "EDIT": "Edit",
   "REMOVE": "Remove",
+  "SUCESS_SAVE": "Saved successfully",
+  "CHANGE_LANGUAGE": "Change language",
+  "DARK_MODE": "Dark mode",
+  "LIGHT_MODE": "Light mode",
+  "HIDE_ANSWERS": "Hide answers",
+  "SHOW_ANSWERS": "Show answers",
   "CERTIFICATION": {
     "LABEL": "Certifications",
     "TITLE": "Title",

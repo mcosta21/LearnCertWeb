@@ -6,8 +6,10 @@ import { LTabContent } from './TabContent';
 import { LTabProps } from "./models";
 import { STabsContainer } from './styles';
 
+const ADD_TAB_INDEX = -1;
+
 export default function LTabs({
-    currentTab = -1,
+    currentTab = ADD_TAB_INDEX,
     tabs = [],
     onChange,
     onAddTab,
@@ -15,7 +17,7 @@ export default function LTabs({
 }: LTabProps){
 
     function handleChange(event: React.SyntheticEvent, newValue: number){
-        if(newValue === -1) return;
+        if(newValue === ADD_TAB_INDEX) return;
         onChange(newValue);
     }
     
@@ -41,7 +43,7 @@ export default function LTabs({
                         />
                     ))
                 }
-                <Tab icon={<Add />} value={-1} onClick={onAddTab}/>
+                <Tab icon={<Add />} value={ADD_TAB_INDEX} onClick={onAddTab}/>
 
             </Tabs>
 

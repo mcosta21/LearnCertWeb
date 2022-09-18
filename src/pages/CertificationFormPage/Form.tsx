@@ -271,7 +271,7 @@ export default function CertificationForm({
                         />
 
                         {
-                            isNew ? (
+                            isNewModule ? (
                                 <IconButton 
                                     aria-label="add-module"
                                     onClick={() => handleAddModule()} 

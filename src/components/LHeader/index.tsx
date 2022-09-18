@@ -15,16 +15,11 @@ export default function LHeader({
     const { themeName, toggleTheme } = useMyTheme();
     const { getAuthenticatedUser, logout } = useUser();
     const user = getAuthenticatedUser();
-
-    if(!user) {
-        return <></>
-    }
-
     return (
         <SHeaderContainer>
             <aside>
                 <img src={themeName === 'light' ? '/images/logo-purple.png' : '/images/logo-white.png'} />
-                <span>{user.name}</span>
+                <span>{user?.name}</span>
             </aside>
             <div>
                 <IconButton 
@@ -34,14 +29,19 @@ export default function LHeader({
                 >
                     { themeName === 'light' ? <DarkMode /> : <LightMode /> }
                 </IconButton>
-                <Button
-                    variant="contained"
-                    size="medium"
-                    type="button"
-                    onClick={logout}
-                >
-                    <Translate value="USER.LOGOUT" />
-                </Button>
+                {
+                    user && (
+                        <Button
+                            variant="contained"
+                            size="medium"
+                            type="button"
+                            onClick={logout}
+                        >
+                            <Translate value="USER.LOGOUT" />
+                        </Button>
+                    )
+                }
+                
             </div>
         </SHeaderContainer>
     )

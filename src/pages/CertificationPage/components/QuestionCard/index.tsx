@@ -1,6 +1,8 @@
+import { Chip } from "@mui/material";
 import { Module, Question } from "@pages/CertificationFormPage/domain/certification.model";
 import { AnswerOption, QuestionDescriptionModel } from "@pages/CertificationPage/models/certification.model";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import AnswerOptionList from "./AnswerOptionList";
 import QuestionModuleTitle from "./QuestionModuleTitle";
 import { SCardContainer, SQuestionDescription, SQuestionFooter } from "./styles";
@@ -16,6 +18,8 @@ export default function QuestionCard({
     module,
     showCorrectAnswer = false
 }: Props){
+
+    const { t } = useTranslation();
 
     const [showCorrect, setShowCorrect] = useState<boolean>(showCorrectAnswer);
     const [showAllCorrect, setShowAllCorrect] = useState<boolean>(showCorrectAnswer);
@@ -46,17 +50,19 @@ export default function QuestionCard({
 
     return (
         <SCardContainer onClick={handleFocus} className={focused ? 'focused' : 'collapsed'}>
+
             <QuestionModuleTitle 
                 module={module}
                 question={question}
                 focused={focused}
                 handleCollapse={handleCollapse}
+                answered={!!selectedOptionCode}
             />
 
             <SQuestionDescription>
                 {question.description}
             </SQuestionDescription>
-
+            
             {
                 focused && (
                     <>

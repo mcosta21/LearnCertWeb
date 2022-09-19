@@ -2,20 +2,26 @@ import styled from 'styled-components';
 import { GlobalTheme } from '@styles/theme';
 import { FiChevronDown } from 'react-icons/fi';
 import { Module, Question } from '@pages/CertificationFormPage/domain/certification.model';
+import { Chip } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     question: Question;
     module: Module;
     focused: boolean;
     handleCollapse: () => void;
+    answered?: boolean;
 }
 
 export default function QuestionModuleTitle({
     question,
     module,
     focused = false,
-    handleCollapse
+    handleCollapse,
+    answered= false
 }: Props){
+    const { t } = useTranslation();
+
     return (
         <>
             {
@@ -39,6 +45,9 @@ export default function QuestionModuleTitle({
                             {module.code}.{question.code}
                         </span>
                         {module.title}
+
+                        {answered && <Chip className="answered-badge" color="success" label={t("ANSWERED")} />}
+
                     </SNormalTitle>
                 )
             }
@@ -72,12 +81,26 @@ const SFocusedTitle = styled.h3`
     }
 `
 
-const SNormalTitle = styled.p`
+const SNormalTitle = styled.div`
     color: ${({ theme }: GlobalTheme) => theme.textSecondary};
     font-size: 0.7rem;
     padding: 16px 16px 0 30px;
+    position: relative;
 
-    span {
+    > span {
         margin-right: 1rem;
+    }
+
+    .answered-badge{
+        position: absolute;
+        background-color: ${({ theme }: GlobalTheme) => theme.colors.green};
+        color: ${({ theme }: GlobalTheme) => theme.background};
+        top: 75%;
+        right: 1.2rem;
+        height: 30px;
+        
+        span {
+            font-weight: 600;
+        }
     }
 `

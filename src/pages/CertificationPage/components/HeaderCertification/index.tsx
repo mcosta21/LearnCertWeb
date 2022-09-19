@@ -25,7 +25,7 @@ export default function HeaderCertification({
     
     const { themeName, toggleTheme } = useMyTheme();
 
-    const { i18n } = useTranslation();
+    const { i18n, t } = useTranslation();
 
     function changeLanguage(language: string){
         i18n.changeLanguage(language)
@@ -50,7 +50,7 @@ export default function HeaderCertification({
                         {countQuestions()} 
                         <Translate value="QUESTION.LABEL" /> 
                         {' / '} 
-                        <Translate value="CERTIFICATION.LANGUAGE_TYPE" />: {certification.languageType}
+                        <Translate value="CERTIFICATION.LANGUAGE_TYPE" />: {t(certification.languageType)}
                     </p>
                 </div>
             </aside>

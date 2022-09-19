@@ -66,25 +66,6 @@ export const SOptionsList = styled.ul`
     li + li {
         margin-top: 1rem;
     }
-
-    /*
-    li {
-        color: ${({ theme }: GlobalTheme) => theme.text};
-        font-size: 0.9rem;
-        transition: color 0.3s ease;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-    }
-
-    li:hover {
-        color: ${({ theme }: GlobalTheme) => theme.colors.purple};
-    }
-    
-
-    
-    */
 `
 
 export const SCommonOptionButton = styled.button`

@@ -10,13 +10,11 @@ export const SCardContainer = styled.div`
     transition: all 0.3s ease;
     width: 100%;
     height: 100%;
+    background: ${({ theme }: GlobalTheme) => theme.backgroundSecondary};
+    box-shadow: 0 0 20px ${({ theme }: GlobalTheme) => theme.shadow};
 
     &.collapsed {
         cursor: pointer;
-    }
-
-    &.focused {
-        background: ${({ theme }: GlobalTheme) => theme.backgroundSecondary};
     }
 
     &:hover, &:hover footer, &:hover h3 {
@@ -29,7 +27,12 @@ export const SQuestionDescription = styled.p`
     color: ${({ theme }: GlobalTheme) => theme.text};
     font-size: 0.8rem;
     line-height: 1.2rem;
-    padding: 6px 30px 14px 30px;
+    padding: 6px 125px 14px 30px;
+
+    @media (max-width: 800px) {
+        padding-right: 30px;
+        margin-top: 8px;
+    }
 `;
 
 export const SQuestionFooter  = styled.footer`

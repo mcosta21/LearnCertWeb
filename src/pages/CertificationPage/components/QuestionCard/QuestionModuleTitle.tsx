@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { GlobalTheme } from '@styles/theme';
-import { FiChevronDown } from 'react-icons/fi';
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { Module, Question } from '@pages/CertificationFormPage/domain/certification.model';
 import { Chip } from '@mui/material';
 import { useTranslation } from 'react-i18next';
@@ -35,7 +35,7 @@ export default function QuestionModuleTitle({
                             {module.title}
                         </div>
                         <button onClick={handleCollapse}>
-                            <FiChevronDown size={20}/>
+                            <FiChevronUp size={20}/>
                         </button>
                     </SFocusedTitle>
 
@@ -95,9 +95,9 @@ const SNormalTitle = styled.div`
         position: absolute;
         background-color: ${({ theme }: GlobalTheme) => theme.colors.green};
         color: ${({ theme }: GlobalTheme) => theme.background};
-        top: 75%;
-        right: 1.2rem;
-        height: 30px;
+        top: 50%;
+        right: 1.1rem;
+        height: 28px;
         
         span {
             font-weight: 600;

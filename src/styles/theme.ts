@@ -18,6 +18,7 @@ export interface Theme extends DefaultTheme {
     textSecondary: string;
     border: string;
     colors: Colors;
+    shadow: string;
 }
 
 const colorsTheme = {
@@ -33,7 +34,8 @@ export const lightTheme = {
     text: '#000000',
     textSecondary: '#706E6E',
     border: '#E5E5E5',
-    colors: colorsTheme
+    colors: colorsTheme,
+    shadow: '#e6e6e6'
 } as Theme;
 
 export const darkTheme = {
@@ -42,7 +44,8 @@ export const darkTheme = {
     text: '#FFFFFF',
     textSecondary: '#C4C4C4',
     border: '#21325E',
-    colors: colorsTheme
+    colors: colorsTheme,
+    shadow: '#0c132a'
 } as Theme;
 
 

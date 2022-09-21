@@ -2,10 +2,9 @@ import styled from 'styled-components';
 import { GlobalTheme } from '@styles/theme';
 
 export const SCertificationForm = styled.form`
-    margin-top: 2rem;
+    margin-top: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 10px;
     padding: 0 4rem;
 `
 
@@ -17,17 +16,13 @@ export const SCertificationInputs = styled.div`
     & > div {
         width: 100%;
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         grid-column-gap: 10px;
-
-        .l-select {
-            grid-column: 1 / -1;
-        }
     }
 
     & > img {
-        width: 160px;
-        height: 160px;
+        width: 75px;
+        height: 75px;
     }
 `
 
@@ -40,20 +35,53 @@ export const SPopoverModule = styled.div`
 `;
 
 export const SModuleTabsContainer = styled.div`
-    height: calc(100vh - 265px);
+    min-height: calc(100vh - 275px);
 
+
+    & .module-tab {
+        height: 386px;
+        overflow-y: overlay;
+    }
+
+    & > .module-header {
+        padding: 0;
+        padding-bottom: 4px;
+        border-bottom: 1px solid ${({ theme }: GlobalTheme) => theme.border};
+    } 
+
+    &.full-screen-module {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+        background-color: ${({ theme }: GlobalTheme) => theme.background};
+        
+        & > .module-header {
+            border-bottom: 0;
+            padding: 0.5rem 1rem;
+        }
+
+        & .module-tab {
+            height: calc(100vh - 105px);
+        }
+    }
+`
+
+export const SModuleHeader = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
     & > label {
         display: block;
         padding-bottom: 10px;
         margin-top: 10px;
-        border-bottom: 1px solid ${({ theme }: GlobalTheme) => theme.border};
     }
 
-    & .module-tab {
-        height: calc(100vh - 350px);
-        overflow-y: overlay;
-    }
 `
+
 export const SCertificationFooter = styled.footer`
     height: 65px;
     display: flex;

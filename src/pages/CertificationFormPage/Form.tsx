@@ -7,7 +7,7 @@ import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
 import { Certification, LanguageType, LanguageTypes, Module } from "./domain/certification.model";
 import { CertificationValidation } from "./domain/certification.validation";
-import { SCertificationFooter, SCertificationForm, SCertificationInputs, SModuleTabsContainer, SPopoverModule } from "./styles";
+import { SCertificationFooter, SCertificationForm, SCertificationInputs, SModuleHeader, SModuleTabsContainer, SPopoverModule } from "./styles";
 
 import LBody from "@components/LBody";
 import { LTabModel } from '@components/LTabs/models';
@@ -22,6 +22,8 @@ import Translate from '@services/i18nProvider/Translate';
 import { RouterKey } from '@routes/routekeys';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import LIconButton from '@components/LIconButton';
+import FullscreenIcon from '@mui/icons-material/Fullscreen';
 
 interface Props {
     certification?: Certification;
@@ -58,8 +60,9 @@ export default function CertificationForm({
     const [titleModule, setTitleModule] = useState<string>("");
     const [inputModule, setInputModule] = useState<HTMLElement | undefined>(undefined);
     const open = Boolean(inputModule);
-    const id = open ? 'imput-module' : undefined;
+    const id = open ? 'input-module' : undefined;
     const [isNewModule, setIsNewModule] = useState(true);
+    const [isFullScreenModule, setIsFullScreenModule] = useState(false);
 
     const navigate = useNavigate();
     const { t } = useTranslation();
@@ -161,6 +164,10 @@ export default function CertificationForm({
         setLanguageType(selectedValue);
     }
 
+    function handleFullScreenModule() {
+        setIsFullScreenModule(oldState => !oldState);
+    }
+
     const onSubmit: SubmitHandler<Certification> = async data => {
         try {
             if(isNew) {
@@ -226,8 +233,18 @@ export default function CertificationForm({
 
                 </SCertificationInputs>
 
-                <SModuleTabsContainer>
-                    <LLabel value="MODULE.LABEL" />
+                <SModuleTabsContainer className={isFullScreenModule ? 'full-screen-module' : ''}>
+                    
+                    <SModuleHeader className="module-header">
+                        <LLabel value="MODULE.LABEL" />
+                        <LIconButton 
+                            arialLabel="full-screen"
+                            onClick={handleFullScreenModule} 
+                            icon={<FullscreenIcon />}
+                            tooltip="FULL_SCREEN"
+                        />
+                    </SModuleHeader>
+
                     <LTabs 
                         currentTab={currentTab} 
                         onChange={handleChangeTab}

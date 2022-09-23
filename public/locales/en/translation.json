@@ -15,6 +15,9 @@
   "HIDE_ANSWERS": "Hide answers",
   "SHOW_ANSWERS": "Show answers",
   "ANSWERED": "Answered",
+  "COLLAPSE": "Collapse",
+  "CLEAR": "Clear",
+  "FULL_SCREEN": "Full screen",
   "CERTIFICATION": {
     "LABEL": "Certifications",
     "TITLE": "Title",
@@ -34,7 +37,9 @@
   },
   "ANSWER": {
     "DESCRIPTION": "Answer",
-    "IS_CORRECT": "Is it correct?"
+    "IS_CORRECT": "Is it correct?",
+    "HIDE_ANSWER": "Hide answer",
+    "SHOW_ANSWER": "Show answer"
   },
   "USER": {
     "LOGOUT": "Logout",

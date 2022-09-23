@@ -33,7 +33,7 @@ export default function LTabs({
                             label={tab.name} 
                             icon={tab.icon} 
                             iconPosition={tab.iconPosition}
-                            className={tab.invalid ? 'invalid' : ''}
+                            className={tab.invalid ? 'l-tab invalid' : 'l-tab'}
                             onContextMenu={(e) => {
                                 if(onRightClick) {
                                     e.preventDefault(); 

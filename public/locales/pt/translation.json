@@ -15,6 +15,9 @@
   "HIDE_ANSWERS": "Ocultar respostas",
   "SHOW_ANSWERS": "Mostrar respostas",
   "ANSWERED": "Respondido",
+  "COLLAPSE": "Colapsar",
+  "CLEAR": "Limpar",
+  "FULL_SCREEN": "Tela cheia",
   "CERTIFICATION": {
     "LABEL": "Certificações",
     "TITLE": "Título",
@@ -34,7 +37,9 @@
   },
   "ANSWER": {
     "DESCRIPTION": "Resposta",
-    "IS_CORRECT": "Está correto?"
+    "IS_CORRECT": "Está correto?",
+    "HIDE_ANSWER": "Ocultar resposta",
+    "SHOW_ANSWER": "Mostrar resposta"
   },
   "USER": {
     "LOGOUT": "Sair",

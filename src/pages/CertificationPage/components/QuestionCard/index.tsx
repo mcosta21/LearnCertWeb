@@ -85,7 +85,7 @@ export default function QuestionCard({
                                 Learn more
                             </a>
                             <button onClick={handleShowCorrectAnswer}>
-                                {(showCorrect || showAllCorrect) ? 'Hide answer' : 'Show answer'}
+                                {(showCorrect || showAllCorrect) ? t('ANSWER.HIDE_ANSWER') : t('ANSWER.SHOW_ANSWER')}
                             </button>
                         </SQuestionFooter>
                     </>

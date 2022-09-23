@@ -114,6 +114,7 @@ export default function CertificationForm({
         const content = {
             index,
             control,
+            setValue
         } as ModuleTabProps;
 
         const component = React.createElement(ModuleTab, { ...content });

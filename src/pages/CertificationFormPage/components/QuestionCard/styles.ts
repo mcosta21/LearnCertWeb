@@ -24,13 +24,65 @@ export const SQuestionCardCollapsed = styled.div`
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        .question-description {
+            font-size: 0.8rem;
+            padding-left: 1rem;
+        }
     }
 `
 
 export const SQuestionInputs = styled.div`
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1rem;        
+
+    > aside {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 1rem;
+
+        .question-buttons {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 0.8rem;
+            height: 210px;
+        }
+
+        .description-editor {
+            width: 100%;
+
+            > label {
+                font-size: 0.8rem;
+                margin-bottom: 10px;
+                display: block;
+            }
+
+            .quill-editor {
+                background: ${({ theme }: GlobalTheme) => theme.backgroundSecondary};
+                height: 130px;
+                
+                div {
+                    border-color: ${({ theme }: GlobalTheme) => theme.border};
+                }
+
+                .ql-picker-label, path, line, polygon {
+                    color: ${({ theme }: GlobalTheme) => theme.text};
+                    stroke: ${({ theme }: GlobalTheme) => theme.text};
+                }
+
+                .ql-container {
+                    height: calc(100% - 42px);
+                }
+            }
+        }
+    }
+
+    aside:first-child {
+        flex: 1;
+    }
 `
 
 export const SAnswerOptionInput = styled.aside`

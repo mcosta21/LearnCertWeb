@@ -13,12 +13,18 @@ import { LLabel } from "@components/LLabel";
 
 import Translate from '@services/i18nProvider/Translate';
 
+import ReactQuill from "react-quill";
+import 'react-quill/dist/quill.snow.css';
+import LIconButton from "@components/LIconButton";
+import ClearIcon from '@mui/icons-material/Clear';
+
 interface Props {
     moduleIndex: number;
     questionIndex: number;
     control: Control<Certification, any>,
     onRemoveQuestion: (index: number) => void;
     collapsed?: boolean;
+    onClearDescription: (index: number) => void;
 }
 
 export function QuestionCard({
@@ -26,7 +32,8 @@ export function QuestionCard({
     questionIndex,
     control,
     onRemoveQuestion,
-    collapsed = true
+    collapsed = true,
+    onClearDescription
 }: Props){
 
     const [newOption, setNewOption] = useState<AnswerOption>(new AnswerOption());
@@ -86,6 +93,10 @@ export function QuestionCard({
         setCollapsed(oldState => !oldState);
     }
 
+    function handleClearDescription(){
+        
+    }
+
     return (
         <SQuestionCardContainer>
             
@@ -97,9 +108,7 @@ export function QuestionCard({
                         name={`modules.${moduleIndex}.questions.${questionIndex}.description`}
                         render={({ field }) =>
                             (
-                                <>
-                                    <LLabel value={field.value} />
-                                </>
+                                <div className="question-description" dangerouslySetInnerHTML={{ __html: field.value }} />
                             )
                         }
                     />
@@ -115,53 +124,64 @@ export function QuestionCard({
             </SQuestionCardCollapsed>
 
             <SQuestionCardData hidden={isCollapsed}>
+
                 <SQuestionInputs>
-                    <Controller
-                        control={control}
-                        defaultValue=""
-                        name={`modules.${moduleIndex}.questions.${questionIndex}.description`}
-                        render={({ field, fieldState }) =>
-                            (
-                                <LInput 
-                                    label="QUESTION.DESCRIPTION"
-                                    required
-                                    error={fieldState.error?.message}
-                                    {...field} 
-                                />
-                            )
-                        }
-                    />
 
-                    <Controller
-                        control={control}
-                        defaultValue=""
-                        name={`modules.${moduleIndex}.questions.${questionIndex}.learnMore`}
-                        render={({ field, fieldState }) =>
-                            (
-                                <LInput 
-                                    label="QUESTION.LEARN_MORE"
-                                    error={fieldState.error?.message}
-                                    {...field} 
-                                />
-                            )
-                        }
-                    />
+                    <aside>
+                        <Controller
+                            control={control}
+                            defaultValue=""
+                            name={`modules.${moduleIndex}.questions.${questionIndex}.description`}
+                            render={({ field, fieldState }) =>
+                                (
+                                    <div className="description-editor">
+                                        <LLabel value="QUESTION.DESCRIPTION" />
+                                        <ReactQuill theme="snow" {...field} className="quill-editor"/>
+                                    </div>
+                                )
+                            }
+                        />
+                    
+                        <Controller
+                            control={control}
+                            defaultValue=""
+                            name={`modules.${moduleIndex}.questions.${questionIndex}.learnMore`}
+                            render={({ field, fieldState }) =>
+                                (
+                                    <LInput 
+                                        label="QUESTION.LEARN_MORE"
+                                        error={fieldState.error?.message}
+                                        {...field} 
+                                    />
+                                )
+                            }
+                        />
 
-                    <IconButton 
-                        aria-label="remove-question"
-                        size="small" 
-                        onClick={() => onRemoveQuestion(questionIndex)} 
-                    >
-                        <Delete />
-                    </IconButton>
+                    </aside>
 
-                    <IconButton 
-                        aria-label="collapse-question"
-                        size="small" 
-                        onClick={handleCollapse} 
-                    >
-                        <KeyboardArrowUp />
-                    </IconButton>
+                    <aside>
+                        <div className="question-buttons">
+                            <LIconButton 
+                                arialLabel="collapse-question"
+                                onClick={handleCollapse} 
+                                icon={<KeyboardArrowUp />}
+                                tooltip="COLLAPSE"
+                            />
+                            <LIconButton 
+                                arialLabel="remove-question"
+                                onClick={() => onRemoveQuestion(questionIndex)} 
+                                icon={<Delete />}
+                                tooltip="REMOVE"
+                            />
+                            <LIconButton 
+                                arialLabel="clear-question-description"
+                                onClick={() => onClearDescription(questionIndex)} 
+                                icon={<ClearIcon />}
+                                tooltip="CLEAR"
+                            />
+                        </div>
+                    </aside>
+                    
                 </SQuestionInputs>
 
                 <SAnswerOptionContainer>

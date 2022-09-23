@@ -59,9 +59,7 @@ export default function QuestionCard({
                 answered={!!selectedOptionCode}
             />
 
-            <SQuestionDescription>
-                {question.description}
-            </SQuestionDescription>
+            <SQuestionDescription dangerouslySetInnerHTML={{ __html: question.description }} />
             
             {
                 focused && (

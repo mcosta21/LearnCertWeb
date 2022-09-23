@@ -1,4 +1,4 @@
-import { Control, useFieldArray } from "react-hook-form";
+import { Control, useFieldArray, UseFormSetValue } from "react-hook-form";
 import { LDashedButton } from "@components/LDashedButton";
 import { Certification, Question } from "../../domain/certification.model";
 import { QuestionCard } from "../QuestionCard";
@@ -8,10 +8,12 @@ import Translate from "@services/i18nProvider/Translate";
 export interface ModuleTabProps {
     control: Control<Certification, any>,
     index: number;
+    setValue: UseFormSetValue<Certification>
 }
-export function ModuleTab({ control, index }: ModuleTabProps){
 
-    const { fields, remove, append } = useFieldArray({
+export function ModuleTab({ control, index, setValue }: ModuleTabProps){
+
+    const { fields, remove, append, update } = useFieldArray({
         control,
         name: `modules.${index}.questions`
     });
@@ -27,6 +29,10 @@ export function ModuleTab({ control, index }: ModuleTabProps){
         remove(index);
     }
 
+    function handleClearQuestionDescription(questionIndex: number) {
+        setValue(`modules.${index}.questions.${questionIndex}.description`, '');
+    }
+
     return (
         <SModuleTabContainer className="module-tab">
             <SQuestionContainer>
@@ -39,6 +45,7 @@ export function ModuleTab({ control, index }: ModuleTabProps){
                             questionIndex={questionIndex}
                             onRemoveQuestion={handleRemoveQuestion}
                             collapsed={question.collapsed}
+                            onClearDescription={handleClearQuestionDescription}
                         />
                     ))
                 }

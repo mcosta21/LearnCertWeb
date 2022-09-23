@@ -82,7 +82,7 @@ export default function QuestionCard({
                                 target="_blank"
                                 className={!!question.learnMore ? 'visible' : 'hidden'}
                             >
-                                Learn more
+                                {t('QUESTION.LEARN_MORE')}
                             </a>
                             <button onClick={handleShowCorrectAnswer}>
                                 {(showCorrect || showAllCorrect) ? t('ANSWER.HIDE_ANSWER') : t('ANSWER.SHOW_ANSWER')}

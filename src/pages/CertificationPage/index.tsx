@@ -28,17 +28,13 @@ export default function CertificationLearnPage(){
             setLoading(false);
         }
     }, []);
-
-    if(!certification.id || loading) {
-        return <h1>loading</h1>
-    }
     
     function handleShowAllAnswer(){
         setShowAllAnswer(oldState => !oldState);
     }
 
     return (
-        <LBody hideHeader>
+        <LBody hideHeader loading={!certification.id || loading}>
 
             <HeaderCertification 
                 certification={certification} 

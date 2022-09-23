@@ -28,7 +28,12 @@ export default function QuestionCard({
     const [focused, setFocused] = useState(false);
     
     function handleFocus() {
+        const element = document.getElementById(question.id);
+        if(element) {
+            setTimeout(() => element?.scrollIntoView({ behavior: 'smooth', block: 'center' }))
+        }
         if(focused) return;
+
         setFocused(true);
     }
 
@@ -49,7 +54,7 @@ export default function QuestionCard({
     }, [showCorrectAnswer])
 
     return (
-        <SCardContainer onClick={handleFocus} className={focused ? 'focused' : 'collapsed'}>
+        <SCardContainer id={question.id} onClick={handleFocus} className={focused ? 'focused' : 'collapsed'}>
 
             <QuestionModuleTitle 
                 module={module}

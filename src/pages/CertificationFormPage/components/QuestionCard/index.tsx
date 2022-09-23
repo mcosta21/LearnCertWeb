@@ -90,15 +90,16 @@ export function QuestionCard({
     }
 
     function handleCollapse(){
+        const element = document.getElementById(`question-${questionIndex}`);
+        if(element) {
+            setTimeout(() => element?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
+        }
+
         setCollapsed(oldState => !oldState);
     }
 
-    function handleClearDescription(){
-        
-    }
-
     return (
-        <SQuestionCardContainer>
+        <SQuestionCardContainer id={`question-${questionIndex}`}>
             
             <SQuestionCardCollapsed hidden={!isCollapsed}>
                 <div>

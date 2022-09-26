@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { GlobalTheme } from '@styles/theme';
 
-export const SCardContainer = styled.div`
+export const SCardContainer = styled.aside`
     display: flex;
     flex-direction: column;
     border: 1px solid ${({ theme }: GlobalTheme) => theme.border};

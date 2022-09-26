@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 
 interface Props {
-    onClick: () => void;
+    onClick?: () => void;
     arialLabel?: string;
     icon: ReactElement;
     tooltip?: string;

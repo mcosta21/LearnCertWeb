@@ -1,30 +1,34 @@
-import { SButtonOptionContainer, SHeaderContainer } from "./styles";
-import { Certification } from "@pages/CertificationFormPage/domain/certification.model";
-import Translate from "@services/i18nProvider/Translate";
-import { IconButton, Tooltip } from "@mui/material";
-import { useMyTheme } from "@hooks/useMyTheme";
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from "react-i18next";
-import { DarkMode, FirstPage, LightMode, TranslateOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
-import { RouterKey } from "@routes/routekeys";
+import LButtonOutlined from "@components/LButtonOutlined";
 import LIconButton from "@components/LIconButton";
+import { useMyTheme } from "@hooks/useMyTheme";
+import { DarkMode, FirstPage, LightMode, TranslateOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
+import { Certification } from "@pages/CertificationFormPage/domain/certification.model";
+import { RouterKey } from "@routes/routekeys";
+import Translate from "@services/i18nProvider/Translate";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from 'react-router-dom';
+import { SButtonOptionContainer, SHeaderContainer } from "./styles";
 
 interface Props {
     certification: Certification;
     showAllAnswer: boolean;
-    handleShowAllAnswer: () => void;
+    onShowAllAnswer?: () => void;
+    onStartQuiz?: () => void;
+    onFinishQuiz?: () => void;
+    onCancelQuiz?: () => void;
 }
 
 export default function HeaderCertification({
     certification,
     showAllAnswer = false,
-    handleShowAllAnswer
+    onShowAllAnswer,
+    onStartQuiz,
+    onFinishQuiz,
+    onCancelQuiz
 }: Props){
 
     const navigate = useNavigate();
-    
     const { themeName, toggleTheme } = useMyTheme();
-
     const { i18n, t } = useTranslation();
 
     function changeLanguage(language: string){
@@ -57,6 +61,12 @@ export default function HeaderCertification({
 
             <SButtonOptionContainer>
  
+                <LButtonOutlined hidden={!onStartQuiz} text="START_QUIZ" onClick={onStartQuiz}/>
+
+                <LButtonOutlined hidden={!onFinishQuiz} text="FINISH_QUIZ" onClick={onFinishQuiz}/>
+
+                <LButtonOutlined hidden={!onCancelQuiz} text="CANCEL" onClick={onCancelQuiz}/>
+
                 <LIconButton 
                     arialLabel="language"
                     onClick={() => changeLanguage(i18n.language === 'pt' ? 'en' : 'pt')} 
@@ -71,12 +81,16 @@ export default function HeaderCertification({
                     tooltip={themeName === 'light' ? 'DARK_MODE' : 'LIGHT_MODE' }
                 />
 
-                <LIconButton 
-                    arialLabel="visibility"
-                    onClick={handleShowAllAnswer} 
-                    icon={showAllAnswer ? <VisibilityOff /> : <Visibility />}
-                    tooltip={showAllAnswer ? 'HIDE_ANSWERS' : 'SHOW_ANSWERS' }
-                />
+                {
+                    !!onShowAllAnswer && (
+                        <LIconButton 
+                            arialLabel="visibility"
+                            onClick={onShowAllAnswer} 
+                            icon={showAllAnswer ? <VisibilityOff /> : <Visibility />}
+                            tooltip={showAllAnswer ? 'HIDE_ANSWERS' : 'SHOW_ANSWERS' }
+                        />
+                    )
+                }
 
                 <LIconButton 
                     arialLabel="go-back"

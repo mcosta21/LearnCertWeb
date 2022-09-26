@@ -1,5 +1,5 @@
 import { Chip } from "@mui/material";
-import { Module, Question } from "@pages/CertificationFormPage/domain/certification.model";
+import { Module, Question, QuestionModelCard } from "@pages/CertificationFormPage/domain/certification.model";
 import { AnswerOption, QuestionDescriptionModel } from "@pages/CertificationPage/models/certification.model";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -8,15 +8,17 @@ import QuestionModuleTitle from "./QuestionModuleTitle";
 import { SCardContainer, SQuestionDescription, SQuestionFooter } from "./styles";
 
 interface Props {
-    question: Question;
-    module: Module;
+    question: QuestionModelCard;
     showCorrectAnswer?: boolean;
+    optionsDisabled?: boolean;
+    onSelectAnswer: (question: Question, answer: AnswerOption) => void;
 }
 
 export default function QuestionCard({
     question,
-    module,
-    showCorrectAnswer = false
+    showCorrectAnswer = false,
+    optionsDisabled = false,
+    onSelectAnswer
 }: Props){
 
     const { t } = useTranslation();
@@ -24,7 +26,6 @@ export default function QuestionCard({
     const [showCorrect, setShowCorrect] = useState<boolean>(showCorrectAnswer);
     const [showAllCorrect, setShowAllCorrect] = useState<boolean>(showCorrectAnswer);
     
-    const [selectedOptionCode, setSelectedOptionCode] = useState<number>();
     const [focused, setFocused] = useState(false);
     
     function handleFocus() {
@@ -44,9 +45,9 @@ export default function QuestionCard({
     function handleShowCorrectAnswer() {
         setShowCorrect(oldState => !oldState);
     }
-    
-    function handleSelectOption(option: AnswerOption) {
-        setSelectedOptionCode(option.code);
+
+    function handleSelectAnswer(answer: AnswerOption) {
+        onSelectAnswer(question, answer)
     }
 
     useEffect(() => {
@@ -57,11 +58,10 @@ export default function QuestionCard({
         <SCardContainer id={question.id} onClick={handleFocus} className={focused ? 'focused' : 'collapsed'}>
 
             <QuestionModuleTitle 
-                module={module}
                 question={question}
                 focused={focused}
                 handleCollapse={handleCollapse}
-                answered={!!selectedOptionCode}
+                answered={!!question.answerSelected}
             />
 
             <SQuestionDescription dangerouslySetInnerHTML={{ __html: question.description }} />
@@ -72,22 +72,27 @@ export default function QuestionCard({
                         <AnswerOptionList 
                             answers={question.answerOptions} 
                             showCorrect={showCorrect || showAllCorrect} 
-                            selectedOptionCode={selectedOptionCode}
-                            onSelectOption={handleSelectOption}
+                            selectedOptionCode={question.answerSelected?.code}
+                            onSelectAnswer={handleSelectAnswer}
                         />
-                        <SQuestionFooter>
-                            <a 
-                                href={question.learnMore} 
-                                rel="noreferrer noopener"
-                                target="_blank"
-                                className={!!question.learnMore ? 'visible' : 'hidden'}
-                            >
-                                {t('QUESTION.LEARN_MORE')}
-                            </a>
-                            <button onClick={handleShowCorrectAnswer}>
-                                {(showCorrect || showAllCorrect) ? t('ANSWER.HIDE_ANSWER') : t('ANSWER.SHOW_ANSWER')}
-                            </button>
-                        </SQuestionFooter>
+                        {
+                            !optionsDisabled && (
+                                <SQuestionFooter>
+                                    <a 
+                                        href={question.learnMore} 
+                                        rel="noreferrer noopener"
+                                        target="_blank"
+                                        className={!!question.learnMore ? 'visible' : 'hidden'}
+                                    >
+                                        {t('QUESTION.LEARN_MORE')}
+                                    </a>
+                                    <button onClick={handleShowCorrectAnswer}>
+                                        {(showCorrect || showAllCorrect) ? t('ANSWER.HIDE_ANSWER') : t('ANSWER.SHOW_ANSWER')}
+                                    </button>
+                                </SQuestionFooter>
+                            )
+                        }
+                        
                     </>
                 )
             }

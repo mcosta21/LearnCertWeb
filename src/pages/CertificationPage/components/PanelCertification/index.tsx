@@ -1,30 +1,42 @@
-import { Certification } from "@pages/CertificationFormPage/domain/certification.model";
+import { AnswerOption, Question, QuestionModelCard } from "@pages/CertificationFormPage/domain/certification.model";
+import { Dispatch, SetStateAction, useState } from "react";
 import QuestionCard from "../QuestionCard";
 import { SPanelContainer } from "./styles";
 
 interface Props {
-    certification: Certification,
-    showAllAnswer: boolean;
+    questions: QuestionModelCard[],
+    setQuestions: Dispatch<SetStateAction<QuestionModelCard[]>>;
+    showAllAnswer?: boolean;
+    optionsDisabled?: boolean;
 }
 
 export default function PanelCertification({
-    certification,
-    showAllAnswer
+    questions = [],
+    setQuestions,
+    showAllAnswer = false,
+    optionsDisabled = false
 }: Props){
+
+    function handleSelectAnswer(question: Question, answer: AnswerOption){
+        setQuestions(data => data.map(x => {
+            if(question.id === x.id) {
+                x.answerSelected = answer;
+            }
+            return x;
+        }))
+    }
+
     return (
         <SPanelContainer>
             {
-                certification.modules.map(module => (
-                    module.questions.map((question, index) => (
-                        <aside key={index}>
-                            <QuestionCard 
-                                key={question.id} 
-                                question={question} 
-                                module={module}
-                                showCorrectAnswer={showAllAnswer}
-                            />
-                        </aside>
-                    ))     
+                questions.map(question => (
+                    <QuestionCard 
+                        key={question.id} 
+                        question={question}
+                        showCorrectAnswer={showAllAnswer}
+                        optionsDisabled={optionsDisabled}
+                        onSelectAnswer={handleSelectAnswer}
+                    />
                 ))
                 
             }

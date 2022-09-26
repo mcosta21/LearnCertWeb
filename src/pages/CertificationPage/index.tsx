@@ -4,15 +4,19 @@ import { useParams } from "react-router-dom";
 import HeaderCertification from "./components/HeaderCertification";
 import PanelCertification from "./components/PanelCertification";
 import * as api from '../CertificationFormPage/services/certification.api';
-import { Certification } from "@pages/CertificationFormPage/domain/certification.model";
+import { Certification, QuestionModelCard } from "@pages/CertificationFormPage/domain/certification.model";
+import _ from "lodash";
+import { CertificationHelper } from "./services/certification.helper";
+import QuizCertification from "./components/QuizCertification";
+import LearnCertification from "./components/LearnCertification";
 
 export default function CertificationLearnPage(){
 
     const { id } = useParams();
     const [certification, setCertification] = useState<Certification>(new Certification());
     const [loading, setLoading] = useState<boolean>(true);
-    const [showAllAnswer, setShowAllAnswer] = useState<boolean>(false);
-
+    const [isQuizMode, setQuizMode] = useState(false);
+    
     useEffect(() => {
         if(id) {
             api.getById(id)
@@ -29,24 +33,35 @@ export default function CertificationLearnPage(){
         }
     }, []);
     
-    function handleShowAllAnswer(){
-        setShowAllAnswer(oldState => !oldState);
+    function handleStartQuiz(){
+        setQuizMode(true);
+    }
+
+    function handleFinishQuiz(questions: QuestionModelCard[]){
+        setQuizMode(false);
+        console.log(questions)
+    }
+
+    function handleCancelQuiz(){
+        setQuizMode(false);
     }
 
     return (
         <LBody hideHeader loading={!certification.id || loading}>
-
-            <HeaderCertification 
-                certification={certification} 
-                showAllAnswer={showAllAnswer}
-                handleShowAllAnswer={handleShowAllAnswer}
-            />
-
-            <PanelCertification 
-                certification={certification} 
-                showAllAnswer={showAllAnswer}
-            />
-
+            {
+                !isQuizMode ? (
+                    <LearnCertification
+                        certification={certification}
+                        onStartQuiz={handleStartQuiz}
+                    />
+                ) : (
+                    <QuizCertification 
+                        certification={certification} 
+                        onFinishQuiz={handleFinishQuiz}
+                        onCancelQuiz={handleCancelQuiz}
+                    />
+                )
+            }
         </LBody>
     )
 }

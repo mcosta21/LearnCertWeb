@@ -10,7 +10,7 @@ interface Props {
     answers: AnswerOption[];
     showCorrect: boolean;
     selectedOptionCode: number | undefined;
-    onSelectOption: (option: AnswerOption) => void;
+    onSelectAnswer: (option: AnswerOption) => void;
 }
 
 
@@ -18,7 +18,7 @@ export default function AnswerOptionList({
     answers,
     showCorrect = false,
     selectedOptionCode,
-    onSelectOption
+    onSelectAnswer: onSelectOption
 }: Props){
 
     function handleSelectOption(option: AnswerOption) {

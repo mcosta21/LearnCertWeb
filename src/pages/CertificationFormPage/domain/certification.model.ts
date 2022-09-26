@@ -54,7 +54,6 @@ export class Question {
     public learnMore: string;
     public answerOptions: Array<AnswerOption> = [];
 
-    public collapsed: boolean = true;
 }
 
 export class AnswerOption {
@@ -62,4 +61,11 @@ export class AnswerOption {
     public description: string = '';
     public code: number;
     public isCorrect: boolean = false;
+}
+
+export class QuestionModelCard extends Question {
+    public collapsed: boolean = true;
+    public answerSelected: AnswerOption;
+    public moduleTitle: string;
+    public moduleCode: number;
 }

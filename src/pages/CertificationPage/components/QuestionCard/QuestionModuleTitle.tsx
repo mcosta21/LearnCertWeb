@@ -1,13 +1,12 @@
-import styled from 'styled-components';
-import { GlobalTheme } from '@styles/theme';
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
-import { Module, Question } from '@pages/CertificationFormPage/domain/certification.model';
 import { Chip } from '@mui/material';
+import { Question, QuestionModelCard } from '@pages/CertificationFormPage/domain/certification.model';
+import { GlobalTheme } from '@styles/theme';
 import { useTranslation } from 'react-i18next';
+import { FiChevronUp } from 'react-icons/fi';
+import styled from 'styled-components';
 
 interface Props {
-    question: Question;
-    module: Module;
+    question: QuestionModelCard;
     focused: boolean;
     handleCollapse: () => void;
     answered?: boolean;
@@ -15,10 +14,9 @@ interface Props {
 
 export default function QuestionModuleTitle({
     question,
-    module,
     focused = false,
     handleCollapse,
-    answered= false
+    answered = false
 }: Props){
     const { t } = useTranslation();
 
@@ -30,9 +28,9 @@ export default function QuestionModuleTitle({
                     <SFocusedTitle>
                         <div>
                             <span>
-                                {module.code}.{question.code}
+                                {question.moduleCode}.{question.code}
                             </span>
-                            {module.title}
+                            {question.moduleTitle}
                         </div>
                         <button onClick={handleCollapse}>
                             <FiChevronUp size={20}/>
@@ -42,9 +40,9 @@ export default function QuestionModuleTitle({
                 ) : (
                     <SNormalTitle>
                         <span>
-                            {module.code}.{question.code}
+                            {question.moduleCode}.{question.code}
                         </span>
-                        {module.title}
+                        {question.moduleTitle}
 
                         {answered && <Chip className="answered-badge" color="success" label={t("ANSWERED")} />}
 

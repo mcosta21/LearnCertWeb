@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { SButton } from "./styles";
 
 interface Props {
@@ -11,9 +12,11 @@ export default function LButtonOutlined({
     hidden = false,
     onClick
 }: Props){
+    const { t } = useTranslation();
+
     return (
         <SButton style={{ display: hidden ? 'none' : 'block' }} variant="outlined" onClick={onClick}>
-            {text}
+            {t(text)}
         </SButton>
     )
 }

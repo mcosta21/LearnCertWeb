@@ -1,6 +1,7 @@
-import { IconButton, Tooltip } from "@mui/material";
+import { Tooltip } from "@mui/material";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
+import { SIconButton } from "./styles";
 
 interface Props {
     onClick?: () => void;
@@ -18,13 +19,13 @@ export default function  LIconButton({
     const { t } = useTranslation();
     return (
         <Tooltip title={!!tooltip ? t(tooltip) : ''}>
-            <IconButton 
+            <SIconButton 
                 aria-label={arialLabel}
                 size="small" 
                 onClick={onClick} 
             >
                 {icon}
-            </IconButton>
+            </SIconButton>
         </Tooltip>
     )
 }

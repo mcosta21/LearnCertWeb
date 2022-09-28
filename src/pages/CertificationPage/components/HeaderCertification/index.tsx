@@ -4,13 +4,13 @@ import { useMyTheme } from "@hooks/useMyTheme";
 import { DarkMode, FirstPage, LightMode, TranslateOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
 import { Certification } from "@pages/CertificationFormPage/domain/certification.model";
 import { RouterKey } from "@routes/routekeys";
-import Translate from "@services/i18nProvider/Translate";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from 'react-router-dom';
 import { SButtonOptionContainer, SHeaderContainer } from "./styles";
 
 interface Props {
     certification: Certification;
+    children: any;
     showAllAnswer: boolean;
     onShowAllAnswer?: () => void;
     onStartQuiz?: () => void;
@@ -20,6 +20,7 @@ interface Props {
 
 export default function HeaderCertification({
     certification,
+    children,
     showAllAnswer = false,
     onShowAllAnswer,
     onStartQuiz,
@@ -29,14 +30,10 @@ export default function HeaderCertification({
 
     const navigate = useNavigate();
     const { themeName, toggleTheme } = useMyTheme();
-    const { i18n, t } = useTranslation();
+    const { i18n } = useTranslation();
 
     function changeLanguage(language: string){
         i18n.changeLanguage(language)
-    }
-    
-    function countQuestions(){
-        return certification.modules.map(x => x.questions.length) + ' ';
     }
 
     function goBack(){
@@ -49,21 +46,15 @@ export default function HeaderCertification({
                 <img src={certification.imageUrl} />
 
                 <div>
-                    <h1>{certification.title}</h1>
-                    <p>
-                        {countQuestions()} 
-                        <Translate value="QUESTION.LABEL" /> 
-                        {' / '} 
-                        <Translate value="CERTIFICATION.LANGUAGE_TYPE" />: {t(certification.languageType)}
-                    </p>
+                    {children}
                 </div>
             </aside>
 
             <SButtonOptionContainer>
  
-                <LButtonOutlined hidden={!onStartQuiz} text="START_QUIZ" onClick={onStartQuiz}/>
+                <LButtonOutlined hidden={!onStartQuiz} text="CERTIFICATION.START_QUIZ" onClick={onStartQuiz}/>
 
-                <LButtonOutlined hidden={!onFinishQuiz} text="FINISH_QUIZ" onClick={onFinishQuiz}/>
+                <LButtonOutlined hidden={!onFinishQuiz} text="FINISH" onClick={onFinishQuiz}/>
 
                 <LButtonOutlined hidden={!onCancelQuiz} text="CANCEL" onClick={onCancelQuiz}/>
 

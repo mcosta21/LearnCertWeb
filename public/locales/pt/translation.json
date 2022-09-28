@@ -18,12 +18,21 @@
   "COLLAPSE": "Colapsar",
   "CLEAR": "Limpar",
   "FULL_SCREEN": "Tela cheia",
+  "CONGRATULATIONS": "Parabéns",
+  "TRY_AGAIN": "Tentar novamente",
+  "FINISH": "Finalizar",
+  "RESULT": "Resultado",
   "CERTIFICATION": {
     "LABEL": "Certificações",
     "TITLE": "Título",
     "NO_IMAGE": "Sem imagem",
     "IMAGE_URL": "Url da imagem",
-    "LANGUAGE_TYPE": "Idioma"
+    "LANGUAGE_TYPE": "Idioma",
+    "START_QUIZ": "Iniciar questionário",
+    "YOUR_QUIZ_WILL_START_IN_A_MOMENT": "Seu questionário comecerá em instantes",
+    "WE_ARE_CALCULATING_YOUR_PROGRESS": "Estamos calculando seu progresso",
+    "SORRY_BUT_YOU_DIDNT_MAKE_IT_THIS_TIME": "Poxa, você não conseguiu dessa vez", 
+    "RESULT_QUIZ_DESCRIPTION": "Você obteve uma taxa de aprovação de {{percentage}}% e acertou {{quantity}} perguntas"
   },
   "MODULE": {
     "TITLE": "Título do módulo",

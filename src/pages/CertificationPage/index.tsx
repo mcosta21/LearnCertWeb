@@ -38,11 +38,10 @@ export default function CertificationLearnPage(){
     }
 
     function handleFinishQuiz(questions: QuestionModelCard[]){
-        setQuizMode(false);
-        console.log(questions)
+        console.log('save', questions)
     }
 
-    function handleCancelQuiz(){
+    function handleCloseQuiz(){
         setQuizMode(false);
     }
 
@@ -58,7 +57,8 @@ export default function CertificationLearnPage(){
                     <QuizCertification 
                         certification={certification} 
                         onFinishQuiz={handleFinishQuiz}
-                        onCancelQuiz={handleCancelQuiz}
+                        onCancelQuiz={handleCloseQuiz}
+                        onCloseQuiz={handleCloseQuiz}
                     />
                 )
             }

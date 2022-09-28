@@ -1,7 +1,12 @@
-import styled from 'styled-components';
 import { GlobalTheme } from '@styles/theme';
+import styled, { keyframes } from 'styled-components';
+import { fadeInUp, fadeInDown } from 'react-animations';
+
+const fadeInUpAnimation = keyframes`${fadeInUp}`;
+const fadeInDownAnimation = keyframes`${fadeInDown}`;
 
 export const SCardContainer = styled.aside`
+    animation: 1s ${fadeInUpAnimation};
     display: flex;
     flex-direction: column;
     border: 1px solid ${({ theme }: GlobalTheme) => theme.border};
@@ -21,7 +26,6 @@ export const SCardContainer = styled.aside`
         border-color: ${({ theme }: GlobalTheme) => theme.colors.purple};
     }
 `;
-
 
 export const SQuestionDescription = styled.p`
     color: ${({ theme }: GlobalTheme) => theme.text};

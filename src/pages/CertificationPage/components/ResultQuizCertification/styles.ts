@@ -2,19 +2,14 @@ import styled from 'styled-components';
 import { GlobalTheme } from '@styles/theme';
 
 export const SContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 100%;
-    gap: .5rem;
+    padding: 2rem 1rem 1rem 1rem;
 `;
 
 export const SHeader = styled.header`
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: -45px;
     margin-bottom: 1rem;
 
     img {
@@ -23,15 +18,19 @@ export const SHeader = styled.header`
 `;
 
 export const SResultTitle = styled.h1`
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 700;
+    text-align: center;
+    margin-bottom: .5rem;
 `;
 
 export const SResultSubTitle = styled.p`
+    text-align: center;
     color: ${({ theme }: GlobalTheme) => theme.textSecondary};
+    font-size: .8rem;
 
     strong {
-    font-weight: 700;
+        font-weight: 700;
     }
 `;
 
@@ -40,5 +39,5 @@ export const SFooter = styled.footer`
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    margin-top: 2rem;
+    margin: 2rem 0;
 `

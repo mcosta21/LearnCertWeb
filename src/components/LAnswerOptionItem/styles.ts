@@ -16,6 +16,10 @@ export const LAnswerOptionItemContainer = styled.div`
     span:hover {
         color: ${({ theme }: GlobalTheme) => theme.textSecondary};
     }
+
+    svg {
+        color: ${({ theme }: GlobalTheme) => theme.backgroundSecondary};
+    }
 `;
 
 export const SCommonOptionButton = styled.button`

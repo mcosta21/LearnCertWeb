@@ -80,6 +80,7 @@ export default function QuizCertification({
                 <HeaderCertification 
                     certification={certification} 
                     showAllAnswer={false}
+                    onFinishQuizDisabled={countAnsweredQuestions < countQuestions}
                     onFinishQuiz={handleFinish}
                     onCancelQuiz={onCancelQuiz}
                 >
@@ -94,7 +95,8 @@ export default function QuizCertification({
                         questions={questions} 
                         setQuestions={setQuestions}
                         showAllAnswer={false}
-                        optionsDisabled
+                        learnMoreHidden
+                        showAnswerHidden
                     />
                 )
             }

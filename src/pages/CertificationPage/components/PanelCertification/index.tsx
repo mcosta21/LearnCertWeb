@@ -5,19 +5,25 @@ import { SPanelContainer } from "./styles";
 
 interface Props {
     questions: QuestionModelCard[],
-    setQuestions: Dispatch<SetStateAction<QuestionModelCard[]>>;
+    setQuestions?: Dispatch<SetStateAction<QuestionModelCard[]>>;
     showAllAnswer?: boolean;
-    optionsDisabled?: boolean;
+    learnMoreHidden?: boolean;
+    showAnswerHidden?: boolean;
+    showAllFocused?: boolean;
 }
 
 export default function PanelCertification({
     questions = [],
     setQuestions,
     showAllAnswer = false,
-    optionsDisabled = false
+    learnMoreHidden = false,
+    showAnswerHidden = false,
+    showAllFocused = false
 }: Props){
 
     function handleSelectAnswer(question: Question, answer: AnswerOption){
+        if(!setQuestions) return;
+        
         setQuestions(data => data.map(x => {
             if(question.id === x.id) {
                 x.answerSelected = answer;
@@ -34,8 +40,10 @@ export default function PanelCertification({
                         key={question.id} 
                         question={question}
                         showCorrectAnswer={showAllAnswer}
-                        optionsDisabled={optionsDisabled}
+                        learnMoreHidden={learnMoreHidden}
+                        showAnswerHidden={showAnswerHidden}
                         onSelectAnswer={handleSelectAnswer}
+                        focused={showAllFocused}
                     />
                 ))
                 

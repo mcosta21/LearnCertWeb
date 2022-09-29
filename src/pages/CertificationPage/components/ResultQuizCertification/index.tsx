@@ -3,6 +3,7 @@ import { Certification, QuestionModelCard } from "@pages/CertificationFormPage/d
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import LoaderTime from "../LoaderTime";
+import PanelCertification from "../PanelCertification";
 import { SContainer, SFooter, SHeader, SResultSubTitle, SResultTitle } from "./styles";
 
 interface Props {
@@ -64,8 +65,14 @@ export default function ResultQuizCertification({
             <SFooter>
                 <LButtonOutlined text="TRY_AGAIN" onClick={onTryAgain} />
                 <LButtonOutlined text="BACK" onClick={onClose}/>
-
             </SFooter>
+
+            <PanelCertification 
+                questions={questions} 
+                showAllAnswer={true}
+                showAnswerHidden
+                showAllFocused={true}
+            />
         </SContainer>
     )
 }

@@ -1,5 +1,5 @@
 import { api } from "@config/api";
-import { CertificationModel } from "../models/certification.model";
+import { CertificationModel } from "../domain/models/certification.model";
 
 const root = '/certification';
 

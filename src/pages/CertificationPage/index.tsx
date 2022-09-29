@@ -1,14 +1,11 @@
-import { useEffect, useState } from "react";
 import LBody from "@components/LBody";
-import { useParams } from "react-router-dom";
-import HeaderCertification from "./components/HeaderCertification";
-import PanelCertification from "./components/PanelCertification";
-import * as api from '../CertificationFormPage/services/certification.api';
 import { Certification, QuestionModelCard } from "@pages/CertificationFormPage/domain/certification.model";
-import _ from "lodash";
-import { CertificationHelper } from "./services/certification.helper";
-import QuizCertification from "./components/QuizCertification";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import * as certificationApi from '../CertificationFormPage/services/certification.api';
 import LearnCertification from "./components/LearnCertification";
+import QuizCertification from "./components/QuizCertification";
+import * as quizApi from './services/quiz.api';
 
 export default function CertificationLearnPage(){
 
@@ -19,7 +16,7 @@ export default function CertificationLearnPage(){
     
     useEffect(() => {
         if(id) {
-            api.getById(id)
+            certificationApi.getById(id)
                 .then(data => {
                     setCertification(data);
                     setLoading(false);
@@ -38,7 +35,7 @@ export default function CertificationLearnPage(){
     }
 
     function handleFinishQuiz(questions: QuestionModelCard[]){
-        console.log('save', questions)
+        quizApi.register(certification, questions);
     }
 
     function handleCloseQuiz(){

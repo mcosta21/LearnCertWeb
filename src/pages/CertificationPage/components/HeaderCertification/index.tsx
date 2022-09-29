@@ -16,6 +16,7 @@ interface Props {
     onStartQuiz?: () => void;
     onFinishQuiz?: () => void;
     onCancelQuiz?: () => void;
+    onFinishQuizDisabled?: boolean;
 }
 
 export default function HeaderCertification({
@@ -25,7 +26,8 @@ export default function HeaderCertification({
     onShowAllAnswer,
     onStartQuiz,
     onFinishQuiz,
-    onCancelQuiz
+    onCancelQuiz,
+    onFinishQuizDisabled = true
 }: Props){
 
     const navigate = useNavigate();
@@ -54,7 +56,7 @@ export default function HeaderCertification({
  
                 <LButtonOutlined hidden={!onStartQuiz} text="CERTIFICATION.START_QUIZ" onClick={onStartQuiz}/>
 
-                <LButtonOutlined hidden={!onFinishQuiz} text="FINISH" onClick={onFinishQuiz}/>
+                <LButtonOutlined hidden={!onFinishQuiz} disabled={onFinishQuizDisabled} text="FINISH" onClick={onFinishQuiz}/>
 
                 <LButtonOutlined hidden={!onCancelQuiz} text="CANCEL" onClick={onCancelQuiz}/>
 

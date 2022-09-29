@@ -13,7 +13,7 @@ export interface ModuleTabProps {
 
 export function ModuleTab({ control, index, setValue }: ModuleTabProps){
 
-    const { fields, remove, append, update } = useFieldArray({
+    const { fields, remove, append } = useFieldArray({
         control,
         name: `modules.${index}.questions`
     });

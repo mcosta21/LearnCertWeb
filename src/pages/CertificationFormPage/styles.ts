@@ -39,7 +39,7 @@ export const SModuleTabsContainer = styled.div`
 
 
     & .module-tab {
-        height: 386px;
+        height: calc(100vh - 332px);
         overflow-y: overlay;
     }
 

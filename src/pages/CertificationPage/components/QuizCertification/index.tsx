@@ -97,6 +97,7 @@ export default function QuizCertification({
                         showAllAnswer={false}
                         learnMoreHidden
                         showAnswerHidden
+                        useIndexCode
                     />
                 )
             }

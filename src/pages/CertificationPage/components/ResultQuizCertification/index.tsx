@@ -69,9 +69,9 @@ export default function ResultQuizCertification({
 
             <PanelCertification 
                 questions={questions} 
-                showAllAnswer={true}
+                showAllAnswer
                 showAnswerHidden
-                showAllFocused={true}
+                showAllFocused
             />
         </SContainer>
     )

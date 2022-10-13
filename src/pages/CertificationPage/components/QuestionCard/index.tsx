@@ -13,6 +13,7 @@ interface Props {
     learnMoreHidden?: boolean;
     showAnswerHidden?: boolean;
     focused?: boolean;
+    useIndexCode?: boolean;
 }
 
 export default function QuestionCard({
@@ -21,7 +22,8 @@ export default function QuestionCard({
     onSelectAnswer,
     learnMoreHidden = false,
     showAnswerHidden = false,
-    focused = false
+    focused = false,
+    useIndexCode = false
 }: Props){
 
     const { t } = useTranslation();
@@ -65,6 +67,7 @@ export default function QuestionCard({
                 focused={_focused}
                 handleCollapse={handleCollapse}
                 answered={!!question.answerSelected}
+                useIndexCode={useIndexCode}
             />
 
             <SQuestionDescription dangerouslySetInnerHTML={{ __html: question.description }} />

@@ -1,5 +1,5 @@
 import { Chip } from '@mui/material';
-import { Question, QuestionModelCard } from '@pages/CertificationFormPage/domain/certification.model';
+import { QuestionModelCard } from '@pages/CertificationFormPage/domain/certification.model';
 import { GlobalTheme } from '@styles/theme';
 import { useTranslation } from 'react-i18next';
 import { FiChevronUp } from 'react-icons/fi';
@@ -10,13 +10,15 @@ interface Props {
     focused: boolean;
     handleCollapse: () => void;
     answered?: boolean;
+    useIndexCode?: boolean;
 }
 
 export default function QuestionModuleTitle({
     question,
     focused = false,
     handleCollapse,
-    answered = false
+    answered = false,
+    useIndexCode = false
 }: Props){
     const { t } = useTranslation();
 
@@ -27,10 +29,18 @@ export default function QuestionModuleTitle({
                 (
                     <SFocusedTitle>
                         <div>
-                            <span>
-                                {question.moduleCode}.{question.code}
-                            </span>
-                            {question.moduleTitle}
+                            {
+                                useIndexCode === true ? (
+                                    <span>{t('QUESTION.SINGULAR')} {question.index}</span>
+                                ) : (
+                                    <>
+                                        <span>
+                                            {question.moduleCode}.{question.code}
+                                        </span>
+                                        {question.moduleTitle}
+                                    </>
+                                )
+                            }
                         </div>
                         <button onClick={handleCollapse}>
                             <FiChevronUp size={20}/>
@@ -39,10 +49,18 @@ export default function QuestionModuleTitle({
 
                 ) : (
                     <SNormalTitle>
-                        <span>
-                            {question.moduleCode}.{question.code}
-                        </span>
-                        {question.moduleTitle}
+                        {
+                            useIndexCode === true ? (
+                                <span>{t('QUESTION.SINGULAR')} {question.index}</span>
+                            ) : (
+                                <>
+                                    <span>
+                                        {question.moduleCode}.{question.code}
+                                    </span>
+                                    {question.moduleTitle}
+                                </>
+                            )
+                        }
 
                         {answered && <Chip className="answered-badge" color="success" label={t("ANSWERED")} />}
 

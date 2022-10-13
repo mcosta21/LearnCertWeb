@@ -39,6 +39,7 @@
     "LABEL": "Módulos"
   },
   "QUESTION": {
+    "SINGULAR": "Questão",
     "LABEL": "Questões",
     "DESCRIPTION": "Descrição",
     "LEARN_MORE": "Saiba mais",

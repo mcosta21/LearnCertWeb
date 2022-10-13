@@ -5,7 +5,7 @@ export const SQuestionCardContainer = styled.li`
     list-style: none;
     background-color: ${({ theme }: GlobalTheme) => theme.background};
     border: 1px solid ${({ theme }: GlobalTheme) => theme.border};
-    padding: 10px;
+    padding: 1.4rem;
     border-left: 4px solid ${({ theme }: GlobalTheme) => theme.border};
     transition: 0.3s all ease;
 
@@ -62,13 +62,21 @@ export const SQuestionInputs = styled.div`
 
             .quill-editor {
                 background: ${({ theme }: GlobalTheme) => theme.backgroundSecondary};
-                height: 130px;
-                
+                height: 200px;
+                overflow-y: scroll;
+                resize: vertical;
+                border: 1px solid ${({ theme }: GlobalTheme) => theme.border};
+
                 div {
-                    border-color: ${({ theme }: GlobalTheme) => theme.border};
+                    border-color: transparent;
+                    border-right-color: ${({ theme }: GlobalTheme) => theme.border};
                 }
 
-                .ql-picker-label, path, line, polygon {
+                .ql-toolbar {
+                    border-bottom-color: ${({ theme }: GlobalTheme) => theme.border};
+                }
+
+                .ql-picker-label, path, line, polygon, polyline, rect {
                     color: ${({ theme }: GlobalTheme) => theme.text};
                     stroke: ${({ theme }: GlobalTheme) => theme.text};
                 }

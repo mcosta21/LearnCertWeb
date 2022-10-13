@@ -10,13 +10,28 @@ import { LAnswerOptionItem } from "@components/LAnswerOptionItem";
 import { OptionType } from "@components/LAnswerOptionItem/models";
 import { LInput } from "@components/LInput";
 import { LLabel } from "@components/LLabel";
+import ImageResize from 'quill-image-resize-module-react';
 
 import Translate from '@services/i18nProvider/Translate';
 
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import LIconButton from "@components/LIconButton";
 import ClearIcon from '@mui/icons-material/Clear';
+ 
+const modules = {
+    toolbar: [
+      [{ 'header': [1, 2, false] }],
+      ['bold', 'italic', 'underline','strike', 'blockquote'],
+      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+      ['link', 'image'],
+      ['clean']
+    ],
+    imageResize: {
+        parchment: Quill.import('parchment'),
+        modules: ['Resize', 'DisplaySize']
+    }
+};
 
 interface Props {
     moduleIndex: number;
@@ -35,6 +50,8 @@ export function QuestionCard({
     collapsed = true,
     onClearDescription
 }: Props){
+    
+    Quill.register('modules/imageResize', ImageResize);
 
     const [newOption, setNewOption] = useState<AnswerOption>(new AnswerOption());
     const [isNew, setIsNew] = useState<boolean>(true);
@@ -137,7 +154,12 @@ export function QuestionCard({
                                 (
                                     <div className="description-editor">
                                         <LLabel value="QUESTION.DESCRIPTION" />
-                                        <ReactQuill theme="snow" {...field} className="quill-editor"/>
+                                        <ReactQuill 
+                                            theme="snow" 
+                                            {...field} 
+                                            modules={modules} 
+                                            className="quill-editor"
+                                        />
                                     </div>
                                 )
                             }

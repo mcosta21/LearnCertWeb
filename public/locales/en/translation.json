@@ -30,6 +30,7 @@
     "LABEL": "Modules"
   },
   "QUESTION": {
+    "SINGULAR": "Question",
     "LABEL": "Questions",
     "DESCRIPTION": "Description",
     "LEARN_MORE": "Learn more",

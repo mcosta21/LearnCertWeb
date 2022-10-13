@@ -10,6 +10,7 @@ interface Props {
     learnMoreHidden?: boolean;
     showAnswerHidden?: boolean;
     showAllFocused?: boolean;
+    useIndexCode?: boolean;
 }
 
 export default function PanelCertification({
@@ -18,7 +19,8 @@ export default function PanelCertification({
     showAllAnswer = false,
     learnMoreHidden = false,
     showAnswerHidden = false,
-    showAllFocused = false
+    showAllFocused = false,
+    useIndexCode = false
 }: Props){
 
     function handleSelectAnswer(question: Question, answer: AnswerOption){
@@ -44,6 +46,7 @@ export default function PanelCertification({
                         showAnswerHidden={showAnswerHidden}
                         onSelectAnswer={handleSelectAnswer}
                         focused={showAllFocused}
+                        useIndexCode={useIndexCode}
                     />
                 ))
                 

@@ -67,4 +67,5 @@ export class QuestionModelCard extends Question {
     public answerSelected: AnswerOption;
     public moduleTitle: string;
     public moduleCode: number;
+    public index: number;
 }

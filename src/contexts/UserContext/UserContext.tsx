@@ -1,9 +1,10 @@
 /* eslint-disable camelcase */
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
+import * as AuthenticationService from '@services/authentication/authentication.service';
 import { api } from '@config/api';
 
-interface AthenticatedUser {
+export interface AuthenticatedUser {
   id: string;
   name: string;
   email: string;
@@ -12,9 +13,10 @@ interface AthenticatedUser {
 }
 
 interface UserContextData {
-  getAuthenticatedUser: () => AthenticatedUser | undefined;
+  getAuthenticatedUser: () => AuthenticatedUser | undefined;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
+  loginWithGitHub: (code: string) => Promise<void>;
 }
 
 interface UserProviderProps {
@@ -37,28 +39,14 @@ export function logout() {
 export function UserProvider({ children }: UserProviderProps) {
 
   async function login(email: string, password: string) {
-
-      const data = {
-        email,
-        password
-      }
-  
-      const config = {
-        headers: { 
-          'Accept': 'application/json',
-          'Content-Type': 'application/json' 
-        },
-      } 
-      const response = await api.post<AthenticatedUser>(
-        'Login/Authenticate',
-        { ...data },
-        config
-      );
-
-      const authenticatedUser = response.data;
-  
+      const authenticatedUser = await AuthenticationService.internalAuthentication(email, password);
       api.defaults.headers.common.Authorization = `Bearer ${authenticatedUser.token}`;
+      setUser(authenticatedUser)
+  }
 
+  async function loginWithGitHub(code: string) {
+      const authenticatedUser = await AuthenticationService.gitHubAuthentication(code);
+      api.defaults.headers.common.Authorization = `Bearer ${authenticatedUser.token}`;
       setUser(authenticatedUser)
   }
 
@@ -67,13 +55,13 @@ export function UserProvider({ children }: UserProviderProps) {
     setUser(undefined);
   }
 
-  function getUser(): AthenticatedUser | undefined {
+  function getUser(): AuthenticatedUser | undefined {
     const loggedUser = Cookies.get('@learn-cert:user');
     if (!loggedUser) return undefined;
     return JSON.parse(loggedUser);
   }
 
-  function setUser(user: AthenticatedUser | undefined) {
+  function setUser(user: AuthenticatedUser | undefined) {
     if(user === undefined) {
       Cookies.remove('@learn-cert:user');
       return;
@@ -93,7 +81,7 @@ export function UserProvider({ children }: UserProviderProps) {
 
   return (
     <UserContext.Provider
-      value={{ getAuthenticatedUser: getUser, login, logout: handleLogout }}
+      value={{ getAuthenticatedUser: getUser, login, logout: handleLogout, loginWithGitHub }}
     >
       {children}
     </UserContext.Provider>

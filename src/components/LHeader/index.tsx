@@ -6,22 +6,37 @@ import { Button, IconButton } from "@mui/material";
 import Translate from "@services/i18nProvider/Translate";
 import { useTranslation } from "react-i18next";
 import { SHeaderContainer } from "./styles";
+import GitHubLogin from 'react-github-login';
+import * as githubApi from '@services/authentication/authentication.service';
+import { useState } from "react";
+import { AuthenticatedUser } from "@contexts/UserContext/UserContext";
 
 interface Props {
+}
+
+interface GithubResponse {
+    code: string;
 }
 
 export default function LHeader({
 
 }: Props){
     const { themeName, toggleTheme } = useMyTheme();
-    const { getAuthenticatedUser, logout } = useUser();
-    const user = getAuthenticatedUser();
+    const { getAuthenticatedUser, logout, loginWithGitHub } = useUser();
+    const [user, setUser] = useState<AuthenticatedUser | undefined>(getAuthenticatedUser());
 
     const { i18n } = useTranslation();
 
     function changeLanguage(language: string){
         i18n.changeLanguage(language)
     }
+
+    async function onSuccess(response: GithubResponse) {
+        await loginWithGitHub(response.code);
+        setUser(getAuthenticatedUser());
+    }
+
+    const onFailure = response => console.error(response);
     
     return (
         <SHeaderContainer>
@@ -44,8 +59,10 @@ export default function LHeader({
                     tooltip={themeName === 'light' ? 'DARK_MODE' : 'LIGHT_MODE' }
                 />
                 
+                
+                    
                 {
-                    user && (
+                    user ? (
                         <Button
                             variant="contained"
                             size="medium"
@@ -54,6 +71,13 @@ export default function LHeader({
                         >
                             <Translate value="USER.LOGOUT" />
                         </Button>
+                    ) : (
+                        <GitHubLogin 
+                            clientId={String(import.meta.env.VITE_API_GITHUB_CLIENT_ID)}
+                            redirectUri=""
+                            onSuccess={onSuccess}
+                            onFailure={onFailure}
+                        />
                     )
                 }
                 

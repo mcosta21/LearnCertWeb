@@ -18,6 +18,11 @@
   "COLLAPSE": "Collapse",
   "CLEAR": "Clear",
   "FULL_SCREEN": "Full screen",
+  "EXIT_FULL_SCREEN": "Exit full screen",
+  "CONGRATULATIONS": "Congratulations",
+  "TRY_AGAIN": "Try again",
+  "FINISH": "Finish",
+  "RESULT": "Result",
   "CERTIFICATION": {
     "LABEL": "Certifications",
     "TITLE": "Title",
@@ -51,6 +56,8 @@
     "EMAIL_NOT_INFORMED": "Email not informed",
     "PASSWORD_NOT_INFORMED": "Password not informed",
     "INVALID_EMAIL": "Invalid email",
-    "EMAIL_OR_PASSWORD_INCORRECT": "Email or password incorrect"
+    "EMAIL_OR_PASSWORD_INCORRECT": "Email or password incorrect",
+    "FAILED_TO_SIGNIN_WITH_GITHUB": "Failed to sign in with GitHub",
+    "SIGNIN_WITH_GITHUB": "Sign In with GitHub"
   }
 }

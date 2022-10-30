@@ -10,6 +10,7 @@ export interface AuthenticatedUser {
   email: string;
   role: string;
   token: string;
+  avatar?: string;
 }
 
 interface UserContextData {

@@ -13,13 +13,11 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 interface Props {
     certification: CertificationFlat;
     isAdmin: boolean;
-    onDelete: (id: string) => void;
 }
 
 export function CertificationCard({
     certification,
     isAdmin,
-    onDelete
 }: Props) {
 
     const navigate = useNavigate();
@@ -36,7 +34,7 @@ export function CertificationCard({
 
     function handleDeleteCertification() {
         handleCloseOptions();
-        onDelete(certification.id);
+        // onDelete(certification.id);
     }
 
     function getImageLanguage(){
@@ -68,8 +66,16 @@ export function CertificationCard({
                     {certification.countQuestions + ' '}
                     <Translate value="QUESTION.LABEL" />
                 </span>
+                <span>
+                    {certification.quizCounter}
+                </span>
             </div>
             <SOptionsContainer>
+                
+                <span>
+                    Criado por <strong>{certification.creator}</strong>
+                </span>
+
                 <img src={getImageLanguage()} />
                 {
                     isAdmin && (
@@ -96,9 +102,6 @@ export function CertificationCard({
                                     <Translate value="EDIT"/>
                                 </MenuItem>
 
-                                <MenuItem key="remove-certification"onClick={handleDeleteCertification}>
-                                    <Translate value="REMOVE"/>
-                                </MenuItem>
                             </Menu>
                         </>
                     )

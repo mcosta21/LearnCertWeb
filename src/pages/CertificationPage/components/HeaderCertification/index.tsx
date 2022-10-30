@@ -31,12 +31,6 @@ export default function HeaderCertification({
 }: Props){
 
     const navigate = useNavigate();
-    const { themeName, toggleTheme } = useMyTheme();
-    const { i18n } = useTranslation();
-
-    function changeLanguage(language: string){
-        i18n.changeLanguage(language)
-    }
 
     function goBack(){
         navigate(RouterKey.CertificationList);
@@ -59,20 +53,6 @@ export default function HeaderCertification({
                 <LButtonOutlined hidden={!onFinishQuiz} disabled={onFinishQuizDisabled} text="FINISH" onClick={onFinishQuiz}/>
 
                 <LButtonOutlined hidden={!onCancelQuiz} text="CANCEL" onClick={onCancelQuiz}/>
-
-                <LIconButton 
-                    arialLabel="language"
-                    onClick={() => changeLanguage(i18n.language === 'pt' ? 'en' : 'pt')} 
-                    icon={<TranslateOutlined />}
-                    tooltip="CHANGE_LANGUAGE"
-                />
-
-                <LIconButton 
-                    arialLabel="theme"
-                    onClick={toggleTheme} 
-                    icon={themeName === 'light' ? <DarkMode /> : <LightMode />}
-                    tooltip={themeName === 'light' ? 'DARK_MODE' : 'LIGHT_MODE' }
-                />
 
                 {
                     !!onShowAllAnswer && (

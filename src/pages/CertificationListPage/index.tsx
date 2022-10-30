@@ -104,7 +104,6 @@ export default function CertificationListPage() {
                                 key={index}
                                 certification={certification}
                                 isAdmin={isAdmin}
-                                onDelete={handleDeleteCertification}
                             />
                         ))
                     }

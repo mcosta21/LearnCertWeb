@@ -43,7 +43,7 @@ export default function CertificationLearnPage(){
     }
 
     return (
-        <LBody hideHeader loading={!certification.id || loading}>
+        <LBody loading={!certification.id || loading}>
             {
                 !isQuizMode ? (
                     <LearnCertification

@@ -24,6 +24,9 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import LIconButton from '@components/LIconButton';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import LButton from '@components/LButton';
+import LButtonOutlined from '@components/LButtonOutlined';
+import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 
 interface Props {
     certification?: Certification;
@@ -201,7 +204,7 @@ export default function CertificationForm({
                         !!getValues('imageUrl') ? 
                             <img src={getValues('imageUrl')} />  
                          : 
-                            <LDashedButton type="button" width="200px" height="155px">
+                            <LDashedButton type="button" width="120px" height="100px">
                                 <Translate value="CERTIFICATION.NO_IMAGE" />
                             </LDashedButton> 
                     }
@@ -241,8 +244,8 @@ export default function CertificationForm({
                         <LIconButton 
                             arialLabel="full-screen"
                             onClick={handleFullScreenModule} 
-                            icon={<FullscreenIcon />}
-                            tooltip="FULL_SCREEN"
+                            icon={isFullScreenModule ? <FullscreenExitIcon /> : <FullscreenIcon />}
+                            tooltip={isFullScreenModule ? 'EXIT_FULL_SCREEN' : 'FULL_SCREEN'}
                         />
                     </SModuleHeader>
 
@@ -256,22 +259,15 @@ export default function CertificationForm({
                 </SModuleTabsContainer>
                 
                 <SCertificationFooter>
-                    <Button 
-                        variant="contained" 
-                        size="medium" 
-                        type="button"
+                    <LButtonOutlined 
+                        text="BACK"
                         onClick={handleBack}
-                    >
-                        <Translate value="BACK" />
-                    </Button>
-                    <Button 
-                        variant="contained" 
-                        size="medium" 
+                    />
+                    <LButton 
+                        text="SAVE" 
                         type="submit"
                         disabled={!isValid}
-                    >
-                        <Translate value="SAVE" />
-                    </Button>
+                    />
                 </SCertificationFooter>
 
                 <Popover 

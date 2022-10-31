@@ -9,7 +9,7 @@ export abstract class CertificationHelper {
         data.modules.forEach(module => {
             module.questions.forEach(question => {
                 question.answerOptions.forEach(answer => {
-                    answer.isCorrect = this.parseBoolean(decrypt(answer.value));
+                    answer.isCorrect = this.parseAnswerValue(answer.value);
                 })
             });
         });
@@ -36,8 +36,8 @@ export abstract class CertificationHelper {
         return this.shuffle(questions).map((q, newIndex) => ({ ...q, index: newIndex + 1}));
     }
 
-    public static parseBoolean(value: string) {
-        return value.toLowerCase() === 'true' ? true : false;
+    public static parseAnswerValue(value: string) {
+        return decrypt(value).split('/')[1].toLowerCase() === 'true' ? true : false;;
     }
 
     private static shuffle(array): QuestionModelCard[] {

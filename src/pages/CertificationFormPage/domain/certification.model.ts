@@ -30,8 +30,8 @@ export const LanguageTypeOptions = [
 export class Certification {
     public id: string;
     public title: string;
-    public imageUrl: string;
-    public languageType: LanguageType = LanguageType.English;
+    public imageUrl: string = '';
+    public languageType: LanguageType = LanguageType.Portuguese;
     public modules: Array<Module> = [];
 }
 

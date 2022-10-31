@@ -40,7 +40,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, Props> = (
         <SInputContainer className="l-input">
             <span>
                 <LLabel hidden={!label} value={label} />
-                {!label && required ? '*' : ''}
+                {!!label && required ? ' *' : ''}
             </span>
             <SInput 
                 ref={ref}

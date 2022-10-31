@@ -66,7 +66,6 @@ export default function CertificationListPage() {
                     <LInput
                         label="SEARCH"
                         value={filterText}
-                        required
                         hideError
                         onChange={(e) => filterCertificates(e.target.value)}
                     />
@@ -75,7 +74,6 @@ export default function CertificationListPage() {
                         defaultValue={languageType}
                         onChange={handleSelectLanguageType}
                         hideError
-                        required
                     >
                         {
                             LanguageTypeOptions.map(option =>

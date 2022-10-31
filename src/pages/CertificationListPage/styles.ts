@@ -12,7 +12,7 @@ export const SCertificationListContainer = styled.div`
     flex-direction: column;
     gap: 20px;
     justify-content: center;
-    padding-bottom: 1rem;
+    padding-bottom: 1rem !important;
     
     .filters-container {
         display: flex;
@@ -26,14 +26,14 @@ export const SCertificationListContainer = styled.div`
         width: 100%;
         height: 100%;
         display: grid;
+        gap: 20px;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 140px auto;
-        gap: 20px;
         justify-content: center;
     }
 
     @media (max-width: 800px) {
-        padding: 0 3rem;
+        padding: 0 3rem;    
 
         .filters-container {
             flex-direction: column;

@@ -91,8 +91,8 @@ export function CertificationCard({
                     </h1>
 
                     <span className="certificate-subtitle">
-                        {certification.countQuestions + ' '}
-                        <Translate value="QUESTION.LABEL" />
+                        {certification.countQuestions + ' ' + t(certification.countQuestions > 1 ? 'QUESTION.LABEL' : 'QUESTION.SINGULAR')}
+                        {' / ' + t(certification.languageType)}
                     </span>
                 </aside>
 

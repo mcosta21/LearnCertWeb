@@ -29,15 +29,13 @@ import LButtonOutlined from '@components/LButtonOutlined';
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 
 interface Props {
-    certification?: Certification;
+    certification: Certification;
     isNew: boolean;
-    loading: boolean;
 }
 
 export default function CertificationForm({
     certification,
     isNew,
-    loading
 }: Props){
 
     const { 
@@ -52,7 +50,7 @@ export default function CertificationForm({
         defaultValues: certification
     });
 
-    const [languageType, setLanguageType] = useState<LanguageType>(certification?.languageType ?? LanguageType.English);
+    const [languageType, setLanguageType] = useState<LanguageType>(certification.languageType);
 
     const { fields, append, update  } = useFieldArray({
         control,
@@ -195,124 +193,122 @@ export default function CertificationForm({
     }
 
     return (
-        <LBody loading={loading}>
-            <SCertificationForm onSubmit={handleSubmit(onSubmit)}>
+        <SCertificationForm onSubmit={handleSubmit(onSubmit)}>
 
-                <SCertificationInputs>
+            <SCertificationInputs>
+
+                {
+                    !!getValues('imageUrl') ? 
+                        <img src={getValues('imageUrl')} />  
+                        : 
+                        <LDashedButton type="button" width="120px" height="100px">
+                            <Translate value="CERTIFICATION.NO_IMAGE" />
+                        </LDashedButton> 
+                }
+
+                <div>
+                    <LInput 
+                        label="CERTIFICATION.TITLE"
+                        error={errors.title?.message}
+                        required
+                        {...register("title")} 
+                    />
+
+                    <LInput 
+                        label="CERTIFICATION.IMAGE_URL"
+                        error={errors.imageUrl?.message}
+                        hideError
+                        {...register("imageUrl")} 
+                    />  
+
+                    <LSelect
+                        label="CERTIFICATION.LANGUAGE_TYPE"
+                        defaultValue={languageType}
+                        onChange={handleSelectLanguageType}
+                        hideError
+                        required
+                    >
+                        {LanguageTypes.map(x => <MenuItem key={x} value={x}>{t(x)}</MenuItem>)}
+                    </LSelect> 
+                </div>            
+
+            </SCertificationInputs>
+
+            <SModuleTabsContainer className={isFullScreenModule ? 'full-screen-module' : ''}>
+                
+                <SModuleHeader className="module-header">
+                    <LLabel value="MODULE.LABEL" />
+                    <LIconButton 
+                        arialLabel="full-screen"
+                        onClick={handleFullScreenModule} 
+                        icon={isFullScreenModule ? <FullscreenExitIcon /> : <FullscreenIcon />}
+                        tooltip={isFullScreenModule ? 'EXIT_FULL_SCREEN' : 'FULL_SCREEN'}
+                    />
+                </SModuleHeader>
+
+                <LTabs 
+                    currentTab={currentTab} 
+                    onChange={handleChangeTab}
+                    tabs={moduleTabs} 
+                    onAddTab={handleOpenInputModule}
+                    onRightClick={handleRightClickTab}
+                />
+            </SModuleTabsContainer>
+            
+            <SCertificationFooter>
+                <LButtonOutlined 
+                    text="BACK"
+                    onClick={handleBack}
+                />
+                <LButton 
+                    text="SAVE" 
+                    type="submit"
+                    disabled={!isValid}
+                />
+            </SCertificationFooter>
+
+            <Popover 
+                id={id} 
+                open={open} 
+                anchorEl={inputModule}
+                onClose={handleCloseInputModule}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
+            >
+                <SPopoverModule>
+                    <LInput 
+                        label="MODULE.TITLE"
+                        width="300px"
+                        required
+                        hideError
+                        value={titleModule}
+                        onChange={(event) => setTitleModule(event.currentTarget.value)}
+                    />
 
                     {
-                        !!getValues('imageUrl') ? 
-                            <img src={getValues('imageUrl')} />  
-                         : 
-                            <LDashedButton type="button" width="120px" height="100px">
-                                <Translate value="CERTIFICATION.NO_IMAGE" />
-                            </LDashedButton> 
+                        isNewModule ? (
+                            <IconButton 
+                                aria-label="add-module"
+                                onClick={() => handleAddModule()} 
+                                disabled={!titleModule}
+                            >
+                                <Check />
+                            </IconButton>
+                        ) : (
+                            <IconButton 
+                                aria-label="update-module"
+                                size="small" 
+                                onClick={() => handleUpdateModule()} 
+                            >
+                                <Edit />
+                            </IconButton>
+                        )
                     }
-
-                    <div>
-                        <LInput 
-                            label="CERTIFICATION.TITLE"
-                            error={errors.title?.message}
-                            required
-                            {...register("title")} 
-                        />
-
-                        <LInput 
-                            label="CERTIFICATION.IMAGE_URL"
-                            error={errors.imageUrl?.message}
-                            hideError
-                            {...register("imageUrl")} 
-                        />  
-
-                        <LSelect
-                            label="CERTIFICATION.LANGUAGE_TYPE"
-                            defaultValue={languageType}
-                            onChange={handleSelectLanguageType}
-                            hideError
-                            required
-                        >
-                            {LanguageTypes.map(x => <MenuItem key={x} value={x}>{x}</MenuItem>)}
-                        </LSelect> 
-                    </div>            
-
-                </SCertificationInputs>
-
-                <SModuleTabsContainer className={isFullScreenModule ? 'full-screen-module' : ''}>
                     
-                    <SModuleHeader className="module-header">
-                        <LLabel value="MODULE.LABEL" />
-                        <LIconButton 
-                            arialLabel="full-screen"
-                            onClick={handleFullScreenModule} 
-                            icon={isFullScreenModule ? <FullscreenExitIcon /> : <FullscreenIcon />}
-                            tooltip={isFullScreenModule ? 'EXIT_FULL_SCREEN' : 'FULL_SCREEN'}
-                        />
-                    </SModuleHeader>
-
-                    <LTabs 
-                        currentTab={currentTab} 
-                        onChange={handleChangeTab}
-                        tabs={moduleTabs} 
-                        onAddTab={handleOpenInputModule}
-                        onRightClick={handleRightClickTab}
-                    />
-                </SModuleTabsContainer>
-                
-                <SCertificationFooter>
-                    <LButtonOutlined 
-                        text="BACK"
-                        onClick={handleBack}
-                    />
-                    <LButton 
-                        text="SAVE" 
-                        type="submit"
-                        disabled={!isValid}
-                    />
-                </SCertificationFooter>
-
-                <Popover 
-                    id={id} 
-                    open={open} 
-                    anchorEl={inputModule}
-                    onClose={handleCloseInputModule}
-                    anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                >
-                    <SPopoverModule>
-                        <LInput 
-                            label="MODULE.TITLE"
-                            width="300px"
-                            required
-                            hideError
-                            value={titleModule}
-                            onChange={(event) => setTitleModule(event.currentTarget.value)}
-                        />
-
-                        {
-                            isNewModule ? (
-                                <IconButton 
-                                    aria-label="add-module"
-                                    onClick={() => handleAddModule()} 
-                                    disabled={!titleModule}
-                                >
-                                    <Check />
-                                </IconButton>
-                            ) : (
-                                <IconButton 
-                                    aria-label="update-module"
-                                    size="small" 
-                                    onClick={() => handleUpdateModule()} 
-                                >
-                                    <Edit />
-                                </IconButton>
-                            )
-                        }
-                        
-                    </SPopoverModule>
-                </Popover>
-            </SCertificationForm>
-        </LBody>
+                </SPopoverModule>
+            </Popover>
+        </SCertificationForm>
     )
 }

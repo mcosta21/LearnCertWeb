@@ -5,16 +5,22 @@ import { api } from '@config/api';
 
 const root = '/Certification';
 
+const config = {
+  headers: { 
+    'Accept': 'application/json',
+    'Content-Type': 'application/json' 
+  }
+} 
+
 export async function getById(
     id: string,
     decryptAnswerOption: boolean = false
   ): Promise<Certification> {
-    const response = await api.get(`${root}/Show/${id}`);
+    const response = await api.get(`${root}/Show/${id}`, config);
 
     if(decryptAnswerOption) {
       const certification = response.data as Certification;
-      return CertificationHelper.parse(certification);
-
+      return await CertificationHelper.parse(certification);
     }
     return response.data;
 }

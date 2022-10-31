@@ -31,7 +31,7 @@ export class QuestionModelCard extends Question {
         this.code = question.code;
         this.description = question.description;
         this.learnMore = question.learnMore;
-        this.answerOptions = question.answerOptions.map(x => ({ ...x, isCorrect: CertificationHelper.parseBoolean(x.value)}));
+        this.answerOptions = question.answerOptions.map(x => ({ ...x, isCorrect: CertificationHelper.parseAnswerValue(x.value)}));
         this.collapsed = true;
         this.moduleCode = moduleCode,
         this.moduleTitle = moduleTitle,

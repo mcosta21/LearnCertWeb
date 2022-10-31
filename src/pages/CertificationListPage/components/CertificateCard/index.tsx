@@ -1,6 +1,6 @@
 
 import { Delete, Edit } from "@mui/icons-material";
-import { IconButton, Menu, MenuItem } from "@mui/material";
+import { IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
 import { LanguageTypeOptions } from "@pages/CertificationFormPage/domain/certification.model";
 import { CertificationFlat } from "@pages/CertificationListPage/domain/certification-flat.model";
 import { RouterKey } from "@routes/routekeys";
@@ -8,21 +8,28 @@ import Translate from "@services/i18nProvider/Translate";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SCertificateCard, SOptionsContainer } from "./styles";
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import LIconButton from "@components/LIconButton";
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import EditIcon from '@mui/icons-material/Edit';
+import { useTranslation } from "react-i18next";
+import LAvatar from "@components/LAvatar";
+import LLogo from "@components/LLogo";
 
 interface Props {
     certification: CertificationFlat;
     isAdmin: boolean;
-    onDelete: (id: string) => void;
+    userId: string;
 }
 
 export function CertificationCard({
     certification,
+    userId,
     isAdmin,
-    onDelete
 }: Props) {
 
     const navigate = useNavigate();
+
+    const { t } = useTranslation();
 
     function handleOpenCertification(){
         handleCloseOptions();
@@ -36,7 +43,7 @@ export function CertificationCard({
 
     function handleDeleteCertification() {
         handleCloseOptions();
-        onDelete(certification.id);
+        // onDelete(certification.id);
     }
 
     function getImageLanguage(){
@@ -55,54 +62,78 @@ export function CertificationCard({
         setAnchorEl(null);
     };
 
+    const canUpdate = certification.creatorId === userId || isAdmin;
+
+    const creatorName = certification.creatorId === userId ? t('YOU') : certification.creator;
+
     return (
         <SCertificateCard onDoubleClick={handleOpenCertification}>
-            <div className="certificate-img">
-                <img src={certification.imageUrl} alt={certification.title} />
-            </div>
+
+            {
+                    <div className="certificate-img">
+                        {
+                            !!certification.imageUrl ? (
+                                <img src={certification.imageUrl} alt={certification.title} />
+                            ) : (
+                                <LLogo type="icon" />
+                            )
+                        }
+                    </div>
+                
+            }
+            
+
             <div className="certificate-info-container">
-                <span className="certificate-name">
-                    {certification.title}
-                </span>
-                <span className="certificate-questions">
-                    {certification.countQuestions + ' '}
-                    <Translate value="QUESTION.LABEL" />
+
+                <aside>
+                    <h1 className="certificate-name">
+                        {certification.title}
+                    </h1>
+
+                    <span className="certificate-subtitle">
+                        {certification.countQuestions + ' ' + t(certification.countQuestions > 1 ? 'QUESTION.LABEL' : 'QUESTION.SINGULAR')}
+                        {' / ' + t(certification.languageType)}
+                    </span>
+                </aside>
+
+                <span className="certificate-subtitle">
+                    <LAvatar src={certification.creatorAvatar} size={26}/>
+                    <span>
+                        <Translate value="CERTIFICATION.CREATED_BY" />
+                        <strong>{' ' + creatorName}</strong>
+                    </span>
                 </span>
             </div>
+
             <SOptionsContainer>
-                <img src={getImageLanguage()} />
+
                 {
-                    isAdmin && (
-                        <>
-                            <IconButton
-                                aria-label="more"
-                                id="long-button"
-                                aria-controls={open ? 'long-menu' : undefined}
-                                aria-expanded={open ? 'true' : undefined}
-                                aria-haspopup="true"
-                                onClick={handleOpenOptions}
-                            >
-                                <MoreVertIcon />
-                            </IconButton>
+                    certification.quizCounter > 0 && (
+                        <Tooltip title={t('CERTIFICATION.QUIZ_EXECUTED')}>
+                            <strong className="quiz-executed">{certification.quizCounter}</strong>
+                        </Tooltip>
+                    ) 
+                }
 
-                            <Menu
-                                id="long-menu"
-                                MenuListProps={{'aria-labelledby': 'long-button'}}
-                                anchorEl={anchorEl}
-                                open={open}
-                                onClose={handleCloseOptions}
-                            >
-                                <MenuItem key="edit-certification"onClick={handleEditCertification}>
-                                    <Translate value="EDIT"/>
-                                </MenuItem>
+                <LIconButton 
+                    arialLabel="start"
+                    onClick={handleOpenCertification} 
+                    icon={<PlayArrowIcon />}
+                    tooltip="START"
+                />
 
-                                <MenuItem key="remove-certification"onClick={handleDeleteCertification}>
-                                    <Translate value="REMOVE"/>
-                                </MenuItem>
-                            </Menu>
-                        </>
+                {
+                    canUpdate === true && (
+                        <LIconButton 
+                            arialLabel="edit"
+                            onClick={handleEditCertification} 
+                            icon={<EditIcon />}
+                            tooltip="EDIT"
+                        />
                     )
                 }
+                
+
             </SOptionsContainer>
             
         </SCertificateCard>

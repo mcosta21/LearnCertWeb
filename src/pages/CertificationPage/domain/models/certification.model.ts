@@ -1,4 +1,5 @@
-import { LanguageType } from "@pages/CertificationFormPage/domain/certification.model";
+import { AnswerOption, LanguageType, Question } from "@pages/CertificationFormPage/domain/certification.model";
+import { CertificationHelper } from '@pages/CertificationPage/services/certification.helper';
 
 export class CertificationModel {
     id: string;
@@ -17,13 +18,26 @@ export interface QuestionDescriptionModel {
     answerOptions: AnswerOption[];
 }
 
-export interface AnswerOption {
-    id: string;
-    code: number;
-    description: string;
-    isCorrect: boolean;
-}
+export class QuestionModelCard extends Question {
+    public answerSelected: AnswerOption;
+    public moduleTitle: string;
+    public moduleCode: number;
+    public index: number;
 
+    constructor(question: Question, moduleCode: number, moduleTitle: string, index: number) {
+        super();
+
+        this.id = question.id;
+        this.code = question.code;
+        this.description = question.description;
+        this.learnMore = question.learnMore;
+        this.answerOptions = question.answerOptions.map(x => ({ ...x, isCorrect: CertificationHelper.parseAnswerValue(x.value)}));
+        this.collapsed = true;
+        this.moduleCode = moduleCode,
+        this.moduleTitle = moduleTitle,
+        this.index = index;
+    }
+}
 
 export interface QuestionResult {
     id: string;
@@ -35,3 +49,4 @@ export interface QuestionResult {
     numberModule: number;
     numberQuestion: number;
 }
+

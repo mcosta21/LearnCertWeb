@@ -46,7 +46,6 @@ export default function LoginPage() {
         try {
             await login(values.email, encrypt(values.password));
         } catch (err: any) {
-            console.error(err);
             alert(err.message)
         }
     };

@@ -52,6 +52,7 @@ export default function CertificationListPage() {
 
     const isAdmin = getAuthenticatedUser()?.role === 'Admin';
 
+    const userId = getAuthenticatedUser()?.id ?? '';
 
     return (
         <LBody loading={loading}>
@@ -65,7 +66,6 @@ export default function CertificationListPage() {
                     <LInput
                         label="SEARCH"
                         value={filterText}
-                        required
                         hideError
                         onChange={(e) => filterCertificates(e.target.value)}
                     />
@@ -74,7 +74,6 @@ export default function CertificationListPage() {
                         defaultValue={languageType}
                         onChange={handleSelectLanguageType}
                         hideError
-                        required
                     >
                         {
                             LanguageTypeOptions.map(option =>
@@ -104,7 +103,7 @@ export default function CertificationListPage() {
                                 key={index}
                                 certification={certification}
                                 isAdmin={isAdmin}
-                                onDelete={handleDeleteCertification}
+                                userId={userId}
                             />
                         ))
                     }

@@ -6,4 +6,8 @@ export interface CertificationFlat {
     imageUrl: string;
     languageType: LanguageType;
     countQuestions: number;
+    quizCounter: number;
+    creator: string;
+    creatorId: string;
+    creatorAvatar: string;
 }

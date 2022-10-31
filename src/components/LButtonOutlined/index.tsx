@@ -1,24 +1,40 @@
+import { ButtonBaseProps, ButtonProps } from "@mui/material";
+import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { SButton } from "./styles";
 
-interface Props {
+export interface LButtonOutlinedProps {
     text: string
     onClick?: () => void;
     hidden?: boolean;
     disabled?: boolean;
+    icon?: ReactElement;
+    variant?: "text" | "outlined" | "contained" | undefined;
+    type?: "button" | "submit" | "reset" | undefined;
 }
 
 export default function LButtonOutlined({
     text,
     hidden = false,
     onClick,
-    disabled = false
-}: Props){
+    disabled = false,
+    icon,
+    variant = 'outlined',
+    type = 'button'
+}: LButtonOutlinedProps){
     const { t } = useTranslation();
-
     return (
-        <SButton style={{ display: hidden ? 'none' : 'block' }} disabled={disabled} variant="outlined" onClick={onClick}>
-            {t(text)}
+        <SButton 
+            disabled={disabled} 
+            variant={variant}
+            onClick={onClick}
+            type={type}
+            style={{ display: hidden ? 'none' : 'block' }} 
+        >
+            <div>
+                {!!icon && <span>{icon}</span>}
+                {t(text)}
+            </div>
         </SButton>
     )
 }

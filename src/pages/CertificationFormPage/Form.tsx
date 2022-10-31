@@ -24,15 +24,18 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import LIconButton from '@components/LIconButton';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import LButton from '@components/LButton';
+import LButtonOutlined from '@components/LButtonOutlined';
+import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 
 interface Props {
-    certification?: Certification;
+    certification: Certification;
     isNew: boolean;
 }
 
 export default function CertificationForm({
     certification,
-    isNew
+    isNew,
 }: Props){
 
     const { 
@@ -47,7 +50,7 @@ export default function CertificationForm({
         defaultValues: certification
     });
 
-    const [languageType, setLanguageType] = useState<LanguageType | undefined>(certification?.languageType);
+    const [languageType, setLanguageType] = useState<LanguageType>(certification.languageType);
 
     const { fields, append, update  } = useFieldArray({
         control,
@@ -110,13 +113,11 @@ export default function CertificationForm({
     }
 
     function createModuleTab(index: number, module: Module){
-        
         const content = {
             index,
             control,
             setValue
         } as ModuleTabProps;
-
         const component = React.createElement(ModuleTab, { ...content });
         return new LTabModel(module.id, module.title, component)
     }
@@ -192,131 +193,122 @@ export default function CertificationForm({
     }
 
     return (
-        <LBody>
-            <SCertificationForm onSubmit={handleSubmit(onSubmit)}>
+        <SCertificationForm onSubmit={handleSubmit(onSubmit)}>
 
-                <SCertificationInputs>
+            <SCertificationInputs>
+
+                {
+                    !!getValues('imageUrl') ? 
+                        <img src={getValues('imageUrl')} />  
+                        : 
+                        <LDashedButton type="button" width="120px" height="100px">
+                            <Translate value="CERTIFICATION.NO_IMAGE" />
+                        </LDashedButton> 
+                }
+
+                <div>
+                    <LInput 
+                        label="CERTIFICATION.TITLE"
+                        error={errors.title?.message}
+                        required
+                        {...register("title")} 
+                    />
+
+                    <LInput 
+                        label="CERTIFICATION.IMAGE_URL"
+                        error={errors.imageUrl?.message}
+                        hideError
+                        {...register("imageUrl")} 
+                    />  
+
+                    <LSelect
+                        label="CERTIFICATION.LANGUAGE_TYPE"
+                        defaultValue={languageType}
+                        onChange={handleSelectLanguageType}
+                        hideError
+                        required
+                    >
+                        {LanguageTypes.map(x => <MenuItem key={x} value={x}>{t(x)}</MenuItem>)}
+                    </LSelect> 
+                </div>            
+
+            </SCertificationInputs>
+
+            <SModuleTabsContainer className={isFullScreenModule ? 'full-screen-module' : ''}>
+                
+                <SModuleHeader className="module-header">
+                    <LLabel value="MODULE.LABEL" />
+                    <LIconButton 
+                        arialLabel="full-screen"
+                        onClick={handleFullScreenModule} 
+                        icon={isFullScreenModule ? <FullscreenExitIcon /> : <FullscreenIcon />}
+                        tooltip={isFullScreenModule ? 'EXIT_FULL_SCREEN' : 'FULL_SCREEN'}
+                    />
+                </SModuleHeader>
+
+                <LTabs 
+                    currentTab={currentTab} 
+                    onChange={handleChangeTab}
+                    tabs={moduleTabs} 
+                    onAddTab={handleOpenInputModule}
+                    onRightClick={handleRightClickTab}
+                />
+            </SModuleTabsContainer>
+            
+            <SCertificationFooter>
+                <LButtonOutlined 
+                    text="BACK"
+                    onClick={handleBack}
+                />
+                <LButton 
+                    text="SAVE" 
+                    type="submit"
+                    disabled={!isValid}
+                />
+            </SCertificationFooter>
+
+            <Popover 
+                id={id} 
+                open={open} 
+                anchorEl={inputModule}
+                onClose={handleCloseInputModule}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
+            >
+                <SPopoverModule>
+                    <LInput 
+                        label="MODULE.TITLE"
+                        width="300px"
+                        required
+                        hideError
+                        value={titleModule}
+                        onChange={(event) => setTitleModule(event.currentTarget.value)}
+                    />
 
                     {
-                        !!getValues('imageUrl') ? 
-                            <img src={getValues('imageUrl')} />  
-                         : 
-                            <LDashedButton type="button" width="200px" height="155px">
-                                <Translate value="CERTIFICATION.NO_IMAGE" />
-                            </LDashedButton> 
+                        isNewModule ? (
+                            <IconButton 
+                                aria-label="add-module"
+                                onClick={() => handleAddModule()} 
+                                disabled={!titleModule}
+                            >
+                                <Check />
+                            </IconButton>
+                        ) : (
+                            <IconButton 
+                                aria-label="update-module"
+                                size="small" 
+                                onClick={() => handleUpdateModule()} 
+                            >
+                                <Edit />
+                            </IconButton>
+                        )
                     }
-
-                    <div>
-                        <LInput 
-                            label="CERTIFICATION.TITLE"
-                            error={errors.title?.message}
-                            required
-                            {...register("title")} 
-                        />
-
-                        <LInput 
-                            label="CERTIFICATION.IMAGE_URL"
-                            error={errors.imageUrl?.message}
-                            hideError
-                            {...register("imageUrl")} 
-                        />  
-
-                        <LSelect
-                            label="CERTIFICATION.LANGUAGE_TYPE"
-                            defaultValue={languageType}
-                            onChange={handleSelectLanguageType}
-                            hideError
-                            required
-                        >
-                            {LanguageTypes.map(x => <MenuItem key={x} value={x}>{x}</MenuItem>)}
-                        </LSelect> 
-                    </div>            
-
-                </SCertificationInputs>
-
-                <SModuleTabsContainer className={isFullScreenModule ? 'full-screen-module' : ''}>
                     
-                    <SModuleHeader className="module-header">
-                        <LLabel value="MODULE.LABEL" />
-                        <LIconButton 
-                            arialLabel="full-screen"
-                            onClick={handleFullScreenModule} 
-                            icon={<FullscreenIcon />}
-                            tooltip="FULL_SCREEN"
-                        />
-                    </SModuleHeader>
-
-                    <LTabs 
-                        currentTab={currentTab} 
-                        onChange={handleChangeTab}
-                        tabs={moduleTabs} 
-                        onAddTab={handleOpenInputModule}
-                        onRightClick={handleRightClickTab}
-                    />
-                </SModuleTabsContainer>
-                
-                <SCertificationFooter>
-                    <Button 
-                        variant="contained" 
-                        size="medium" 
-                        type="button"
-                        onClick={handleBack}
-                    >
-                        <Translate value="BACK" />
-                    </Button>
-                    <Button 
-                        variant="contained" 
-                        size="medium" 
-                        type="submit"
-                        disabled={!isValid}
-                    >
-                        <Translate value="SAVE" />
-                    </Button>
-                </SCertificationFooter>
-
-                <Popover 
-                    id={id} 
-                    open={open} 
-                    anchorEl={inputModule}
-                    onClose={handleCloseInputModule}
-                    anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                >
-                    <SPopoverModule>
-                        <LInput 
-                            label="MODULE.TITLE"
-                            width="300px"
-                            required
-                            hideError
-                            value={titleModule}
-                            onChange={(event) => setTitleModule(event.currentTarget.value)}
-                        />
-
-                        {
-                            isNewModule ? (
-                                <IconButton 
-                                    aria-label="add-module"
-                                    onClick={() => handleAddModule()} 
-                                    disabled={!titleModule}
-                                >
-                                    <Check />
-                                </IconButton>
-                            ) : (
-                                <IconButton 
-                                    aria-label="update-module"
-                                    size="small" 
-                                    onClick={() => handleUpdateModule()} 
-                                >
-                                    <Edit />
-                                </IconButton>
-                            )
-                        }
-                        
-                    </SPopoverModule>
-                </Popover>
-            </SCertificationForm>
-        </LBody>
+                </SPopoverModule>
+            </Popover>
+        </SCertificationForm>
     )
 }

@@ -26,7 +26,7 @@ export default function LSelect({
         <SSelectContainer className="l-select">
             <span>
                 <LLabel hidden={!label} value={label} />
-                {!label && required ? '*' : ''}
+                {!!label && required ? ' *' : ''}
             </span>
             <Select
                 value={defaultValue}

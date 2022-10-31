@@ -1,20 +1,20 @@
-import LLoading from "@components/LLoading";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CertificationForm from "./Form";
 import { Certification } from "./domain/certification.model";
 import * as api from './services/certification.api';
+import LBody from "@components/LBody";
 
 export default function CertificationFormPage(){
 
     const { id } = useParams();
-    const [certification, setCertification] = useState<Certification>();
+    const [certification, setCertification] = useState<Certification>(new Certification());
     const [loading, setLoading] = useState<boolean>(true);
     const [isNew, setIsNew] = useState<boolean>(true);
 
     useEffect(() => {
         if(id) {
-            api.getById(id)
+            api.getById(id, true)
                 .then(data => {
                     setCertification(data);
                     setIsNew(false);
@@ -25,14 +25,15 @@ export default function CertificationFormPage(){
                 });
         }
         else {
-            setCertification(new Certification());
             setLoading(false);
         }
     }, [id]);
 
-    if(loading) {
-        return <LLoading />
-    }
-
-    return <CertificationForm certification={certification} isNew={isNew}/>
-}
+    return (
+        <LBody loading={loading}>
+            <CertificationForm 
+                certification={certification} 
+                isNew={isNew}
+            />
+        </LBody>
+)}

@@ -18,12 +18,27 @@
   "COLLAPSE": "Collapse",
   "CLEAR": "Clear",
   "FULL_SCREEN": "Full screen",
+  "EXIT_FULL_SCREEN": "Exit full screen",
+  "CONGRATULATIONS": "Congratulations",
+  "TRY_AGAIN": "Try again",
+  "FINISH": "Finish",
+  "RESULT": "Result",
+  "START": "Start",
+  "YOU": "You",
   "CERTIFICATION": {
     "LABEL": "Certifications",
     "TITLE": "Title",
     "NO_IMAGE": "No image",
     "IMAGE_URL": "Imagem url",
-    "LANGUAGE_TYPE": "Language"
+    "LANGUAGE_TYPE": "Language",
+    "START_QUIZ": "Start quiz",
+    "YOUR_QUIZ_WILL_START_IN_A_MOMENT": "Your quiz will start in a moment",
+    "WE_ARE_CALCULATING_YOUR_PROGRESS": "We are calculating your progress",
+    "SORRY_BUT_YOU_DIDNT_MAKE_IT_THIS_TIME": "Sorry, but you didn't make it this time", 
+    "RESULT_QUIZ_DESCRIPTION": "You got a pass rate of {{percentage}}% and got it right {{quantity}} questions",
+    "CREATE_YOUR_OWN": "New quiz",
+    "CREATED_BY": "Created by",
+    "QUIZ_EXECUTED": "Completed quiz"
   },
   "MODULE": {
     "TITLE": "Module title",
@@ -51,6 +66,8 @@
     "EMAIL_NOT_INFORMED": "Email not informed",
     "PASSWORD_NOT_INFORMED": "Password not informed",
     "INVALID_EMAIL": "Invalid email",
-    "EMAIL_OR_PASSWORD_INCORRECT": "Email or password incorrect"
+    "EMAIL_OR_PASSWORD_INCORRECT": "Email or password incorrect",
+    "FAILED_TO_SIGNIN_WITH_GITHUB": "Failed to sign in with GitHub",
+    "SIGNIN_WITH_GITHUB": "Sign In with GitHub"
   }
 }

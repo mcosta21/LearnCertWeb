@@ -28,10 +28,10 @@ export const LanguageTypeOptions = [
 ] as LanguageTypeOption[];
 
 export class Certification {
-    public id: string = uuid();
+    public id: string;
     public title: string;
-    public imageUrl: string;
-    public languageType: LanguageType = LanguageType.English;
+    public imageUrl: string = '';
+    public languageType: LanguageType = LanguageType.Portuguese;
     public modules: Array<Module> = [];
 }
 
@@ -61,11 +61,5 @@ export class AnswerOption {
     public description: string = '';
     public code: number;
     public isCorrect: boolean = false;
-}
-
-export class QuestionModelCard extends Question {
-    public answerSelected: AnswerOption;
-    public moduleTitle: string;
-    public moduleCode: number;
-    public index: number;
+    public value: string;
 }

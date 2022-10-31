@@ -6,12 +6,16 @@ export default createGlobalStyle`
         box-sizing: border-box;  
         margin: 0;
         padding: 0;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter', sans-serif !important;
         font-weight: 400;
     }
 
+    strong {
+        font-weight: 600;
+    }
+
     body {
-        background-color: ${({ theme }: GlobalTheme) => theme.background} !important;
+        background-image: ${({ theme }: GlobalTheme) => `linear-gradient(${theme.backgroundDark}, ${theme.background})`} !important;
         color: ${({ theme }: GlobalTheme) => theme.text} !important;
     }
 

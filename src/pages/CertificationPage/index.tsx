@@ -1,10 +1,11 @@
 import LBody from "@components/LBody";
-import { Certification, QuestionModelCard } from "@pages/CertificationFormPage/domain/certification.model";
+import { Certification} from "@pages/CertificationFormPage/domain/certification.model";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import * as certificationApi from '../CertificationFormPage/services/certification.api';
 import LearnCertification from "./components/LearnCertification";
 import QuizCertification from "./components/QuizCertification";
+import { QuestionModelCard } from "./domain/models/certification.model";
 import * as quizApi from './services/quiz.api';
 
 export default function CertificationLearnPage(){
@@ -43,7 +44,7 @@ export default function CertificationLearnPage(){
     }
 
     return (
-        <LBody hideHeader loading={!certification.id || loading}>
+        <LBody loading={!certification.id || loading}>
             {
                 !isQuizMode ? (
                     <LearnCertification

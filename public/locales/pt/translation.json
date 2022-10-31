@@ -18,10 +18,13 @@
   "COLLAPSE": "Colapsar",
   "CLEAR": "Limpar",
   "FULL_SCREEN": "Tela cheia",
+  "EXIT_FULL_SCREEN": "Sair da tela cheia",
   "CONGRATULATIONS": "Parabéns",
   "TRY_AGAIN": "Tentar novamente",
   "FINISH": "Finalizar",
   "RESULT": "Resultado",
+  "START": "Iniciar",
+  "YOU": "Você",
   "CERTIFICATION": {
     "LABEL": "Certificações",
     "TITLE": "Título",
@@ -32,7 +35,10 @@
     "YOUR_QUIZ_WILL_START_IN_A_MOMENT": "Seu questionário comecerá em instantes",
     "WE_ARE_CALCULATING_YOUR_PROGRESS": "Estamos calculando seu progresso",
     "SORRY_BUT_YOU_DIDNT_MAKE_IT_THIS_TIME": "Poxa, você não conseguiu dessa vez", 
-    "RESULT_QUIZ_DESCRIPTION": "Você obteve uma taxa de aprovação de {{percentage}}% e acertou {{quantity}} perguntas"
+    "RESULT_QUIZ_DESCRIPTION": "Você obteve uma taxa de aprovação de {{percentage}}% e acertou {{quantity}} perguntas",
+    "CREATE_YOUR_OWN": "Novo questionário",
+    "CREATED_BY": "Criado por",
+    "QUIZ_EXECUTED": "Questionários concluídos"
   },
   "MODULE": {
     "TITLE": "Título do módulo",
@@ -60,6 +66,8 @@
     "EMAIL_NOT_INFORMED": "E-mail não informado",
     "PASSWORD_NOT_INFORMED": "Senha não informada",
     "INVALID_EMAIL": "E-mail inválido",
-    "EMAIL_OR_PASSWORD_INCORRECT": "E-mail ou senha incorreto"
+    "EMAIL_OR_PASSWORD_INCORRECT": "E-mail ou senha incorreto",
+    "FAILED_TO_SIGNIN_WITH_GITHUB": "Falha ao entrar com GitHub",
+    "SIGNIN_WITH_GITHUB": "Entrar com GitHub"
   }
 }

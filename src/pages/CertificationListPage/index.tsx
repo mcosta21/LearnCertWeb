@@ -52,6 +52,7 @@ export default function CertificationListPage() {
 
     const isAdmin = getAuthenticatedUser()?.role === 'Admin';
 
+    const userId = getAuthenticatedUser()?.id ?? '';
 
     return (
         <LBody loading={loading}>
@@ -104,6 +105,7 @@ export default function CertificationListPage() {
                                 key={index}
                                 certification={certification}
                                 isAdmin={isAdmin}
+                                userId={userId}
                             />
                         ))
                     }

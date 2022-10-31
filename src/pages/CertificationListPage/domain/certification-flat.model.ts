@@ -9,4 +9,5 @@ export interface CertificationFlat {
     quizCounter: number;
     creator: string;
     creatorId: string;
+    creatorAvatar: string;
 }

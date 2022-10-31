@@ -1,5 +1,6 @@
 import LButtonOutlined from "@components/LButtonOutlined";
 import LIconButton from "@components/LIconButton";
+import LLogo from "@components/LLogo";
 import { useMyTheme } from "@hooks/useMyTheme";
 import { DarkMode, FirstPage, LightMode, TranslateOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
 import { Certification } from "@pages/CertificationFormPage/domain/certification.model";
@@ -39,7 +40,13 @@ export default function HeaderCertification({
     return (
         <SHeaderContainer>
             <aside>
-                <img src={certification.imageUrl} />
+                {
+                    certification.imageUrl ? (
+                        <img className="certification-image" src={certification.imageUrl} />
+                    ) : (
+                        <LLogo type="icon" />
+                    )
+                }
 
                 <div>
                     {children}
@@ -52,7 +59,7 @@ export default function HeaderCertification({
 
                 <LButtonOutlined hidden={!onFinishQuiz} disabled={onFinishQuizDisabled} text="FINISH" onClick={onFinishQuiz}/>
 
-                <LButtonOutlined hidden={!onCancelQuiz} text="CANCEL" onClick={onCancelQuiz}/>
+                <LButtonOutlined hidden={onCancelQuiz === undefined} text="CANCEL" onClick={onCancelQuiz}/>
 
                 {
                     !!onShowAllAnswer && (

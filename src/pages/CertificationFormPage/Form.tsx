@@ -31,11 +31,13 @@ import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 interface Props {
     certification?: Certification;
     isNew: boolean;
+    loading: boolean;
 }
 
 export default function CertificationForm({
     certification,
-    isNew
+    isNew,
+    loading
 }: Props){
 
     const { 
@@ -50,7 +52,7 @@ export default function CertificationForm({
         defaultValues: certification
     });
 
-    const [languageType, setLanguageType] = useState<LanguageType | undefined>(certification?.languageType);
+    const [languageType, setLanguageType] = useState<LanguageType>(certification?.languageType ?? LanguageType.English);
 
     const { fields, append, update  } = useFieldArray({
         control,
@@ -113,13 +115,11 @@ export default function CertificationForm({
     }
 
     function createModuleTab(index: number, module: Module){
-        
         const content = {
             index,
             control,
             setValue
         } as ModuleTabProps;
-
         const component = React.createElement(ModuleTab, { ...content });
         return new LTabModel(module.id, module.title, component)
     }
@@ -195,7 +195,7 @@ export default function CertificationForm({
     }
 
     return (
-        <LBody>
+        <LBody loading={loading}>
             <SCertificationForm onSubmit={handleSubmit(onSubmit)}>
 
                 <SCertificationInputs>

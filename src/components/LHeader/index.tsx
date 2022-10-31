@@ -14,6 +14,8 @@ import LButton from "@components/LButton";
 import { Avatar } from "@mui/material";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { RouterKey } from "@routes/routekeys";
+import LAvatar from "@components/LAvatar";
+import LLogo from "@components/LLogo";
 
 interface Props {
 }
@@ -63,11 +65,9 @@ export default function LHeader({
 
     return (
         <SHeaderContainer>
-            <aside>
-                <Link to={RouterKey.Home}>
-                    <img src={themeName === 'light' ? '/images/logo-purple.png' : '/images/logo-white.png'} />
-                </Link>
-            </aside>
+            <Link to={RouterKey.Home}>
+                <LLogo />
+            </Link>
             <div>
 
                 
@@ -114,16 +114,7 @@ export default function LHeader({
                     )
                 }
 
-                { !!user && (
-                    <div className="user-info">
-                        <Avatar 
-                            alt={user?.name} 
-                            src={user?.avatar} 
-                            sx={{ width: 38, height: 38 }}
-                        />
-                    </div>
-                )}
-                
+                { !!user && <LAvatar alt={user.name} src={user.avatar}/>}
 
                 <GitHubLogin 
                     ref={gitHubButtonRef}

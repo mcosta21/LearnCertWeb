@@ -23,17 +23,18 @@ export default function LButtonOutlined({
     type = 'button'
 }: LButtonOutlinedProps){
     const { t } = useTranslation();
-
     return (
         <SButton 
-            style={{ display: hidden ? 'none' : 'block' }} 
             disabled={disabled} 
             variant={variant}
             onClick={onClick}
             type={type}
+            style={{ display: hidden ? 'none' : 'block' }} 
         >
-            {!!icon && <span>{icon}</span>}
-            {t(text)}
+            <div>
+                {!!icon && <span>{icon}</span>}
+                {t(text)}
+            </div>
         </SButton>
     )
 }

@@ -17,7 +17,7 @@ export const SHeaderContainer = styled.header`
         align-items: center;
         gap: 1.4rem;
         
-        img {
+        .certification-image {
             width: 7rem;
         }
 

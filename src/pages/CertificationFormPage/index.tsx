@@ -1,4 +1,3 @@
-import LLoading from "@components/LLoading";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CertificationForm from "./Form";
@@ -14,7 +13,7 @@ export default function CertificationFormPage(){
 
     useEffect(() => {
         if(id) {
-            api.getById(id)
+            api.getById(id, true)
                 .then(data => {
                     setCertification(data);
                     setIsNew(false);
@@ -30,9 +29,9 @@ export default function CertificationFormPage(){
         }
     }, [id]);
 
-    if(loading) {
-        return <LLoading />
-    }
-
-    return <CertificationForm certification={certification} isNew={isNew}/>
+    return <CertificationForm 
+                certification={certification} 
+                isNew={isNew}
+                loading={loading}
+            />
 }

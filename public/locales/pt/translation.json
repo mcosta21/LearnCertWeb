@@ -23,6 +23,8 @@
   "TRY_AGAIN": "Tentar novamente",
   "FINISH": "Finalizar",
   "RESULT": "Resultado",
+  "START": "Iniciar",
+  "YOU": "Você",
   "CERTIFICATION": {
     "LABEL": "Certificações",
     "TITLE": "Título",
@@ -34,7 +36,9 @@
     "WE_ARE_CALCULATING_YOUR_PROGRESS": "Estamos calculando seu progresso",
     "SORRY_BUT_YOU_DIDNT_MAKE_IT_THIS_TIME": "Poxa, você não conseguiu dessa vez", 
     "RESULT_QUIZ_DESCRIPTION": "Você obteve uma taxa de aprovação de {{percentage}}% e acertou {{quantity}} perguntas",
-    "CREATE_YOUR_OWN": "Novo questionário"
+    "CREATE_YOUR_OWN": "Novo questionário",
+    "CREATED_BY": "Criado por",
+    "QUIZ_EXECUTED": "Questionários concluídos"
   },
   "MODULE": {
     "TITLE": "Título do módulo",

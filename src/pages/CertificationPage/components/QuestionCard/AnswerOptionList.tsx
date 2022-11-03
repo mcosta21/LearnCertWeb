@@ -1,9 +1,9 @@
 import { OptionType } from "@components/LAnswerOptionItem/models";
-import { AnswerOption } from "@pages/CertificationPage/domain/models/certification.model";
 import { LAnswerOptionItem } from "@components/LAnswerOptionItem";
 import {
     SOptionsList
 } from './styles';
+import { AnswerOption } from "@pages/CertificationFormPage/domain/certification.model";
 
 
 interface Props {

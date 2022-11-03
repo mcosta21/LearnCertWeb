@@ -1,5 +1,5 @@
 import { Chip } from '@mui/material';
-import { QuestionModelCard } from '@pages/CertificationFormPage/domain/certification.model';
+import { QuestionModelCard } from '@pages/CertificationPage/domain/models/certification.model';
 import { GlobalTheme } from '@styles/theme';
 import { useTranslation } from 'react-i18next';
 import { FiChevronUp } from 'react-icons/fi';

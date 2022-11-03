@@ -1,5 +1,6 @@
-import { AnswerOption, Question, QuestionModelCard } from "@pages/CertificationFormPage/domain/certification.model";
-import { Dispatch, SetStateAction, useState } from "react";
+import { AnswerOption, Question } from "@pages/CertificationFormPage/domain/certification.model";
+import { QuestionModelCard } from "@pages/CertificationPage/domain/models/certification.model";
+import { Dispatch, SetStateAction } from "react";
 import QuestionCard from "../QuestionCard";
 import { SPanelContainer } from "./styles";
 

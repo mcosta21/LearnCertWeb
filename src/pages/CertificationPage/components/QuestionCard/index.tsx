@@ -1,5 +1,5 @@
-import { Question, QuestionModelCard } from "@pages/CertificationFormPage/domain/certification.model";
-import { AnswerOption } from "@pages/CertificationPage/domain/models/certification.model";
+import { AnswerOption, Question } from "@pages/CertificationFormPage/domain/certification.model";
+import { QuestionModelCard } from "@pages/CertificationPage/domain/models/certification.model";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import AnswerOptionList from "./AnswerOptionList";

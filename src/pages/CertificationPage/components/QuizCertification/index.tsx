@@ -1,4 +1,4 @@
-import { Certification, QuestionModelCard } from "@pages/CertificationFormPage/domain/certification.model"
+import { Certification } from "@pages/CertificationFormPage/domain/certification.model"
 import { CertificationHelper } from "@pages/CertificationPage/services/certification.helper"
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -6,6 +6,7 @@ import HeaderCertification from "../HeaderCertification"
 import PanelCertification from "../PanelCertification"
 import ResultQuizCertification from "../ResultQuizCertification";
 import LoaderTime from "../LoaderTime";
+import { QuestionModelCard } from "@pages/CertificationPage/domain/models/certification.model";
 
 interface Props {
     certification: Certification;

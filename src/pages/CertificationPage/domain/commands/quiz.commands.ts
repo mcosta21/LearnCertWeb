@@ -1,6 +1,7 @@
 import { QuizResponseValue } from '../models/quiz.model';
-import { Certification, QuestionModelCard } from './../../../CertificationFormPage/domain/certification.model';
+import { Certification } from './../../../CertificationFormPage/domain/certification.model';
 import { v4 as uuid } from 'uuid';
+import { QuestionModelCard } from '../models/certification.model';
 
 export class RegisterQuizCommand {
     public id: string;

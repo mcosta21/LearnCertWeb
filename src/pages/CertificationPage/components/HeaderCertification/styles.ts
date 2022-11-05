@@ -6,7 +6,7 @@ export const SHeaderContainer = styled.header`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 2rem;
+    padding: ${({ theme }: GlobalTheme) => theme.dimensions.isMobile ? '0 1rem' : '0 2rem'};
     padding-top: 2rem;
 
     max-width: 1366px;
@@ -35,6 +35,30 @@ export const SHeaderContainer = styled.header`
             p {
                 color: ${({ theme }: GlobalTheme) => theme.textSecondary};
                 font-size: 0.9rem;
+            }
+        }
+    }
+
+    @media (max-width: 600px) {
+        flex-direction: column;
+        gap: 1rem;
+
+        aside {
+            width: 100%;
+            gap: 0.8rem;
+
+            .certification-image {
+                width: 5rem;
+            }
+            
+            div {
+                h1 {
+                    font-size: 1rem;
+                }
+
+                p {
+                    font-size: 0.7rem;
+                }
             }
         }
     }

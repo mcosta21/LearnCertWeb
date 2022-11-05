@@ -1,11 +1,13 @@
 import LButtonOutlined from "@components/LButtonOutlined";
 import LIconButton from "@components/LIconButton";
 import LLogo from "@components/LLogo";
-import { useMyTheme } from "@hooks/useMyTheme";
-import { DarkMode, FirstPage, LightMode, TranslateOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
+import { FirstPage, Visibility, VisibilityOff } from "@mui/icons-material";
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import DoneIcon from '@mui/icons-material/Done';
+import CloseIcon from '@mui/icons-material/Close';
+
 import { Certification } from "@pages/CertificationFormPage/domain/certification.model";
 import { RouterKey } from "@routes/routekeys";
-import { useTranslation } from "react-i18next";
 import { useNavigate } from 'react-router-dom';
 import { SButtonOptionContainer, SHeaderContainer } from "./styles";
 
@@ -55,11 +57,27 @@ export default function HeaderCertification({
 
             <SButtonOptionContainer>
  
-                <LButtonOutlined hidden={!onStartQuiz} text="CERTIFICATION.START_QUIZ" onClick={onStartQuiz}/>
+                <LButtonOutlined 
+                    icon={<PlayArrowIcon />}
+                    hidden={!onStartQuiz} 
+                    text="CERTIFICATION.START_QUIZ" 
+                    onClick={onStartQuiz}
+                />
 
-                <LButtonOutlined hidden={!onFinishQuiz} disabled={onFinishQuizDisabled} text="FINISH" onClick={onFinishQuiz}/>
+                <LButtonOutlined 
+                    icon={<DoneIcon />}
+                    hidden={!onFinishQuiz} 
+                    disabled={onFinishQuizDisabled} 
+                    text="FINISH" 
+                    onClick={onFinishQuiz}
+                />
 
-                <LButtonOutlined hidden={onCancelQuiz === undefined} text="CANCEL" onClick={onCancelQuiz}/>
+                <LButtonOutlined 
+                    icon={<CloseIcon />}
+                    hidden={!onCancelQuiz} 
+                    text="CANCEL" 
+                    onClick={onCancelQuiz}
+                />
 
                 {
                     !!onShowAllAnswer && (

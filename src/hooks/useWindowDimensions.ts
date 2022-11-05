@@ -10,8 +10,8 @@ export interface WindowDimensions {
 function getWindowDimensions(): WindowDimensions {
   const { innerWidth: width, innerHeight: height } = window;
 
-  const isMobile = width <= 400;
-  const isDesktop = width > 400;
+  const isMobile = width <= 600;
+  const isDesktop = width > 600;
   return {
     width,
     height,

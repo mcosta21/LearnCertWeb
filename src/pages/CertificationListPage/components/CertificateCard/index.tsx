@@ -1,20 +1,19 @@
 
-import { Delete, Edit } from "@mui/icons-material";
-import { IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
+import LAvatar from "@components/LAvatar";
+import LIconButton from "@components/LIconButton";
+import LLogo from "@components/LLogo";
+import useWindowDimensions from "@hooks/useWindowDimensions";
+import EditIcon from '@mui/icons-material/Edit';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import { Tooltip } from "@mui/material";
 import { LanguageTypeOptions } from "@pages/CertificationFormPage/domain/certification.model";
 import { CertificationFlat } from "@pages/CertificationListPage/domain/certification-flat.model";
 import { RouterKey } from "@routes/routekeys";
 import Translate from "@services/i18nProvider/Translate";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { SCertificateCard, SOptionsContainer } from "./styles";
-import LIconButton from "@components/LIconButton";
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import EditIcon from '@mui/icons-material/Edit';
-import { useTranslation } from "react-i18next";
-import LAvatar from "@components/LAvatar";
-import LLogo from "@components/LLogo";
-import useWindowDimensions from "@hooks/useWindowDimensions";
 
 interface Props {
     certification: CertificationFlat;

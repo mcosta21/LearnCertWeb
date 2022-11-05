@@ -27,18 +27,22 @@ export default function  LIconButton({
 
     const backgroundColor = variant === 'outlined' ? theme.backgroundSecondary : theme.colors.purple;
     const borderColor = variant === 'outlined' ?  theme.border : theme.colors.purple;
+    const iconColor = variant === 'outlined' ? 'icon-black' : 'icon-white';
     
     return (
-        <Tooltip title={!!tooltip ? t(tooltip) : ''}>
-            <SIconButton 
-                aria-label={arialLabel}
-                size="small" 
-                onClick={onClick} 
-                disabled={disabled}
-                style={{ backgroundColor, borderColor }}
-            >
-                {icon}
-            </SIconButton>
-        </Tooltip>
+            <Tooltip title={!!tooltip ? t(tooltip) : ''}>
+                <span>
+                    <SIconButton 
+                        aria-label={arialLabel}
+                        size="small" 
+                        onClick={onClick} 
+                        disabled={disabled}
+                        style={{ backgroundColor, borderColor }}
+                        className={iconColor}
+                    >
+                        {icon}
+                    </SIconButton>
+                </span>
+            </Tooltip>
     )
 }

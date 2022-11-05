@@ -28,9 +28,7 @@ export default function LButtonOutlined({
     const { t } = useTranslation();
     const { isMobile } = useWindowDimensions();
 
-    console.log(isMobile)
-
-    if(isMobile) {
+    if(isMobile && hidden === false) {
         return <LIconButton
                     arialLabel="language"
                     disabled={disabled} 
@@ -38,11 +36,10 @@ export default function LButtonOutlined({
                     onClick={onClick} 
                     icon={icon}
                     tooltip={t(text)}
-               />
+                />
     }
 
     return (
-        
         <SButton 
             disabled={disabled} 
             variant={variant}

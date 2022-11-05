@@ -16,14 +16,14 @@ export const SCertificateCard = styled.div`
   gap: 2rem;
   transition: 0.2s ease;
 
-  @media (max-width: 400px) {
+  @media (max-width: 600px) {
       gap: 0.8rem;
   }
 
   &:hover {
     border-color: ${({ theme }: GlobalTheme) => theme.colors.purple};
     cursor: pointer;
-    transform: scale(1.03);
+    transform: scale(1.01);
   }
   
   .certificate-img {
@@ -80,7 +80,7 @@ export const SCertificateCard = styled.div`
       color: ${({ theme }: GlobalTheme) => theme.textSecondary};
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: 600px) {
         padding: 0;
 
         .certificate-name {
@@ -107,7 +107,7 @@ export const SOptionsContainer = styled.div`
     font-size: 0.9rem;
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 600px) {
       font-size: 0.8rem;
   }
 `

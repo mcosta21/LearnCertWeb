@@ -78,6 +78,10 @@ export default createGlobalStyle`
         border: 1px solid ${({ theme }: GlobalTheme) => theme.border} !important;
     }
 
+    .MuiButton-outlined {
+        background-color: ${({ theme }: GlobalTheme) => theme.backgroundSecondary} !important;
+    }
+
     .Mui-disabled {
         pointer-events: all !important;
         cursor: not-allowed !important;

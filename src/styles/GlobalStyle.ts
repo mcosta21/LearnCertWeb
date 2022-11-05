@@ -15,6 +15,7 @@ export default createGlobalStyle`
     }
 
     body {
+        overflow: hidden;
         background-image: ${({ theme }: GlobalTheme) => `linear-gradient(${theme.backgroundDark}, ${theme.background})`} !important;
         color: ${({ theme }: GlobalTheme) => theme.text} !important;
     }
@@ -76,6 +77,10 @@ export default createGlobalStyle`
 
     .MuiIconButton-root {
         border: 1px solid ${({ theme }: GlobalTheme) => theme.border} !important;
+    }
+
+    .MuiButton-outlined {
+        background-color: ${({ theme }: GlobalTheme) => theme.backgroundSecondary} !important;
     }
 
     .Mui-disabled {

@@ -6,6 +6,8 @@ import { useTranslation } from "react-i18next";
 import LoaderTime from "../LoaderTime";
 import PanelCertification from "../PanelCertification";
 import { SContainer, SFooter, SHeader, SResultSubTitle, SResultTitle } from "./styles";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ReplayIcon from '@mui/icons-material/Replay';
 
 interface Props {
     certification: Certification,
@@ -64,8 +66,16 @@ export default function ResultQuizCertification({
             </SResultSubTitle>
 
             <SFooter>
-                <LButtonOutlined text="TRY_AGAIN" onClick={onTryAgain} />
-                <LButtonOutlined text="BACK" onClick={onClose}/>
+                <LButtonOutlined 
+                    icon={<ReplayIcon />}
+                    text="TRY_AGAIN" 
+                    onClick={onTryAgain} 
+                />
+                <LButtonOutlined 
+                    icon={<ArrowBackIcon />}
+                    text="BACK" 
+                    onClick={onClose}
+                />
             </SFooter>
 
             <PanelCertification 

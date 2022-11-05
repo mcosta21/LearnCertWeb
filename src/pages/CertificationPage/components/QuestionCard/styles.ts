@@ -32,6 +32,7 @@ export const SQuestionDescription = styled.p`
     font-size: 0.8rem;
     line-height: 1.2rem;
     padding: 6px 125px 14px 30px;
+    overflow-x: auto;
 
     @media (max-width: 800px) {
         padding-right: 30px;

@@ -2,8 +2,6 @@ import { MenuItem } from '@mui/material';
 import styled from "styled-components";
 import { GlobalTheme } from "@styles/theme";
 
-const COLUMN_GRID_WIDTH = '500px';
-
 export const SCertificationListContainer = styled.div`
     width: 100%;
     margin: auto;
@@ -13,6 +11,7 @@ export const SCertificationListContainer = styled.div`
     gap: 20px;
     justify-content: center;
     padding-bottom: 1rem !important;
+    padding: 1.5rem;
     
     .filters-container {
         display: flex;
@@ -33,7 +32,6 @@ export const SCertificationListContainer = styled.div`
     }
 
     @media (max-width: 800px) {
-        padding: 0 3rem;    
 
         .filters-container {
             flex-direction: column;
@@ -50,7 +48,6 @@ export const SCertificationListContainer = styled.div`
     }
 
     @media (max-width: 1366px) {
-        padding: 0 3rem;
 
         .certificates-container {
             grid-template-columns: 1fr;

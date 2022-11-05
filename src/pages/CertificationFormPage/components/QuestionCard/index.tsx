@@ -218,47 +218,51 @@ export function QuestionCard({
                             onChange={(e) => setAnswerDescription(e.target.value)}
                         />
 
-                        <FormControlLabel 
-                            className="answer-is-correct"
-                            labelPlacement="top"
-                            control={
-                                <Switch 
-                                    checked={newOption.isCorrect} 
-                                    onChange={toogleAnswerIsCorrect}
-                                />
-                            } 
-                            label={<Translate value="ANSWER.IS_CORRECT" />} 
-                        />
+                        <aside>
 
-                        {
-                            isNew ? (
-                                <IconButton 
-                                    aria-label="add-answer"
-                                    size="small" 
-                                    onClick={() => handleAddAnswerOption()} 
-                                    disabled={isInvalid()}
-                                >
-                                    <Add />
-                                </IconButton>
-                            ) : (
-                                <IconButton 
-                                    aria-label="update-answer"
-                                    size="small" 
-                                    onClick={() => handleUpdateAnswerOption()} 
-                                    disabled={isInvalid()}
-                                >
-                                    <Edit />
-                                </IconButton>
-                            )
-                        }
+                            <FormControlLabel 
+                                className="answer-is-correct"
+                                labelPlacement="top"
+                                control={
+                                    <Switch 
+                                        checked={newOption.isCorrect} 
+                                        onChange={toogleAnswerIsCorrect}
+                                    />
+                                } 
+                                label={<Translate value="ANSWER.IS_CORRECT" />} 
+                            />
 
-                        <IconButton 
-                            aria-label="clear-answer"
-                            size="small" 
-                            onClick={() => handleClearAnswerOption()} 
-                        >
-                            <Clear />
-                        </IconButton>
+                            {
+                                isNew ? (
+                                    <IconButton 
+                                        aria-label="add-answer"
+                                        size="small" 
+                                        onClick={() => handleAddAnswerOption()} 
+                                        disabled={isInvalid()}
+                                    >
+                                        <Add />
+                                    </IconButton>
+                                ) : (
+                                    <IconButton 
+                                        aria-label="update-answer"
+                                        size="small" 
+                                        onClick={() => handleUpdateAnswerOption()} 
+                                        disabled={isInvalid()}
+                                    >
+                                        <Edit />
+                                    </IconButton>
+                                )
+                            }
+
+                            <IconButton 
+                                aria-label="clear-answer"
+                                size="small" 
+                                onClick={() => handleClearAnswerOption()} 
+                            >
+                                <Clear />
+                            </IconButton>
+
+                        </aside>
                         
                     </SAnswerOptionInput>
 

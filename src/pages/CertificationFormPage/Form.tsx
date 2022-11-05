@@ -27,6 +27,8 @@ import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import LButton from '@components/LButton';
 import LButtonOutlined from '@components/LButtonOutlined';
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import SaveIcon from '@mui/icons-material/Save';
 
 interface Props {
     certification: Certification;
@@ -257,10 +259,12 @@ export default function CertificationForm({
             
             <SCertificationFooter>
                 <LButtonOutlined 
+                    icon={<ArrowBackIcon />}
                     text="BACK"
                     onClick={handleBack}
                 />
                 <LButton 
+                    icon={<SaveIcon />}
                     text="SAVE" 
                     type="submit"
                     disabled={!isValid}

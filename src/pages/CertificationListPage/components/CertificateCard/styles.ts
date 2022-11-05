@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { GlobalTheme } from "@styles/theme";
 
-const IMG_SIZE = '90px';
+const IMG_SIZE = '85px';
 
 export const SCertificateCard = styled.div`
   color: ${({ theme }: GlobalTheme) => theme.text};

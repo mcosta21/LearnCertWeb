@@ -6,6 +6,10 @@ export const SCertificationForm = styled.form`
     display: flex;
     flex-direction: column;
     padding: 0 4rem;
+
+    @media (max-width: 700px) {
+        padding: 0 1rem;
+    }
 `
 
 export const SCertificationInputs = styled.div`
@@ -23,6 +27,15 @@ export const SCertificationInputs = styled.div`
     & > img {
         width: 75px;
         height: 75px;
+    }
+
+    @media (max-width: 700px) {
+        flex-direction: column;
+
+        & > div {
+            grid-template-columns: 1fr;
+            margin-bottom: 1rem;
+        }
     }
 `
 
@@ -88,8 +101,4 @@ export const SCertificationFooter = styled.footer`
     align-items: center;
     justify-content: flex-end;
     gap: 12px;
-
-    button {
-        width: 140px;
-    }
 `

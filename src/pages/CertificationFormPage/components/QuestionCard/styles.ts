@@ -12,6 +12,10 @@ export const SQuestionCardContainer = styled.li`
     &:hover {
         border-left: 4px solid ${({ theme }: GlobalTheme) => theme.colors.purple};
     }
+
+    @media (max-width: 700px) {
+        padding: 0.7rem;
+    }
 `;
 
 export const SQuestionCardData = styled.div`
@@ -86,10 +90,27 @@ export const SQuestionInputs = styled.div`
                 }
             }
         }
+
     }
 
     aside:first-child {
         flex: 1;
+    }
+    
+
+    @media (max-width: 700px) {
+        flex-direction: column-reverse;
+
+        > aside {
+            width: 100%;
+
+            .question-buttons {
+                flex-direction: row;
+                height: 100%;
+                justify-content: flex-end;
+                width: 100%;
+            }
+        }
     }
 `
 
@@ -101,6 +122,12 @@ export const SAnswerOptionInput = styled.aside`
     border-bottom: 1px solid ${({ theme }: GlobalTheme) => theme.border};
     gap: 0.5rem;
 
+    > aside {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
     .l-input {
 
         label {
@@ -111,11 +138,24 @@ export const SAnswerOptionInput = styled.aside`
 
     .answer-is-correct {
         align-items: flex-start;
+        min-width: 85px;
         
         .MuiFormControlLabel-label {
             font-size: 0.7rem;
             padding-left: 10px;
             margin-top: -2px;
+        }
+    }
+
+    @media (max-width: 700px) {
+        & {
+            flex-direction: column;
+            gap: 0;
+
+            > aside {
+                justify-content: flex-end;
+                width: 100%;
+            }
         }
     }
 `;

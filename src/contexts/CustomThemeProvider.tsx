@@ -2,6 +2,7 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { Theme, lightTheme, darkTheme } from "@styles/theme";
 import GlobalTheme from '@styles/GlobalStyle';
+import useWindowDimensions, { WindowDimensions } from "@hooks/useWindowDimensions";
 
 interface CustomThemeProviderData {
 	children: ReactNode;
@@ -21,6 +22,8 @@ export function CustomThemeProvider ({children} : CustomThemeProviderData) {
 
 	const [themeName, setThemeName] = useState<ThemeName>('dark');
 	const [theme, setTheme] = useState<Theme>(darkTheme);
+	
+    const dimensions = useWindowDimensions();
 
 	function toggleTheme() {
 		if (themeName === 'dark') {
@@ -50,7 +53,7 @@ export function CustomThemeProvider ({children} : CustomThemeProviderData) {
 
 	return (
 		<CustomThemeContext.Provider value={{ theme, toggleTheme, themeName }}>
-			<ThemeProvider theme={theme}>
+			<ThemeProvider theme={{ ...theme, dimensions}}>
 				{children}
                 <GlobalTheme />
 			</ThemeProvider>

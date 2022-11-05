@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { GlobalTheme } from "@styles/theme";
 
-const IMG_SIZE = "95px";
+const IMG_SIZE = '90px';
 
 export const SCertificateCard = styled.div`
   color: ${({ theme }: GlobalTheme) => theme.text};
@@ -12,9 +12,13 @@ export const SCertificateCard = styled.div`
   width: 100%;
   border-radius: 6px;
   display: flex;
-  padding: 20px;
-  gap: 30px;
+  padding: 1rem;
+  gap: 2rem;
   transition: 0.2s ease;
+
+  @media (max-width: 400px) {
+      gap: 0.8rem;
+  }
 
   &:hover {
     border-color: ${({ theme }: GlobalTheme) => theme.colors.purple};
@@ -32,6 +36,7 @@ export const SCertificateCard = styled.div`
     img {
       max-width: ${IMG_SIZE};
     }
+
   }
   
   .certificate-info-container {
@@ -49,11 +54,18 @@ export const SCertificateCard = styled.div`
       flex-direction: column;
       gap: 4px;
     }
+
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
     
     .certificate-name {
       width: 100%;
       font-weight: 600 !important;
-      font-size: 16px;
+      font-size: 1rem;
       color: ${({ theme }: GlobalTheme) => theme.text};
     }
 
@@ -64,8 +76,20 @@ export const SCertificateCard = styled.div`
       gap: 8px;
       width: 100%;
       font-weight: 500 !important;
-      font-size: 12px;
+      font-size: 0.8rem;
       color: ${({ theme }: GlobalTheme) => theme.textSecondary};
+    }
+
+    @media (max-width: 400px) {
+        padding: 0;
+
+        .certificate-name {
+          font-size: 0.9rem;
+        }
+
+        .certificate-subtitle { 
+          font-size: 0.7rem;
+        }
     }
   }
 
@@ -80,6 +104,10 @@ export const SOptionsContainer = styled.div`
   .quiz-executed {
     height: 25px;
     margin-right: 4px;
-    font-size: 14px;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 400px) {
+      font-size: 0.8rem;
   }
 `

@@ -10,7 +10,8 @@ export default function LButton({
     onClick,
     disabled = false,
     icon,
-    type
+    type,
+    alwaysShowIcon
 }: Props){
     return (
         <LButtonOutlined 
@@ -21,6 +22,7 @@ export default function LButton({
             icon={icon}
             type={type}
             variant="contained"
+            alwaysShowIcon={alwaysShowIcon}
         />
     )
 }

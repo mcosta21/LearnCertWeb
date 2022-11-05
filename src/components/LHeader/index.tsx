@@ -1,21 +1,19 @@
+import LAvatar from "@components/LAvatar";
+import LButton from "@components/LButton";
 import LIconButton from "@components/LIconButton";
+import LLogo from "@components/LLogo";
+import { AuthenticatedUser } from "@contexts/UserContext/UserContext";
 import { useMyTheme } from "@hooks/useMyTheme";
 import { useUser } from "@hooks/useUser";
 import { Add, DarkMode, LightMode, TranslateOutlined } from "@mui/icons-material";
-import { useTranslation } from "react-i18next";
-import { SHeaderContainer } from "./styles";
-import GitHubLogin from 'react-github-login';
-import { useEffect, useRef, useState } from "react";
-import { AuthenticatedUser } from "@contexts/UserContext/UserContext";
-import LogoutIcon from '@mui/icons-material/Logout';
-import LButtonOutlined from "@components/LButtonOutlined";
 import GitHubIcon from '@mui/icons-material/GitHub';
-import LButton from "@components/LButton";
-import { Avatar } from "@mui/material";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import LogoutIcon from '@mui/icons-material/Logout';
 import { RouterKey } from "@routes/routekeys";
-import LAvatar from "@components/LAvatar";
-import LLogo from "@components/LLogo";
+import { useRef, useState } from "react";
+import GitHubLogin from 'react-github-login';
+import { useTranslation } from "react-i18next";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { SHeaderContainer } from "./styles";
 
 interface Props {
 }
@@ -69,8 +67,6 @@ export default function LHeader({
                 <LLogo />
             </Link>
             <div>
-
-                
 
                 <LIconButton 
                     arialLabel="language"

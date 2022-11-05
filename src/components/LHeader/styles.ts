@@ -7,7 +7,7 @@ export const SHeaderContainer = styled.header`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 3rem;
+    padding: ${({ theme }: GlobalTheme) => theme.dimensions.isMobile ? '0.5rem 1.5rem' : '0 3rem'} !important;
 
     > div {
         display: flex;

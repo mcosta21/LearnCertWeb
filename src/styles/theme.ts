@@ -1,3 +1,4 @@
+import { WindowDimensions } from "@hooks/useWindowDimensions";
 import { DefaultTheme } from "styled-components";
 
 export interface GlobalTheme {
@@ -20,6 +21,7 @@ export interface Theme extends DefaultTheme {
     border: string;
     colors: Colors;
     shadow: string;
+    dimensions: WindowDimensions;
 }
 
 const colorsTheme = {

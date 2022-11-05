@@ -1,4 +1,5 @@
-import { ButtonBaseProps, ButtonProps } from "@mui/material";
+import LIconButton from "@components/LIconButton";
+import useWindowDimensions from "@hooks/useWindowDimensions";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { SButton } from "./styles";
@@ -8,9 +9,10 @@ export interface LButtonOutlinedProps {
     onClick?: () => void;
     hidden?: boolean;
     disabled?: boolean;
-    icon?: ReactElement;
-    variant?: "text" | "outlined" | "contained" | undefined;
-    type?: "button" | "submit" | "reset" | undefined;
+    icon: ReactElement;
+    variant?: "outlined" | "contained";
+    type?: "button" | "submit";
+    alwaysShowIcon?: boolean;
 }
 
 export default function LButtonOutlined({
@@ -20,10 +22,27 @@ export default function LButtonOutlined({
     disabled = false,
     icon,
     variant = 'outlined',
-    type = 'button'
+    type = 'button',
+    alwaysShowIcon = false
 }: LButtonOutlinedProps){
     const { t } = useTranslation();
+    const { isMobile } = useWindowDimensions();
+
+    console.log(isMobile)
+
+    if(isMobile) {
+        return <LIconButton
+                    arialLabel="language"
+                    disabled={disabled} 
+                    variant={variant}
+                    onClick={onClick} 
+                    icon={icon}
+                    tooltip={t(text)}
+               />
+    }
+
     return (
+        
         <SButton 
             disabled={disabled} 
             variant={variant}
@@ -32,7 +51,7 @@ export default function LButtonOutlined({
             style={{ display: hidden ? 'none' : 'block' }} 
         >
             <div>
-                {!!icon && <span>{icon}</span>}
+                {alwaysShowIcon === true && <span>{icon}</span>}
                 {t(text)}
             </div>
         </SButton>

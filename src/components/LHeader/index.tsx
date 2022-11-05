@@ -95,6 +95,7 @@ export default function LHeader({
                         <LButton
                             text="USER.SIGNIN_WITH_GITHUB"
                             icon={<GitHubIcon />}
+                            alwaysShowIcon
                             onClick={handleClickGitHubLogin}
                         />
                     )

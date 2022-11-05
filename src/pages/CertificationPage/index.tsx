@@ -1,4 +1,5 @@
 import LBody from "@components/LBody";
+import { Fab } from "@mui/material";
 import { Certification} from "@pages/CertificationFormPage/domain/certification.model";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -7,6 +8,8 @@ import LearnCertification from "./components/LearnCertification";
 import QuizCertification from "./components/QuizCertification";
 import { QuestionModelCard } from "./domain/models/certification.model";
 import * as quizApi from './services/quiz.api';
+import NavigationIcon from '@mui/icons-material/Navigation';
+import { SNavigateTopFab } from "./styles";
 
 export default function CertificationLearnPage(){
 
@@ -14,6 +17,7 @@ export default function CertificationLearnPage(){
     const [certification, setCertification] = useState<Certification>(new Certification());
     const [loading, setLoading] = useState<boolean>(true);
     const [isQuizMode, setQuizMode] = useState(false);
+    const [showNavigateTopButton, setShowNavigateTopButton] = useState(false);
     
     useEffect(() => {
         if(id) {
@@ -29,6 +33,9 @@ export default function CertificationLearnPage(){
         else {
             setLoading(false);
         }
+
+        addScrollListenet();
+
     }, []);
     
     function handleStartQuiz(){
@@ -41,6 +48,37 @@ export default function CertificationLearnPage(){
 
     function handleCloseQuiz(){
         setQuizMode(false);
+    }
+
+    function addScrollListenet(){
+        const element = document.getElementById('body-content');
+
+        if(!element) {
+            return;
+        }
+
+        element.addEventListener('scroll', () => {
+            if(element.scrollTop > 30) {
+                setShowNavigateTopButton(true);
+            }
+            else {
+                setShowNavigateTopButton(false);
+            }
+
+        }, { passive: true });
+    
+        return () => {
+            element.removeEventListener('scroll', () => {
+                setShowNavigateTopButton(false);
+            });
+        };
+    }
+
+    function handleNavigateTop(){
+        const element = document.getElementById('body-content');
+        if(element) {
+            setTimeout(() => element?.scrollTo({ behavior: 'smooth', top: 0 }))
+        }
     }
 
     return (
@@ -60,6 +98,14 @@ export default function CertificationLearnPage(){
                     />
                 )
             }
+            {
+                showNavigateTopButton && (
+                    <SNavigateTopFab onClick={handleNavigateTop}>
+                        <NavigationIcon />
+                    </SNavigateTopFab>
+                )
+            }
+            
         </LBody>
     )
 }

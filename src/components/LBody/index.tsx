@@ -17,7 +17,7 @@ export default function LBody({
     return (
         <SBodyContainer>
             {!hideHeader && <LHeader />}
-            <section>
+            <section id="body-content">
                 {
                     !loading && children
                 }
